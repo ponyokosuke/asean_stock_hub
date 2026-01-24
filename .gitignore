@@ -1,0 +1,19 @@
+# .gitignore
+
+# 仮想環境フォルダ（もしあれば）
+venv/
+.venv/
+env/
+
+# Pythonのキャッシュ
+__pycache__/
+*.py[cod]
+
+# Macのシステムファイル
+.DS_Store
+
+# ★重要: 環境変数ファイル（APIキーなど）
+.env
+
+# その他
+.vscode/
