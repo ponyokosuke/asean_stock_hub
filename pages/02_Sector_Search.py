@@ -7,6 +7,14 @@ from datetime import datetime
 from utils.ui import render_country_selector
 from utils.processors import get_processor
 
+# --- 1. Page Config (必ず最初) ---
+st.set_page_config(page_title="Version 2: Sector Search", layout="wide")
+
+# --- 2. 認証機能 (utilsから読み込む) ---
+from utils.auth import check_password
+if not check_password():
+    st.stop()
+
 # Import Stock List
 try:
     from utils.stock_codes import ALL_ASEAN_CODES
@@ -29,26 +37,7 @@ SECTOR_OPTIONS = [
     "Utilities"
 ]
 
-# --- Page Config ---
-st.set_page_config(page_title="Version 2: Sector Search", layout="wide")
-
-# --- 1. Authentication ---
-env_password = os.environ.get("APP_PASSWORD")
-
-def check_password():
-    if not env_password: return True
-    if "password_correct" not in st.session_state:
-        st.text_input("Please enter the password:", type="password", key="password_input")
-        if st.session_state.get("password_input") == env_password:
-            st.session_state["password_correct"] = True
-            st.rerun()
-        return False
-    return True
-
-if not check_password():
-    st.stop()
-
-# --- 2. Sidebar (Country Selection) ---
+# --- 3. Sidebar (Country Selection) ---
 country_code = render_country_selector()
 processor = get_processor(country_code)
 
@@ -57,7 +46,7 @@ with st.sidebar:
     st.info(f"Mode: {country_code} ({processor.currency})")
     debug_mode = st.checkbox("Debug Mode")
 
-# --- 3. Main Area ---
+# --- 4. Main Area ---
 st.title(f"🏭 Version 2: Sector Search ({country_code})")
 
 st.markdown("""
@@ -72,7 +61,7 @@ selected_sectors = st.multiselect(
     placeholder="Choose sectors (e.g., Technology, Real Estate)"
 )
 
-# --- 4. Execution Logic ---
+# --- 5. Execution Logic ---
 if st.button("Start Screening & Analysis 🚀"):
     if not selected_sectors:
         st.error("Please select at least one sector.")
@@ -174,8 +163,7 @@ if st.button("Start Screening & Analysis 🚀"):
                     progress_bar.progress(100)
                     status_text.success("✅ All processes completed!")
                     
-                    # ★ Filename Changed Here (Simplified)
-                    # 例: Version_2_SG_2026-01-25.xlsx
+                    # Generate filename
                     filename = f"Version_2_{country_code}_{datetime.today().strftime('%Y-%m-%d')}.xlsx"
                     
                     st.download_button(

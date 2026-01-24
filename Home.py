@@ -2,14 +2,22 @@ import streamlit as st
 import os
 from dotenv import load_dotenv
 
-# Load API Key
-load_dotenv()
-
+# --- 1. Page Config (必ず一番最初に書く！) ---
 st.set_page_config(
     page_title="ASEAN Stock Hub",
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+# --- 2. 認証機能 ---
+# Page Configのあとに書く必要があります
+from utils.auth import check_password
+if not check_password():
+    st.stop()
+
+# --- 3. Main Logic ---
+# Load API Key
+load_dotenv()
 
 st.title("🌏 ASEAN Stock Analysis Hub")
 

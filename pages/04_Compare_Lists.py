@@ -7,22 +7,11 @@ import os
 from utils.ui import render_country_selector
 from utils.processors import get_processor
 
-# --- Page Config ---
+# --- 1. Page Config (必ず最初) ---
 st.set_page_config(page_title="Compare Lists", layout="wide")
 
-# --- Authentication ---
-env_password = os.environ.get("APP_PASSWORD")
-
-def check_password():
-    if not env_password: return True
-    if "password_correct" not in st.session_state:
-        st.text_input("Please enter the password:", type="password", key="password_input")
-        if st.session_state.get("password_input") == env_password:
-            st.session_state["password_correct"] = True
-            st.rerun()
-        return False
-    return True
-
+# --- 2. 認証機能 (utilsから読み込む) ---
+from utils.auth import check_password
 if not check_password():
     st.stop()
 

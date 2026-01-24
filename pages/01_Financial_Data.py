@@ -7,31 +7,21 @@ from datetime import datetime
 from utils.ui import render_country_selector
 from utils.processors import get_processor
 
+# --- 1. Page Config (必ず一番最初！) ---
+st.set_page_config(page_title="Version 1: Financial Data", layout="wide")
+
+# --- 2. 認証機能 (utilsから読み込む) ---
+# 古いコードを消して、この2行にするだけでOKです
+from utils.auth import check_password
+if not check_password():
+    st.stop()
+
 # --- Constants ---
 TEMPLATE_DIR = "templates"
 if not os.path.exists(TEMPLATE_DIR):
     os.makedirs(TEMPLATE_DIR)
 
-# --- Page Config ---
-st.set_page_config(page_title="Version 1: Financial Data", layout="wide")
-
-# --- 1. Authentication ---
-env_password = os.environ.get("APP_PASSWORD")
-
-def check_password():
-    if not env_password: return True
-    if "password_correct" not in st.session_state:
-        st.text_input("Please enter the password:", type="password", key="password_input")
-        if st.session_state.get("password_input") == env_password:
-            st.session_state["password_correct"] = True
-            st.rerun()
-        return False
-    return True
-
-if not check_password():
-    st.stop()
-
-# --- 2. Sidebar (Country & Template) ---
+# --- 3. Sidebar (Country & Template) ---
 country_code = render_country_selector()
 processor = get_processor(country_code)
 
@@ -81,7 +71,7 @@ with st.sidebar:
                 st.rerun()
 
         # ---------------------------------------------------------
-        # C. 削除機能 (Remove) ★新規追加★
+        # C. 削除機能 (Remove)
         # ---------------------------------------------------------
         if current_codes:
             st.write("---")
@@ -138,7 +128,7 @@ with st.sidebar:
     st.divider()
     debug_mode = st.checkbox("Debug Mode")
 
-# --- 3. Main Area ---
+# --- 4. Main Area ---
 # ★ Title with Version emphasized
 st.title(f"📊 Version 1: Financial Data ({country_code})")
 
@@ -151,7 +141,7 @@ default_label = f"Use default list for {country_code} (Registered)" if has_templ
 
 use_sample = st.checkbox(default_label, disabled=not has_template)
 
-# --- 4. Execution ---
+# --- 5. Execution ---
 if st.button("Start Analysis 🚀"):
     target_csv = None
     
