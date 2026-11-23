@@ -25,6 +25,8 @@ st.markdown("""
 ### Welcome
 Please select a tool from the sidebar on the left.
 
+📘 **New here?** Open the **User Guide** in the sidebar for step-by-step instructions.
+
 * **Version 1: Financial Data**
     * Financial Analysis & AI Segment Analysis
 * **Version 2: Sector Search**

@@ -78,6 +78,7 @@ Out of scope:
 | Path | Responsibility |
 |---|---|
 | `Home.py` | Landing page and login. |
+| `pages/00_User_Guide.py` | Beginner user guide (`docs/USER_GUIDE.md`, screenshots in `docs/images/`). |
 | `pages/01_Financial_Data.py` | Version 1: Financial Data. |
 | `pages/02_Sector_Search.py` | Version 2: Sector Search. |
 | `pages/03_AI_Judge.py` | Version 3: AI Judge. |
