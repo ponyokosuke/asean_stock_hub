@@ -18,6 +18,8 @@ ASEAN（東南アジア）市場の株式を分析するための Streamlit ア�
 
 ### 📄 pages/（機能ごとの画面）
 サイドバーのメニューに対応する各ツールの画面です。
+- **`00_User_Guide.py`**
+  - `docs/USER_GUIDE.md`（英語の初心者向け使い方ガイド、画像は `docs/images/`）をアプリ内に表示します。
 - **`01_Financial_Data.py`**
   - **旧 Version 1**: 銘柄リスト（CSV）を読み込み、Yahoo Financeから財務データを取得してエクセル化します。
   - AIによる事業セグメント分析機能も含みます。
