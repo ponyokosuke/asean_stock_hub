@@ -28,14 +28,21 @@ class BaseProcessor:
                 print(f"Client Init Error: {e}")
 
     # --- 1. データ取得 (Yahoo Finance) ---
-    def get_stock_data(self, code):
+    def get_stock_data(self, code, retries=3):
         try:
             ticker = yf.Ticker(code)
-            try:
-                info = ticker.info
-            except:
-                return None
-            
+            info = None
+            # Yahoo のレート制限対策: 失敗したら待って再試行 (2s, 4s, 8s)
+            for attempt in range(retries + 1):
+                try:
+                    info = ticker.info
+                    break
+                except Exception as e:
+                    if attempt == retries:
+                        print(f"  info取得失敗 {code}: {e}")
+                        return None
+                    time.sleep(2 * (2 ** attempt))
+
             if not info: return None
 
             return {

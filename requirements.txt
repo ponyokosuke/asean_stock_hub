@@ -1,6 +1,6 @@
 streamlit
 pandas
-yfinance
+yfinance>=1.0
 openpyxl
 python-dotenv
 google-genai

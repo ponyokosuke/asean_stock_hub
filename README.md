@@ -32,8 +32,21 @@ ASEAN（東南アジア）市場の株式を分析するための Streamlit ア�
 画面には表示されない、計算やデータ処理を行うプログラム群です。
 - **`ui.py`**
   - サイドバーに「国選択メニュー」を表示する共通部品。全ページから呼び出されます。
-- **`stock_codes.py`**
-  - ASEAN各国の全銘柄コードリスト（マスタデータ）。
+- **`sector_master.py`**
+  - セクターマスタ（`data/sector_master.csv`）の読み込みと、対象国・セクターの定義。
+- **`codes.py`**
+  - CSVから銘柄コードを読み込む共通処理（空ファイル・ヘッダー・重複・先頭ゼロに対応）。
+- **`analysis.py`**
+  - 財務データ取得 → AI分析 → Excel出力の共通処理（Version 1 / 2 / 3 で共用）。
+
+### 🗂 data/ と templates/
+- **`data/sector_master.csv`**
+  - SG / MY / TH / ID の全上場銘柄とセクターの一覧。Sector Search と AI Judge はこれを使います。
+  - `.github/workflows/update_sector_master.yml` が毎日 06:00 (SGT) に `scripts/build_sector_master.py` を実行し、変更があればコミットします（Actions 画面から手動実行も可能）。
+  - PH / VN は Yahoo のスクリーナー非対応のため対象外です（Version 1 のCSVアップロードで対応）。
+- **`templates/{国コード}.csv`**
+  - Version 1 の「デフォルトリスト」。1行1銘柄コード。
+  - Streamlit Cloud 上で保存したファイルは再起動で消えるため、変更は GitHub 上でこのファイルを編集してください。
 
 #### utils/processors/（国ごとの処理切り替え）
 「Strategyパターン」を使用して、国ごとの処理の違い（通貨、税率、計算式など）を吸収しています。

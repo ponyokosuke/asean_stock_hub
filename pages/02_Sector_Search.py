@@ -1,11 +1,9 @@
 import streamlit as st
-import pandas as pd
-import time
-import os
-import yfinance as yf
 from datetime import datetime
 from utils.ui import render_country_selector
 from utils.processors import get_processor
+from utils.sector_master import load_master, load_meta, SECTORS
+from utils.analysis import run_financial_analysis
 
 # --- 1. Page Config (必ず最初) ---
 st.set_page_config(page_title="Version 2: Sector Search", layout="wide")
@@ -14,28 +12,6 @@ st.set_page_config(page_title="Version 2: Sector Search", layout="wide")
 from utils.auth import check_password
 if not check_password():
     st.stop()
-
-# Import Stock List
-try:
-    from utils.stock_codes import ALL_ASEAN_CODES
-except ImportError:
-    st.error("⚠️ Critical Error: `utils/stock_codes.py` was not found.")
-    st.stop()
-
-# --- Constants (Sector List) ---
-SECTOR_OPTIONS = [
-    "Basic Materials",
-    "Communication Services",
-    "Consumer Cyclical",
-    "Consumer Defensive",
-    "Energy",
-    "Financial Services",
-    "Healthcare",
-    "Industrials",
-    "Real Estate",
-    "Technology",
-    "Utilities"
-]
 
 # --- 3. Sidebar (Country Selection) ---
 country_code = render_country_selector()
@@ -53,130 +29,77 @@ st.markdown("""
 Search for companies in specific sectors and generate a financial report **identical to Version 1**.
 """)
 
-# ★ Multi-select Input for Sectors
+# セクターマスタ (GitHub Actions が毎日更新) を読み込む
+master = load_master()
+meta = load_meta()
+country_df = master[master["country"] == country_code]
+
+if country_df.empty:
+    st.warning(
+        f"No company list is available for {country_code} (Yahoo Finance does not provide a screener for this market). "
+        "Please use **Version 1** with an uploaded CSV instead."
+    )
+    st.stop()
+
+st.caption(f"Sector master: {len(country_df)} listed companies in {country_code} · last updated {meta.get('updated_at', 'unknown')}")
+
+# ★ Multi-select Input for Sectors (件数つき)
+sector_counts = country_df["sector"].value_counts()
+sector_options = [s for s in SECTORS + ["Unknown"] if s in sector_counts]
 selected_sectors = st.multiselect(
     "Select Target Sectors",
-    options=SECTOR_OPTIONS,
-    default=None,
+    options=sector_options,
+    format_func=lambda s: f"{s} ({sector_counts[s]})",
     placeholder="Choose sectors (e.g., Technology, Real Estate)"
 )
+keyword = st.text_input("Filter by company name (optional)", placeholder="e.g. Berhad, Tech")
 
-# --- 5. Execution Logic ---
-if st.button("Start Screening & Analysis 🚀"):
-    if not selected_sectors:
-        st.error("Please select at least one sector.")
-    else:
-        try:
-            # -------------------------------------------
-            # Step 1: Filter Codes by Country
-            # -------------------------------------------
-            status_text = st.empty()
-            progress_bar = st.progress(0)
-            
-            status_text.text("Filtering stock codes by country...")
-            
-            # Filter by country suffix (.SI, .KL, etc.)
-            country_candidates = [
-                code for code in ALL_ASEAN_CODES 
-                if code.endswith(processor.suffix)
-            ]
-            
-            if not country_candidates:
-                st.error(f"No stock codes found for {country_code} (Suffix: {processor.suffix}). Please check `utils/stock_codes.py`.")
-                st.stop()
-            
-            # -------------------------------------------
-            # Step 2: Sector Screening (Yahoo Finance)
-            # -------------------------------------------
-            target_codes = []
-            total_candidates = len(country_candidates)
-            
-            st.info(f"Screening {total_candidates} companies in {country_code} for sectors: {', '.join(selected_sectors)}...")
-            
-            # Container for logs
-            log_container = st.container()
-            log_container.write("--- Screening Results ---")
+if not selected_sectors:
+    st.info("Select at least one sector to see the companies.")
+    st.stop()
 
-            for i, code in enumerate(country_candidates):
-                progress_bar.progress((i + 1) / (total_candidates + 1))
-                status_text.text(f"Screening ({i+1}/{total_candidates}): {code}...")
-                
-                try:
-                    ticker = yf.Ticker(code)
-                    # Fetch minimal info to check sector
-                    info = ticker.info
-                    company_sector = str(info.get('sector', 'Unknown'))
-                    
-                    # Check for match
-                    is_match = False
-                    if company_sector in selected_sectors:
-                        is_match = True
-                    
-                    if is_match:
-                        target_codes.append(code)
-                        log_container.write(f"✅ Hit: **{code}** ({info.get('longName')}) - Sector: {company_sector}")
-                        
-                except Exception:
-                    pass
-                
-                # Sleep to respect API limits
-                time.sleep(0.1)
+hits = country_df[country_df["sector"].isin(selected_sectors)]
+if keyword:
+    hits = hits[hits["name"].str.contains(keyword, case=False, regex=False)]
 
-            # -------------------------------------------
-            # Step 3: Full Data Analysis (Version 1 Logic)
-            # -------------------------------------------
-            if not target_codes:
-                st.warning("No companies found matching the specified sectors.")
-            else:
-                st.success(f"Found {len(target_codes)} companies! Starting full financial analysis...")
-                time.sleep(1)
-                
-                # Fetch full data like Version 1
-                all_results = []
-                total_targets = len(target_codes)
-                
-                progress_bar.progress(0) # Reset progress
-                
-                for i, code in enumerate(target_codes):
-                    status_text.text(f"Fetching Financial Data ({i+1}/{total_targets}): {code}...")
-                    progress_bar.progress((i + 1) / (total_targets + 1))
-                    
-                    # Use Processor for data extraction
-                    raw = processor.get_stock_data(code)
-                    if raw:
-                        data = processor.extract_data(code, raw)
-                        all_results.append(data)
-                    
-                    time.sleep(0.2)
-                
-                # AI Analysis & Formatting
-                if all_results:
-                    status_text.text("🤖 Running AI Analysis (Gemini)...")
-                    all_results = processor.run_ai_analysis(all_results)
-                    
-                    df = pd.DataFrame(all_results)
-                    
-                    status_text.text("📏 Formatting Excel (Version 1 Style)...")
-                    df = processor.process_dataframe(df)
-                    excel_data = processor.generate_excel_binary(df)
-                    
-                    progress_bar.progress(100)
-                    status_text.success("✅ All processes completed!")
-                    
-                    # Generate filename
-                    filename = f"Version_2_{country_code}_{datetime.today().strftime('%Y-%m-%d')}.xlsx"
-                    
-                    st.download_button(
-                        label="📥 Download Excel File",
-                        data=excel_data,
-                        file_name=filename,
-                        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                    )
-                    
-                    st.subheader("Data Preview")
-                    st.dataframe(df)
-        
-        except Exception as e:
-            st.error(f"❌ Error: {e}")
-            if debug_mode:
-                st.exception(e)
+if hits.empty:
+    st.warning("No companies found matching the specified sectors.")
+    st.stop()
+
+# --- 5. 銘柄一覧 (チェックで対象を選択) ---
+table = hits[["symbol", "name", "sector"]].rename(
+    columns={"symbol": "Code", "name": "Name of Company", "sector": "Sector"}
+)
+table.insert(0, "Select", True)
+edited = st.data_editor(
+    table,
+    hide_index=True,
+    use_container_width=True,
+    disabled=["Code", "Name of Company", "Sector"],
+    key=f"hits_{country_code}_{'|'.join(selected_sectors)}_{keyword}",
+)
+selected_codes = edited.loc[edited["Select"], "Code"].tolist()
+
+col_a, col_b = st.columns(2)
+with col_a:
+    st.download_button(
+        f"📄 Download code list ({len(selected_codes)})",
+        data="\n".join(selected_codes),
+        file_name=f"Codes_{country_code}_{datetime.today().strftime('%Y-%m-%d')}.csv",
+        mime="text/csv",
+        disabled=not selected_codes,
+    )
+with col_b:
+    start = st.button(f"Start Financial Analysis ({len(selected_codes)} companies) 🚀", disabled=not selected_codes)
+
+if len(selected_codes) > 100:
+    st.caption("⏱ Large selections take a long time (several seconds per company). Consider narrowing down first.")
+
+# --- 6. Execution ---
+if start:
+    try:
+        run_financial_analysis(selected_codes, processor, country_code, "Version_2")
+    except Exception as e:
+        st.error(f"❌ Error: {e}")
+        if debug_mode:
+            st.exception(e)
