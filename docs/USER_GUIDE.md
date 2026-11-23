@@ -118,7 +118,7 @@ In the left sidebar, under **Target Country**, click the country, e.g. **Malaysi
 
 **B. Use the default list**
 
-- Tick **"Use default list for MY (129 codes)"**. The number of codes is shown on the box.
+- Tick **"Use default list for MY (141 codes)"**. The number of codes is shown on the box.
 - To see which companies are in it, open **📋 Default List** in the left sidebar.
 - If a country has no default list, the box says **"Not registered ⚠️"** and can't be ticked.
 - To change a default list permanently, ask Kosuke. Changes made inside the app are not saved.
@@ -127,7 +127,7 @@ If you both upload a file **and** tick the default list, the **uploaded file is 
 
 ### Step 3 — Start
 
-Click **Start Analysis 🚀**. A progress bar shows "Fetching Financial Data (5/129): 0097.KL…".
+Click **Start Analysis 🚀**. A progress bar shows "Fetching Financial Data (5/141): 0097.KL…".
 
 > ⏱ **How long does it take?** About **3–6 seconds per company**, plus a short AI step at the end. 10 companies take about 1 minute; 130 companies take about 10–15 minutes.
 >
@@ -164,7 +164,7 @@ Choose it under **Target Country** in the sidebar.
 ### Step 2 — Select sectors
 
 1. Click **Select Target Sectors**.
-2. Choose one or more sectors. The number in brackets is how many companies each has, e.g. "Technology (129)".
+2. Choose one or more sectors. The number in brackets is how many companies each has, e.g. "Technology (141)".
 3. To remove a sector, click the **×** on its red tag.
 
 The sectors are **Yahoo Finance's 11 sectors**:
@@ -193,7 +193,7 @@ Malaysia has three markets. All of them are selected at the start.
 |---|---|
 | **Main** | Main Market: established, larger companies |
 | **ACE (unverified)** | Usually ACE Market (growth companies). "Unverified" because a few companies that moved from ACE to Main keep their old code, so the tool can't be 100% sure. |
-| **LEAP** | LEAP Market (for sophisticated investors). Yahoo has very little data on LEAP companies, so only a few appear. |
+| **LEAP** | LEAP Market (for sophisticated investors). Most LEAP companies are included; a few have no Yahoo data and are missing. |
 | **Other** | Preference shares, rights and similar instruments (not ordinary shares) |
 
 To focus on one market, remove the others by clicking their **×**. If you remove all of them, every company is shown.
@@ -351,10 +351,10 @@ These columns are empty on purpose, for your team's notes:
 | The default-list box says "Not registered ⚠️" | There is no default list for this country | Upload your own CSV, or ask Kosuke to add a default list. |
 | "No company list is available for PH" (or VN) | Yahoo Finance doesn't provide a company list for this market | Use **Financial Data** with your own CSV. |
 | "No companies found matching the specified sectors." | The filters exclude everything | Remove the name filter, add sectors, or re-select all boards. |
-| ⚠️ "Could not retrieve data for N code(s): …" | Those companies are delisted, the code is wrong, Yahoo has no data (common for LEAP companies), or Yahoo was busy | Check the codes. If it looks like a temporary problem, click Start again a few minutes later. |
+| ⚠️ "Could not retrieve data for N code(s): …" | Those companies are delisted, the code is wrong, Yahoo has no data (this happens for a few LEAP companies), or Yahoo was busy | Check the codes. If it looks like a temporary problem, click Start again a few minutes later. |
 | "No data retrieved. Yahoo Finance may be limiting requests…" | Yahoo is temporarily refusing requests | Wait 5–10 minutes and click Start again. Companies already retrieved are remembered for 24 hours, so the retry is quicker. |
 | The page went blank or reset in the middle of a run | You clicked something during the run, or the tab or computer went to sleep | Click Start again. Companies already retrieved come back almost instantly ("N from cache"). |
-| A Malaysian company is missing from Sector Search | It may be delisted, an ETF (ETFs are excluded), or a LEAP company that Yahoo doesn't cover | Check the code on Bursa Malaysia's website. If it is listed, add it through **Financial Data** with your own CSV. |
+| A Malaysian company is missing from Sector Search | It may be delisted, an ETF (ETFs are excluded), or one of the few LEAP companies Yahoo has no data for | Check the code on Bursa Malaysia's website. If it is listed, add it through **Financial Data** with your own CSV. |
 | The wrong company appears for a Malaysian code | Excel removed the leading zero (`0097` → `97`) | Write codes as `0097.KL`, or format the column as Text (Section 4, Step 2). |
 | The "Segments" column is empty | The AI service was not available | The other columns are still correct. Try again later, or tell Kosuke. |
 | Some numbers are blank | Yahoo has no data for that item | Normal; see Section 8.3. Check the annual report if needed. |

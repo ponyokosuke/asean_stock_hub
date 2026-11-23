@@ -851,7 +851,9 @@ MY,0288.KL,Minox International Group Berhad,Basic Materials,KLS
 MY,0289.KL,PLYTEC Holding Berhad,Basic Materials,KLS
 MY,0297.KL,TSA Group Berhad,Basic Materials,KLS
 MY,0301.KL,Zantat Holdings Berhad,Basic Materials,KLS
+MY,03024.KL,CE Technology Berhad,Basic Materials,KLS
 MY,0306.KL,Smart Asia Chemical Bhd,Basic Materials,KLS
+MY,03060.KL,Hydropipes Berhad,Basic Materials,KLS
 MY,0313.KL,BWYS Group Berhad,Basic Materials,KLS
 MY,0331.KL,Cropmate Berhad,Basic Materials,KLS
 MY,0336.KL,Winstar Capital Berhad,Basic Materials,KLS
@@ -993,7 +995,12 @@ MY,0268.KL,L&P Global Berhad,Consumer Cyclical,KLS
 MY,0269.KL,DS Sigma Holdings Berhad,Consumer Cyclical,KLS
 MY,0279.KL,Synergy House Berhad,Consumer Cyclical,KLS
 MY,0287.KL,SSF Home Group Berhad,Consumer Cyclical,KLS
+MY,03012.KL,Baba Eco Group Berhad,Consumer Cyclical,KLS
 MY,0302.KL,Topmix Berhad,Consumer Cyclical,KLS
+MY,03040.KL,Jishan Berhad,Consumer Cyclical,KLS
+MY,03063.KL,Ping Edge Technology Berhad,Consumer Cyclical,KLS
+MY,03067.KL,Associated Air-Pak Industries Berhad,Consumer Cyclical,KLS
+MY,03068.KL,Bentley Music Group Berhad,Consumer Cyclical,KLS
 MY,03072.KL,Milolo Berhad,Consumer Cyclical,KLS
 MY,0322.KL,KHPT Holdings Berhad,Consumer Cyclical,KLS
 MY,0326.KL,Sorento Capital Berhad,Consumer Cyclical,KLS
@@ -1142,7 +1149,12 @@ MY,0260.KL,PT Resources Holdings Berhad,Consumer Defensive,KLS
 MY,0271.KL,Wellspire Holdings Berhad,Consumer Defensive,KLS
 MY,0280.KL,MYMBN Berhad,Consumer Defensive,KLS
 MY,0300.KL,SBH Marine Holdings Berhad,Consumer Defensive,KLS
+MY,03032.KL,Astramina Group Berhad,Consumer Defensive,KLS
 MY,0304.KL,Farm Price Holdings Berhad,Consumer Defensive,KLS
+MY,03051.KL,Alpha Ocean Resources Berhad,Consumer Defensive,KLS
+MY,03055.KL,DSR Taiko Berhad,Consumer Defensive,KLS
+MY,03064.KL,MyAxis Group Berhad,Consumer Defensive,KLS
+MY,03071.KL,Noesis Exed Berhad,Consumer Defensive,KLS
 MY,0309.KL,Agricore CS Holdings Berhad,Consumer Defensive,KLS
 MY,0312.KL,Ocean Fresh Berhad,Consumer Defensive,KLS
 MY,0316.KL,Sik Cheong Berhad,Consumer Defensive,KLS
@@ -1289,6 +1301,8 @@ MY,0150PA.KL,Fintec Global Berhad,Financial Services,KLS
 MY,0242.KL,Pappajack Berhad,Financial Services,KLS
 MY,0285.KL,Mercury Securities Group Berhad,Financial Services,KLS
 MY,0286.KL,Evergreen Max Cash Capital Berhad,Financial Services,KLS
+MY,03021.KL,Equitiestracker Holdings Berhad,Financial Services,KLS
+MY,03070.KL,Whitman Holdings Berhad,Financial Services,KLS
 MY,1015.KL,AMMB Holdings Berhad,Financial Services,KLS
 MY,1023.KL,CIMB Group Holdings Berhad,Financial Services,KLS
 MY,1058.KL,Manulife Holdings Berhad,Financial Services,KLS
@@ -1335,7 +1349,9 @@ MY,0222.KL,Optimax Holdings Berhad,Healthcare,KLS
 MY,0243.KL,Cengild Medical Berhad,Healthcare,KLS
 MY,0256.KL,UMediC Group Berhad,Healthcare,KLS
 MY,0283.KL,DC Healthcare Holdings Berhad,Healthcare,KLS
+MY,03023.KL,Smile-Link Healthcare Global Berhad,Healthcare,KLS
 MY,0303.KL,Alpha IVF Group Berhad,Healthcare,KLS
+MY,03033.KL,Supergenics Berhad,Healthcare,KLS
 MY,0329.KL,Metro Healthcare Berhad,Healthcare,KLS
 MY,0332.KL,Topvision Eye Specialist Berhad,Healthcare,KLS
 MY,0363.KL,PMCK Berhad,Healthcare,KLS
@@ -1437,7 +1453,15 @@ MY,0296.KL,HE Group Berhad,Industrials,KLS
 MY,0298.KL,Wentel Engineering Holdings Berhad,Industrials,KLS
 MY,0299.KL,AGX Group Berhad,Industrials,KLS
 MY,03019.KL,Matrix Parking Solution Holdings Berhad,Industrials,KLS
+MY,03027.KL,MMIS Berhad,Industrials,KLS
+MY,03031.KL,Polydamic Group Berhad,Industrials,KLS
 MY,0305.KL,Sin-Kung Logistics Berhad,Industrials,KLS
+MY,03050.KL,Sunmow Holding Berhad,Industrials,KLS
+MY,03053.KL,CC International Berhad,Industrials,KLS
+MY,03059.KL,Autoris Group Holdings Berhad,Industrials,KLS
+MY,03061.KL,TP TEC Holding Berhad,Industrials,KLS
+MY,03062.KL,TSIC Berhad,Industrials,KLS
+MY,03065.KL,LPC Group Berhad,Industrials,KLS
 MY,0307.KL,Kawan Renergy Berhad,Industrials,KLS
 MY,0310.KL,UUE Holdings Berhad,Industrials,KLS
 MY,0317.KL,EPB Group Berhad,Industrials,KLS
@@ -1665,6 +1689,7 @@ MY,9822.KL,SAM Engineering & Equipment (M) Berhad,Industrials,KLS
 MY,0069.KL,Vinvest Capital Holdings Berhad,Real Estate,KLS
 MY,0206.KL,Gagasan Nadi Cergas Berhad,Real Estate,KLS
 MY,0273.KL,Vestland Berhad,Real Estate,KLS
+MY,03073.KL,Esys Holdings Berhad,Real Estate,KLS
 MY,0308.KL,KTI Landmark Berhad,Real Estate,KLS
 MY,0452.KL,Gold Li Holdings Berhad,Real Estate,KLS
 MY,0481.KL,KEB Berhad,Real Estate,KLS
@@ -1839,7 +1864,19 @@ MY,0277.KL,Cloudpoint Technology Berhad,Technology,KLS
 MY,0278.KL,Edelteq Holdings Berhad,Technology,KLS
 MY,0281.KL,Daythree Digital Berhad,Technology,KLS
 MY,0290.KL,Panda Eco System Berhad,Technology,KLS
+MY,03001.KL,Cloudaron Group Berhad,Technology,KLS
+MY,03002.KL,JaGaSolution Berhad,Technology,KLS
+MY,03011.KL,Amlex Holdings Berhad,Technology,KLS
+MY,03022.KL,MCOM Holdings Berhad,Technology,KLS
+MY,03030.KL,IDB Technologies Berhad,Technology,KLS
 MY,03039.KL,RTS Technology Holdings Berhad,Technology,KLS
+MY,03041.KL,Onetech Solutions Holdings Berhad,Technology,KLS
+MY,03046.KL,DynaFront Holdings Berhad,Technology,KLS
+MY,03052.KL,Ray Go Solar Holdings Berhad,Technology,KLS
+MY,03054.KL,Snowfit Group Berhad,Technology,KLS
+MY,03057.KL,Sancy Berhad,Technology,KLS
+MY,03066.KL,Croesus IT Holdings Berhad,Technology,KLS
+MY,03069.KL,BIMOffice Group Berhad,Technology,KLS
 MY,0311.KL,Go Hub Capital Berhad,Technology,KLS
 MY,0319.KL,VETECE Holdings Berhad,Technology,KLS
 MY,0323.KL,Crest Group Berhad,Technology,KLS
@@ -1898,6 +1935,8 @@ MY,9172.KL,Formosa Prosonic Industries Berhad,Technology,KLS
 MY,9334.KL,KESM Industries Berhad,Technology,KLS
 MY,9377.KL,FSBM Holdings Berhad,Technology,KLS
 MY,9393.KL,Industronics Berhad,Technology,KLS
+MY,03009.KL,Seers Bhd,Unknown,KLS
+MY,03058.KL,Total Dynamic Holdings Berhad,Unknown,KLS
 MY,8877R1.KL,EKOVEST-R1,Unknown,KLS
 MY,0318.KL,Elridge Energy Holdings Berhad,Utilities,KLS
 MY,0369.KL,JS Solar Holding Berhad,Utilities,KLS
