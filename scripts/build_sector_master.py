@@ -24,6 +24,9 @@ PAGE_SIZE = 250
 SLEEP_SEC = 1.0
 # 新しい件数が前回の半分未満なら Yahoo 側の異常とみなし、その国は前回データを残す
 MIN_RATIO = 0.5
+# スクリーナーに出てこない銘柄を、コード番号を直接試して補う
+# (MY の LEAP Market 03001〜03199: スクリーナーは数社しか返さないが、個別には取得できる)
+PROBE_CODES = {"MY": [f"03{i:03d}.KL" for i in range(1, 200)]}
 
 
 def screen_all(query):
@@ -77,6 +80,38 @@ def build_country(country, region):
         if h.get("symbol") and h["symbol"] not in seen:
             seen.add(h["symbol"])
             rows.append(to_row(country, "Unknown", h))
+
+    rows += probe_codes(country, PROBE_CODES.get(country, []), seen)
+    return rows
+
+
+def probe_codes(country, codes, seen):
+    """スクリーナーに無いコードを直接取得し、直近2年に株価がある銘柄を追加"""
+    codes = [c for c in codes if c not in seen]
+    if not codes:
+        return []
+    close = yf.download(codes, period="2y", progress=False, threads=True)["Close"]
+    alive = [c for c in codes if c in close and close[c].notna().any()]
+    rows = []
+    for code in alive:
+        info = {}
+        for attempt in range(3):
+            try:
+                info = yf.Ticker(code).info
+                break
+            except Exception as e:
+                print(f"    retry {code} ({e})")
+                time.sleep(5 * (2 ** attempt))
+        seen.add(code)
+        rows.append({
+            "country": country,
+            "symbol": code,
+            "name": info.get("longName") or info.get("shortName") or "",
+            "sector": info.get("sector") if info.get("sector") in SECTORS else "Unknown",
+            "exchange": info.get("exchange", ""),
+        })
+        time.sleep(SLEEP_SEC)
+    print(f"  {country} probed: {len(rows)} added")
     return rows
 
 

@@ -2,7 +2,7 @@
 
 | Item | Value |
 |---|---|
-| Document version | 1.1 |
+| Document version | 1.2 |
 | Date | 2026-11-23 |
 | Applies to | `main` branch of `ponyokosuke/asean_stock_hub` (after PR #3) |
 | Live app | https://aseanstockapp-analysis.streamlit.app/ |
@@ -100,7 +100,7 @@ Out of scope:
 | Country | Code | Suffix | Currency label | Sector master | Default list |
 |---|---|---|---|---|---|
 | Singapore | SG | `.SI` | SGD | Yes (537) | Yes (70 codes, curated IT list) |
-| Malaysia | MY | `.KL` | MYR | Yes (1,077) | Yes (129 codes, Yahoo "Technology") |
+| Malaysia | MY | `.KL` | MYR | Yes (1,116) | Yes (141 codes, Yahoo "Technology") |
 | Thailand | TH | `.BK` | THB | Yes (1,497) | No |
 | Indonesia | ID | `.JK` | IDR | Yes (838) | No |
 | Philippines | PH | `.PS` | PHP | **No** (not covered by the Yahoo screener) | No |
@@ -144,11 +144,12 @@ Bursa Malaysia has three boards:
 | `0xxx` | ACE (unverified) | Usually ACE. Companies that moved from ACE to Main keep their `0xxx` code. |
 | anything else (`…PA`, `…PC`, `…R1`, `…SS`) | Other | Preference shares, rights, stapled securities (ETFs are excluded from the master) |
 
-As of 2026-11-23 the Malaysian rows are: 705 Main, 360 ACE (unverified), 3 LEAP and 9 Other.
+As of 2026-11-23 the Malaysian rows are: 705 Main, 360 ACE (unverified), 42 LEAP and 9 Other.
 
 **LEAP coverage:**
-- Yahoo Finance covers very few LEAP Market companies. Most LEAP tickers, e.g. `03008.KL` and `03036.KL`, return "Quote not found".
-- Most LEAP companies therefore cannot appear in the master, and cannot be analysed in any version (issue COV-3).
+- The Yahoo screener returns only a few LEAP Market companies, but Yahoo has quotes and financials for most of them when asked by code.
+- The build therefore also tries every code from `03001.KL` to `03199.KL` directly (Section 10.3, step 3). As of 2026-11-23 this finds 42 LEAP companies, 13 of them in Yahoo's "Technology" sector.
+- A few LEAP tickers still have no Yahoo data, e.g. `03008.KL` and `03036.KL` ("Quote not found"), and cannot be analysed (issue COV-3).
 
 **Delisted companies** are dropped automatically: the Yahoo screener only returns listed securities.
 
@@ -388,10 +389,13 @@ When the app loads the master, it adds `board`, `official_sector` and `official_
    - Results are paged 250 at a time, sorted by market cap.
    - Pages are 1 s apart; failed pages retry up to 4 times with 5, 10, 20 and 40 s waits.
 2. Query the whole region again and add symbols that are not in any sector, as `Unknown`.
-3. **Safeguard:** if a country returns fewer than 50 % of its previous row count, keep the previous rows for that country.
-4. Remove Thai `-R.BK` and `-F.BK` lines, and ETFs (Section 5.2a).
-5. If the resulting CSV text is identical to the existing file, stop with "No changes".
-6. Otherwise write the CSV and the metadata.
+3. **Direct probe (MY only):** the screener misses most LEAP companies, so try every code `03001.KL`–`03199.KL` that is not already in the list.
+   - Codes with a price in the last 2 years are added, with name and sector from `Ticker.info` (`Unknown` if Yahoo has no sector).
+   - Codes are listed in `PROBE_CODES` in the script.
+4. **Safeguard:** if a country returns fewer than 50 % of its previous row count, keep the previous rows for that country.
+5. Remove Thai `-R.BK` and `-F.BK` lines, and ETFs (Section 5.2a).
+6. If the resulting CSV text is identical to the existing file, stop with "No changes".
+7. Otherwise write the CSV and the metadata.
 
 ### 10.4 Schedule
 
@@ -413,7 +417,7 @@ Secrets must never be committed. `.streamlit/secrets.toml` in the repository is 
 
 | Topic | Current characteristic |
 |---|---|
-| Performance | About 3–6 s per company in the pipeline. 129 companies take roughly 8–13 minutes, plus AI time. |
+| Performance | About 3–6 s per company in the pipeline. 141 companies take roughly 8–14 minutes, plus AI time. |
 | Rate limits | Yahoo may throttle shared cloud IPs. Mitigation: pauses, retries with backoff, and a failed-code report. |
 | Session | The last result per page is kept for the browser session. Fetched companies are cached for 24 hours, so an interrupted run can be repeated quickly. |
 | Availability | Streamlit Community Cloud sleeps the app after inactivity; the first visit may take about 30 s to wake it. |
@@ -454,7 +458,7 @@ Priority: **H** = affects correctness of the deliverable; **M** = affects usabil
 | ID | Pri | Issue | Target behaviour |
 |---|---|---|---|
 | COV-1 | M | No sector master for PH and VN (Yahoo screener does not cover them). Yahoo's VN data quality has not been checked. | Find an alternative list source, or document "upload only". |
-| COV-3 | M | Yahoo Finance does not cover most LEAP Market companies, e.g. `03008.KL` SL Innovation Capital and `03036.KL` Redplanet. | Add LEAP companies through `data/official/MY.csv` together with another data source for their financials, or document LEAP as out of scope. |
+| COV-3 | L | **Mostly resolved in 1.2:** the build probes LEAP codes directly, adding 39 LEAP companies the screener missed (42 in total). A few LEAP tickers have no Yahoo data at all, e.g. `03008.KL` SL Innovation Capital and `03036.KL` Redplanet. | Check the LEAP list against Bursa quarterly. Companies without Yahoo data need another source for their financials. |
 | COV-2 | M | Default lists exist only for SG and MY. The MY list is a provisional Yahoo "Technology" list, not a curated IT list like SG's. | Replace it with the agreed curated MY list. |
 
 ### 14.3 Usability and reliability
@@ -497,3 +501,4 @@ Priority: **H** = affects correctness of the deliverable; **M** = affects usabil
 |---|---|---|
 | 1.0 | 2026-11-23 | First specification, written after the sector master rebuild (PR #1). |
 | 1.1 | 2026-11-23 | H-priority fixes (PR #3): Malaysian board, official classification support, blank for missing data, persistent results and caching. All Malaysian markets kept, ETFs excluded; login unchanged. |
+| 1.2 | 2026-11-23 | LEAP coverage: the build probes `03001`–`03199` directly (42 LEAP companies instead of 3). Default MY list rebuilt (141 codes). |
