@@ -36,8 +36,7 @@ Out of scope:
 
 - Access is protected by one shared password (`APP_PASSWORD`).
 - After a correct login the session stays authenticated until the browser tab is closed or the app restarts.
-- If `APP_PASSWORD` is not configured, **every page refuses access** and shows a configuration error (fail closed).
-- The password comparison is constant-time.
+- If `APP_PASSWORD` is not configured, the app runs without a login. This is intentional (owner decision, 2026-11-23); see SEC-1.
 
 ## 3. Glossary
 
@@ -143,6 +142,8 @@ As of 2026-11-23 the Malaysian rows are: 704 Main, 360 ACE (unverified), 3 LEAP 
 
 To make every board certain, list the `0xxx` companies that are on the Main Market in `data/official/MY.csv`. Take that list from a source you are licensed to use. Bursa Malaysia's website licenses its market data and blocks automated access, so it must not be scraped.
 
+All boards are kept in the master and in every list: Main, ACE, LEAP and Other. Nothing is excluded. The Sector Search board filter starts with every board selected.
+
 The board is used in three places:
 
 - the **Market / Board** filter and column in Sector Search
@@ -209,7 +210,7 @@ The latest result stays on the page (Section 8.1). Default lists cannot be edite
 4. **Select Target Sectors:** multi-select of sectors for the chosen classification, each showing its company count.
    - Yahoo: the 11 sectors plus "Unknown".
    - Official: the values found in the file.
-5. **Market / Board:** multi-select shown when boards are known (Malaysia), each showing its count. All boards are selected by default.
+5. **Market / Board:** multi-select shown when boards are known (Malaysia), each showing its count. All boards (Main, ACE, LEAP, Other) are selected by default, so no market is left out unless the user removes it.
 6. **Filter by company name:** optional, case-insensitive substring match.
 7. A table of matching companies with a **Select** checkbox per row. All rows are ticked by default.
    - Columns: Code, Name of Company, Board (if known), Sector (Yahoo), Sector (Official) (if available).
@@ -427,7 +428,7 @@ Priority: **H** = affects correctness of the deliverable; **M** = affects usabil
 | ID | Pri | Issue | Target behaviour |
 |---|---|---|---|
 | DATA-1 | H | **Partly resolved in 1.1.** The board is shown and can be filtered, and all non-`0xxx` codes are certain. The 360 `0xxx` codes are shown as "ACE (unverified)" until `data/official/MY.csv` lists the ones on the Main Market. | Fill `data/official/MY.csv` from a licensed source, and review it quarterly. |
-| DATA-3 | M | The master contains ETFs, preference shares, rights and depositary receipts, alongside ordinary shares. | Exclude non-ordinary instruments by default (suffix rules plus `quoteType`), with an option to include them. |
+| DATA-3 | L | The master contains ETFs, preference shares, rights and depositary receipts, alongside ordinary shares. | **All markets and instruments are kept** (owner decision, 2026-11-23). In Malaysia they appear under the board "Other". If needed, add an instrument-type label; do not exclude them. |
 | DATA-4 | H | **Partly resolved in 1.1.** The app supports official sectors: a classification switch in Sector Search, and the Excel columns 42–43. The data files are still empty. | Fill `official_sector` and `official_industry` in `data/official/{COUNTRY}.csv` from a licensed source (e.g. ShareInvestor). |
 | DATA-6 | M | FY comes from `lastFiscalYearEnd`, while figures come from the latest balance sheet or income statement column. The two can refer to different years. | Use the statement column date as FY. |
 | DATA-7 | M | The column "Debt/Equity(%)" actually holds total liabilities ÷ equity. | Rename it to "Liabilities/Equity (%)", or compute Total Debt ÷ Equity. |
@@ -463,18 +464,23 @@ Priority: **H** = affects correctness of the deliverable; **M** = affects usabil
 | OPS-3 | L | `streamlit`, `pandas`, `openpyxl` and `google-genai` are unpinned, so upstream releases can break the app. | Pin tested versions. |
 | OPS-4 | L | The sector master workflow fails silently if Yahoo changes its screener; the safeguard keeps old data without alerting anyone. | Fail the workflow (red) when the safeguard triggers, so GitHub sends a notification. |
 
-### 14.5 Resolved
+### 14.5 Accepted as is
+
+| ID | Decision |
+|---|---|
+| SEC-1 | If `APP_PASSWORD` is missing, the app runs without a login. Kept unchanged by owner decision (2026-11-23). Make sure `APP_PASSWORD` stays set in Streamlit Cloud. |
+
+### 14.6 Resolved
 
 | ID | Resolved in | Resolution |
 |---|---|---|
 | DATA-2 | 1.1 | "Market / Board" is column 4 of the Excel. |
 | DATA-5 | 1.1 | Missing items are blank; 0 only for reported zeros. |
 | UX-1 | 1.1 | Results persist in the session; fetched companies are cached for 24 h, so interrupted runs resume quickly. |
-| SEC-1 | 1.1 | The app fails closed when `APP_PASSWORD` is missing; the comparison is constant-time. |
 
 ## 15. Change history
 
 | Version | Date | Change |
 |---|---|---|
 | 1.0 | 2026-11-23 | First specification, written after the sector master rebuild (PR #1). |
-| 1.1 | 2026-11-23 | H-priority fixes (PR #3): Malaysian board, official classification support, blank for missing data, persistent results and caching, fail-closed login. |
+| 1.1 | 2026-11-23 | H-priority fixes (PR #3): Malaysian board, official classification support, blank for missing data, persistent results and caching. All Malaysian markets kept; login unchanged. |
