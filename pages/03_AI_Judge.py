@@ -8,13 +8,8 @@ from google import genai
 from datetime import datetime
 from utils.ui import render_country_selector
 from utils.processors import get_processor
-
-# 銘柄リストのインポート
-try:
-    from utils.stock_codes import ALL_ASEAN_CODES
-except ImportError:
-    st.error("⚠️ Critical Error: `utils/stock_codes.py` was not found.")
-    st.stop()
+from utils.sector_master import load_master, SECTORS
+from utils.analysis import run_financial_analysis
 
 # --- 1. Page Config (必ず最初！) ---
 st.set_page_config(page_title="Version 3: AI Judge", layout="wide")
@@ -121,6 +116,17 @@ user_prompt = st.text_area(
 )
 st.session_state.current_prompt = user_prompt
 
+# --- Target Sectors (セクターマスタから候補を絞り込む) ---
+country_df = load_master()
+country_df = country_df[country_df["country"] == country_code]
+sector_counts = country_df["sector"].value_counts()
+judge_sectors = st.multiselect(
+    "Target Sectors (companies to send to the AI)",
+    options=[s for s in SECTORS + ["Unknown"] if s in sector_counts],
+    default=[s for s in ["Technology", "Communication Services"] if s in sector_counts],
+    format_func=lambda s: f"{s} ({sector_counts[s]})",
+)
+
 # --- Functions ---
 def fetch_summaries(codes, progress_bar, status_text):
     data_list = []
@@ -137,7 +143,7 @@ def fetch_summaries(codes, progress_bar, status_text):
                 data_list.append({"code": code, "name": name, "summary": summary})
         except Exception:
             pass
-        time.sleep(0.1)
+        time.sleep(0.3)
     return data_list
 
 def batch_judge_it_sector(targets, prompt_template, progress_bar, status_text):
@@ -200,10 +206,10 @@ def batch_judge_it_sector(targets, prompt_template, progress_bar, status_text):
 
 # --- 6. Execution Logic ---
 if st.button("Start AI Judgment & Analysis 🚀"):
-    country_candidates = [code for code in ALL_ASEAN_CODES if code.endswith(processor.suffix)]
+    country_candidates = country_df[country_df["sector"].isin(judge_sectors)]["symbol"].tolist()
     
     if not country_candidates:
-        st.error(f"No stock codes found for {country_code}. Check `utils/stock_codes.py`.")
+        st.error(f"No stock codes found for {country_code} in the selected sectors.")
     else:
         try:
             status_text = st.empty()
@@ -227,38 +233,11 @@ if st.button("Start AI Judgment & Analysis 🚀"):
                 st.success(f"Found {len(yes_companies)} IT-related companies! Starting full financial analysis...")
                 time.sleep(1)
                 
-                all_financials = []
-                total_yes = len(yes_companies)
-                progress_bar.progress(0)
-                
-                for i, company in enumerate(yes_companies):
-                    code = company['code']
-                    status_text.text(f"Fetching Financial Data ({i+1}/{total_yes}): {code}...")
-                    progress_bar.progress((i + 1) / (total_yes + 1))
-                    
-                    raw = processor.get_stock_data(code)
-                    if raw:
-                        data = processor.extract_data(code, raw)
-                        data["Category Classification/YahooFin"] = company.get('Category', '') + " (AI Judged)"
-                        all_financials.append(data)
-                    time.sleep(0.2)
-                
-                if all_financials:
-                    status_text.text("🤖 Extracting detailed Business Segments (Version 1 Style)...")
-                    all_financials = processor.run_ai_analysis(all_financials)
-
-                    status_text.text("📏 Formatting Excel (Version 1 Style)...")
-                    df = pd.DataFrame(all_financials)
-                    df = processor.process_dataframe(df)
-                    excel_data = processor.generate_excel_binary(df)
-                    
-                    progress_bar.progress(100)
-                    status_text.success("✅ All processes completed!")
-                    
-                    filename = f"Version_3_AI_Judge_{country_code}_{datetime.today().strftime('%Y-%m-%d')}.xlsx"
-                    st.download_button(label="📥 Download Excel File", data=excel_data, file_name=filename, mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-                    st.subheader("Results Preview")
-                    st.dataframe(df)
+                run_financial_analysis(
+                    [c["code"] for c in yes_companies], processor, country_code, "Version_3_AI_Judge",
+                    extra_fields={c["code"]: {"Category Classification/YahooFin": c.get("Category", "") + " (AI Judged)"}
+                                  for c in yes_companies},
+                )
 
         except Exception as e:
             st.error(f"❌ Error: {e}")
