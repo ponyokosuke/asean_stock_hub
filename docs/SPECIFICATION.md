@@ -2,9 +2,9 @@
 
 | Item | Value |
 |---|---|
-| Document version | 1.0 |
+| Document version | 1.1 |
 | Date | 2026-11-23 |
-| Applies to | `main` branch of `ponyokosuke/asean_stock_hub` (after PR #1) |
+| Applies to | `main` branch of `ponyokosuke/asean_stock_hub` (after PR #3) |
 | Live app | https://aseanstockapp-analysis.streamlit.app/ |
 | Status | Describes the system **as built**. Section 14 lists known gaps and the target behaviour for each. |
 
@@ -36,7 +36,8 @@ Out of scope:
 
 - Access is protected by one shared password (`APP_PASSWORD`).
 - After a correct login the session stays authenticated until the browser tab is closed or the app restarts.
-- **If `APP_PASSWORD` is not configured, the app is open to anyone** (see Section 14, issue SEC-1).
+- If `APP_PASSWORD` is not configured, **every page refuses access** and shows a configuration error (fail closed).
+- The password comparison is constant-time.
 
 ## 3. Glossary
 
@@ -92,6 +93,7 @@ Out of scope:
 | `scripts/build_sector_master.py` | Builds the sector master. |
 | `templates/` | Default code lists per country. |
 | `data/` | Sector master and its metadata. |
+| `data/official/` | Hand-maintained official exchange classifications (board, official sector). See its README. |
 
 ## 5. Supported markets
 
@@ -125,21 +127,27 @@ Bursa Malaysia has three boards:
 | ACE Market | Growth companies (sponsor-driven) | 4 digits starting with `0` (e.g. `0249`) |
 | LEAP Market | Qualified/sophisticated investors only | 5 digits starting with `03` (e.g. `03011`) |
 
-**Current behaviour:**
+**How the board is determined** (`utils/sector_master.classify`):
 
-- The sector master does **not** record the board. Every Malaysian row has exchange `KLS`.
-  - As of 2026-11-23: 704 codes are `[1-9]xxx`, 360 are `0xxx`, 3 are `03xxx`, and 20 carry an instrument suffix.
-- `BaseProcessor.extract_data` derives a `Market` value from the code: `03xxx` → LEAP, `0xxx` → ACE, `[1-9]xxx` → Main, anything else → Main/Other.
-  - This rule is **wrong for companies that moved from ACE to Main Market**, because they keep their original `0xxx` code.
-  - The `Market` value is **not written to the Excel output**, because it is missing from the column order (issue DATA-2).
-- The Malaysian master also includes non-ordinary-share instruments (issue DATA-3):
-  - ETFs (`…EA`, 11)
-  - Preference shares (`…PA`/`…PC`, 7)
-  - Stapled securities (`…SS`, 1)
-  - Rights (`…R1`, 1)
-- Bursa Malaysia's own data endpoints are protected by bot checks and cannot be fetched automatically.
+1. If `data/official/MY.csv` gives a board for the ticker, that value is used.
+2. Otherwise it is inferred from the stock code:
 
-**Target behaviour:** see issue DATA-1 in Section 14.
+| Code pattern | Board shown | Certainty |
+|---|---|---|
+| `03xxx` | LEAP | Certain |
+| `1xxx`–`9xxx` | Main | Certain (ACE codes always start with 0) |
+| `0xxx` | ACE (unverified) | Usually ACE. Companies that moved from ACE to Main keep their `0xxx` code. |
+| anything else (`…EA`, `…PA`, `…R1`, `…SS`) | Other | ETFs, preference shares, rights, stapled securities |
+
+As of 2026-11-23 the Malaysian rows are: 704 Main, 360 ACE (unverified), 3 LEAP and 20 Other.
+
+To make every board certain, list the `0xxx` companies that are on the Main Market in `data/official/MY.csv`. Take that list from a source you are licensed to use. Bursa Malaysia's website licenses its market data and blocks automated access, so it must not be scraped.
+
+The board is used in three places:
+
+- the **Market / Board** filter and column in Sector Search
+- the **Market / Board** column in the Excel output (column 4)
+- the master as loaded by the app (it is not stored in `sector_master.csv`)
 
 ## 6. Data sources
 
@@ -188,7 +196,7 @@ Used by Version 1, both for uploads and for default lists.
 | Run | "Start Analysis" runs the shared pipeline (Section 8) with the file prefix `Version_1`. |
 | Errors | No input → "Please upload a CSV file or select the default list." No valid codes → explains the expected format. |
 
-Default lists cannot be edited inside the app. Streamlit Cloud deletes files written at runtime whenever the app restarts.
+The latest result stays on the page (Section 8.1). Default lists cannot be edited inside the app. Streamlit Cloud deletes files written at runtime whenever the app restarts.
 
 ### 7.4 Version 2 — Sector Search
 
@@ -197,11 +205,16 @@ Default lists cannot be edited inside the app. Streamlit Cloud deletes files wri
 1. Loads the sector master for the selected country.
    - If the country has no rows (PH, VN), shows a message pointing to Version 1 and stops.
 2. Shows the number of companies and the date the master was last updated.
-3. **Select Target Sectors:** multi-select of the 11 Yahoo sectors plus "Unknown", each showing its company count.
-4. **Filter by company name:** optional, case-insensitive substring match.
-5. A table of matching companies (Code, Name of Company, Sector) with a **Select** checkbox per row. All rows are ticked by default.
-6. **Download code list:** a CSV of the ticked codes, one per line.
-7. **Start Financial Analysis (N companies):** runs the shared pipeline with the file prefix `Version_2`.
+3. **Sector classification:** when the country has official sectors in `data/official/`, a choice between "Yahoo Finance" and "Official (exchange)". Otherwise a note explains that sectors follow Yahoo Finance.
+4. **Select Target Sectors:** multi-select of sectors for the chosen classification, each showing its company count.
+   - Yahoo: the 11 sectors plus "Unknown".
+   - Official: the values found in the file.
+5. **Market / Board:** multi-select shown when boards are known (Malaysia), each showing its count. All boards are selected by default.
+6. **Filter by company name:** optional, case-insensitive substring match.
+7. A table of matching companies with a **Select** checkbox per row. All rows are ticked by default.
+   - Columns: Code, Name of Company, Board (if known), Sector (Yahoo), Sector (Official) (if available).
+8. **Download code list:** a CSV of the ticked codes, one per line.
+9. **Start Financial Analysis (N companies):** runs the shared pipeline with the file prefix `Version_2`.
    - Selections larger than 100 companies show a warning about run time.
 
 No Yahoo requests are made until the analysis starts.
@@ -252,78 +265,89 @@ Shows this document (`docs/SPECIFICATION.md`) inside the app, behind the same lo
 
 For each code, in order:
 
-1. **Fetch:** `processor.get_stock_data(code)`.
+1. **Fetch and extract:** `fetch_company(country, code)` calls `processor.get_stock_data` and then `processor.extract_data`, which builds one row (Section 9).
    - `.info` is retried up to 3 times, waiting 2, 4 and 8 seconds.
+   - Successful rows are **cached for 24 hours** (`st.cache_data`, shared by all users). Failures are not cached.
    - If all attempts fail, the code is recorded as failed.
-   - The statements and holders are then requested.
-2. **Extract:** `processor.extract_data(code, raw)` builds one row (Section 9).
-3. Pause 0.3 s between companies.
+2. Pause 0.3 s between companies. There is no pause when the row came from the cache.
 
 After the loop:
 
-4. Any failed codes are listed in a warning.
-5. If no rows were retrieved, an error message suggests waiting and retrying.
-6. **AI segments:** `run_ai_analysis` sends business summaries to Gemini in batches of 20 (500 characters each) and fills `Segments`.
+3. If no rows were retrieved, the result records only the failures.
+4. **AI segments:** `run_ai_analysis` sends business summaries to Gemini in batches of 20 (500 characters each) and fills `Segments`.
    - Skipped silently if `GEMINI_API_KEY` is not set.
-7. **Formatting:** `process_dataframe` converts monetary columns to thousands and renames them with `('000)`.
+5. **Formatting:** `process_dataframe` converts monetary columns to thousands and renames them with `('000)`.
    - SG renames REVENUE to `REVENUE SGD('000)`, MY to `REVENUE MYR('000)` and VN to `REVENUE VND('000)`.
-8. **Excel:** `generate_excel_binary` (Section 9).
-9. Shows a download button, named `{prefix}_{COUNTRY}_{YYYY-MM-DD}.xlsx`, and a preview table.
+6. **Excel:** `generate_excel_binary` (Section 9).
+7. The result is saved in the session (Section 8.1).
+
+### 8.1 Result display (`show_result`)
+
+The last result of each page and country is kept in `st.session_state`. It is shown at the bottom of the page and survives reruns, including clicking Download (`on_click="ignore"`). It shows:
+
+- a warning listing the codes that failed, if any
+- "Completed at HH:MM (done/total companies · N from cache)"
+- the download button, with the file named `{prefix}_{COUNTRY}_{YYYY-MM-DD}.xlsx`
+- a preview table
+
+If nothing was retrieved, an error suggests waiting and retrying, and notes that companies already fetched come from the cache. If the browser tab closes during a long run, running the same list again continues quickly, because every company finished so far is cached.
 
 ## 9. Excel output specification
 
-One worksheet. Header row filled in yellow (`#FEFE99`) and bold. Columns appear in this exact order:
+One worksheet with 43 columns. Header row filled in yellow (`#FEFE99`) and bold. Columns appear in this exact order:
 
 | # | Column | Source / rule | Format |
 |---|---|---|---|
 | 1 | Ref | Row number, starting at 1 | |
 | 2 | Name of Company | `info.longName` | |
 | 3 | Code | Yahoo ticker | |
-| 4 | Listed 'o' / Non Listed "x" | Always `o` | |
-| 5 | Taka's comments | Blank (manual) | |
-| 6 | Remarks | Blank (manual) | |
-| 7 | Visited (V) / Meeting Proposal (MP) | Blank (manual) | |
-| 8 | Website | `info.website` | |
-| 9 | Major Shareholders | Top 5 lines of `major_holders`; if empty, top 10 of `institutional_holders`; else "Not Available" | |
-| 10 | Currency | `info.financialCurrency`, else `info.currency`; CNY shown as "RMB (CNY)" | |
-| 11 | Exchange Rate (to SGD) ({Mon DD}, Closing) | `{CUR}SGD=X` previous close; 1.0 for SGD | `0.0000` |
-| 12 | FY | `info.lastFiscalYearEnd` (date) | right-aligned |
-| 13 | REVENUE {CUR}('000) | Income statement "Total Revenue" | `#,##0;(#,##0)` |
-| 14 | Segments | Gemini, from business summary | |
-| 15 | PROFIT ('000) | "Pretax Income"; if 0, "Operating Income" | `#,##0;(#,##0)` |
-| 16 | GROSS PROFIT ('000) | "Gross Profit" | same |
-| 17 | OPERATING PROFIT ('000) | "Operating Income" | same |
-| 18 | NET PROFIT (Group) ('000) | "Net Income Including Noncontrolling Interests"; else "Net Income Continuous Operations"; else Net Profit (Shareholders) | same |
-| 19 | NET PROFIT (Shareholders) ('000) | "Net Income"; else "Net Income Common Stock" | same |
-| 20 | Minority Interest ('000) | Balance sheet "Minority Interest" | same |
-| 21 | Shareholders' Equity ('000) | "Stockholders Equity" | same |
-| 22 | Total Equity ('000) | "Total Equity Gross Minority Interest"; else Shareholders' Equity + Minority Interest | same |
-| 23 | TOTAL ASSET ('000) | "Total Assets" | same |
-| 24 | Debt/Equity(%) | (Total Assets − Total Equity) ÷ Total Equity, i.e. **total liabilities** to equity | `0.00%` |
-| 25 | Loan ('000) | "Total Debt"; else "Current Debt" + "Long Term Debt" | `#,##0;(#,##0)` |
-| 26 | Loan/Equity (%) | Loan ÷ Total Equity | `0.00%` |
-| 27 | Stock Price ({Mon DD}, Closing) | `info.previousClose`, else `regularMarketPrice` | `#,##0.000` |
-| 28 | Shares Outstanding ('000) | `info.sharesOutstanding` | `#,##0;(#,##0)` |
-| 29 | Market Cap ('000) | Stock Price × Shares Outstanding; else `info.marketCap` | same |
-| 30 | Summary of Business | `info.longBusinessSummary` | |
-| 31 | Chairman / CEO | First officer whose title contains "CEO" or "Chairman"; else the first officer | |
-| 32 | Address | address1, address2, city, country, zip | |
-| 33 | Contact No. | `info.phone` | |
-| 34 | Access | Blank (manual) | |
-| 35 | Last Communications | Blank (manual) | |
-| 36 | Number of Employee Current | `info.fullTimeEmployees` | |
-| 37 | Category Classification/YahooFin | `info.sector` (V3: AI category + " (AI Judged)") | |
-| 38 | Sector & Industry/YahooFin | `info.industry` | |
-| 39 | Category Classification/ShareInvestor | Blank (manual) | |
-| 40 | Incorporated (IN / Year) | Blank (manual) | |
-| 41 | Category Classification/SGX | Blank (manual) | |
-| 42 | Sector & Industry/ SGX | Blank (manual) | |
+| 4 | Market / Board | Board from `data/official/{COUNTRY}.csv`; for MY inferred from the code (Section 5.3); blank otherwise | |
+| 5 | Listed 'o' / Non Listed "x" | Always `o` | |
+| 6 | Taka's comments | Blank (manual) | |
+| 7 | Remarks | Blank (manual) | |
+| 8 | Visited (V) / Meeting Proposal (MP) | Blank (manual) | |
+| 9 | Website | `info.website` | |
+| 10 | Major Shareholders | Top 5 lines of `major_holders`; if empty, top 10 of `institutional_holders`; else "Not Available" | |
+| 11 | Currency | `info.financialCurrency`, else `info.currency`; CNY shown as "RMB (CNY)" | |
+| 12 | Exchange Rate (to SGD) ({Mon DD}, Closing) | `{CUR}SGD=X` previous close; 1.0 for SGD | `0.0000` |
+| 13 | FY | `info.lastFiscalYearEnd` (date) | right-aligned |
+| 14 | REVENUE {CUR}('000) | Income statement "Total Revenue" | `#,##0;(#,##0)` |
+| 15 | Segments | Gemini, from business summary | |
+| 16 | PROFIT ('000) | "Pretax Income"; if 0, "Operating Income" | `#,##0;(#,##0)` |
+| 17 | GROSS PROFIT ('000) | "Gross Profit" | same |
+| 18 | OPERATING PROFIT ('000) | "Operating Income" | same |
+| 19 | NET PROFIT (Group) ('000) | "Net Income Including Noncontrolling Interests"; else "Net Income Continuous Operations"; else Net Profit (Shareholders) | same |
+| 20 | NET PROFIT (Shareholders) ('000) | "Net Income"; else "Net Income Common Stock" | same |
+| 21 | Minority Interest ('000) | Balance sheet "Minority Interest" | same |
+| 22 | Shareholders' Equity ('000) | "Stockholders Equity" | same |
+| 23 | Total Equity ('000) | "Total Equity Gross Minority Interest"; else Shareholders' Equity + Minority Interest | same |
+| 24 | TOTAL ASSET ('000) | "Total Assets" | same |
+| 25 | Debt/Equity(%) | (Total Assets − Total Equity) ÷ Total Equity, i.e. **total liabilities** to equity | `0.00%` |
+| 26 | Loan ('000) | "Total Debt"; else "Current Debt" + "Long Term Debt" | `#,##0;(#,##0)` |
+| 27 | Loan/Equity (%) | Loan ÷ Total Equity | `0.00%` |
+| 28 | Stock Price ({Mon DD}, Closing) | `info.previousClose`, else `regularMarketPrice` | `#,##0.000` |
+| 29 | Shares Outstanding ('000) | `info.sharesOutstanding` | `#,##0;(#,##0)` |
+| 30 | Market Cap ('000) | Stock Price × Shares Outstanding; else `info.marketCap` | same |
+| 31 | Summary of Business | `info.longBusinessSummary` | |
+| 32 | Chairman / CEO | First officer whose title contains "CEO" or "Chairman"; else the first officer | |
+| 33 | Address | address1, address2, city, country, zip | |
+| 34 | Contact No. | `info.phone` | |
+| 35 | Access | Blank (manual) | |
+| 36 | Last Communications | Blank (manual) | |
+| 37 | Number of Employee Current | `info.fullTimeEmployees` | |
+| 38 | Category Classification/YahooFin | `info.sector` (V3: AI category + " (AI Judged)") | |
+| 39 | Sector & Industry/YahooFin | `info.industry` | |
+| 40 | Category Classification/ShareInvestor | Blank (manual) | |
+| 41 | Incorporated (IN / Year) | Blank (manual) | |
+| 42 | Category Classification/{EXCHANGE} | `official_sector` from `data/official/{COUNTRY}.csv`; blank if not listed | |
+| 43 | Sector & Industry/ {EXCHANGE} | `official_industry` from the same file | |
 
 Rules:
 
 - All financial figures come from the **latest annual** statement column.
 - `{Mon DD}` is the server's date minus one day.
-- Missing statement items are written as **0**, not blank (issue DATA-5).
+- Statement items that Yahoo does not report are written as **blank**; 0 means a reported zero. Ratios are blank when an input is missing or the denominator is zero.
+- `{EXCHANGE}` is SGX (SG), Bursa (MY), SET (TH), IDX (ID), PSE (PH) or HOSE (VN).
 
 ## 10. Sector master specification
 
@@ -338,6 +362,8 @@ Rules:
 | exchange | text | `KLS` | Yahoo exchange code |
 
 The file is sorted by country, sector and symbol.
+
+When the app loads the master, it adds `board`, `official_sector` and `official_industry` columns from `data/official/` and the Malaysian code rule (Section 5.3). These columns are not stored in the CSV.
 
 ### 10.2 Metadata — `data/sector_master_meta.json`
 
@@ -366,6 +392,7 @@ The file is sorted by country, sector and symbol.
 | `APP_PASSWORD` | Streamlit Secrets or environment variable | Strongly recommended | Login password. If unset, there is no login. |
 | `GEMINI_API_KEY` | Streamlit Secrets or environment variable | For AI features | Segments (all versions) and AI Judge (V3). |
 | `templates/{COUNTRY}.csv` | Repository | Optional | Default list for V1. |
+| `data/official/{COUNTRY}.csv` | Repository | Optional | Official board and sector (`symbol,board,official_sector,official_industry`). |
 
 Secrets must never be committed. `.streamlit/secrets.toml` in the repository is empty and must stay empty.
 
@@ -375,7 +402,7 @@ Secrets must never be committed. `.streamlit/secrets.toml` in the repository is 
 |---|---|
 | Performance | About 3–6 s per company in the pipeline. 129 companies take roughly 8–13 minutes, plus AI time. |
 | Rate limits | Yahoo may throttle shared cloud IPs. Mitigation: pauses, retries with backoff, and a failed-code report. |
-| Session | Results live only in the browser session. Closing the tab, or any rerun after completion, clears them (issue UX-1). |
+| Session | The last result per page is kept for the browser session. Fetched companies are cached for 24 hours, so an interrupted run can be repeated quickly. |
 | Availability | Streamlit Community Cloud sleeps the app after inactivity; the first visit may take about 30 s to wake it. |
 | Storage | No database. Files written at runtime are lost on restart. |
 | Localisation | UI in English; code comments in Japanese. |
@@ -387,6 +414,7 @@ Secrets must never be committed. `.streamlit/secrets.toml` in the repository is 
 | Change a default list | Edit `templates/{COUNTRY}.csv` on GitHub (one code per line) and commit. The app redeploys in about 1–2 minutes. |
 | Refresh the sector master now | GitHub → Actions → "Update Sector Master" → Run workflow. |
 | Check the master date | Shown on the Sector Search page. |
+| Correct a board or add official sectors | Edit `data/official/{COUNTRY}.csv` on GitHub (see `data/official/README.md`). |
 | Rotate the password or API key | Streamlit Cloud → App settings → Secrets. |
 | Deploy code | Merge to `main`; Streamlit Cloud redeploys automatically. |
 
@@ -398,11 +426,9 @@ Priority: **H** = affects correctness of the deliverable; **M** = affects usabil
 
 | ID | Pri | Issue | Target behaviour |
 |---|---|---|---|
-| DATA-1 | H | Malaysian board (Main / ACE / LEAP) is not stored in the master. The code-based rule misclassifies companies that moved from ACE to Main. | Add a `board` column to the master, taken from a maintained mapping file (`data/my_board.csv`) refreshed from Bursa's published lists. Add a board filter to Sector Search and a `Market` column to the Excel. |
-| DATA-2 | H | `Market` is calculated in `extract_data` but never appears in the Excel. | Add a "Market / Board" column after "Code". |
+| DATA-1 | H | **Partly resolved in 1.1.** The board is shown and can be filtered, and all non-`0xxx` codes are certain. The 360 `0xxx` codes are shown as "ACE (unverified)" until `data/official/MY.csv` lists the ones on the Main Market. | Fill `data/official/MY.csv` from a licensed source, and review it quarterly. |
 | DATA-3 | M | The master contains ETFs, preference shares, rights and depositary receipts, alongside ordinary shares. | Exclude non-ordinary instruments by default (suffix rules plus `quoteType`), with an option to include them. |
-| DATA-4 | H | Sectors follow Yahoo/Morningstar, not Bursa's or SGX's official classification. "Technology" on Yahoo is not the same set as Bursa's Technology sector. | Store the official exchange sector alongside the Yahoo sector when a reliable source is available, and let users choose which to filter by. |
-| DATA-5 | H | Missing statement items are written as 0, so "no data" cannot be told apart from a true zero. | Write blank (or "N/A") for missing items. |
+| DATA-4 | H | **Partly resolved in 1.1.** The app supports official sectors: a classification switch in Sector Search, and the Excel columns 42–43. The data files are still empty. | Fill `official_sector` and `official_industry` in `data/official/{COUNTRY}.csv` from a licensed source (e.g. ShareInvestor). |
 | DATA-6 | M | FY comes from `lastFiscalYearEnd`, while figures come from the latest balance sheet or income statement column. The two can refer to different years. | Use the statement column date as FY. |
 | DATA-7 | M | The column "Debt/Equity(%)" actually holds total liabilities ÷ equity. | Rename it to "Liabilities/Equity (%)", or compute Total Debt ÷ Equity. |
 | DATA-8 | M | The REVENUE column is labelled with the country currency (e.g. MYR), but the figures are in the company's reporting currency, which can differ. | Label it with the reporting currency, or convert. |
@@ -421,7 +447,6 @@ Priority: **H** = affects correctness of the deliverable; **M** = affects usabil
 
 | ID | Pri | Issue | Target behaviour |
 |---|---|---|---|
-| UX-1 | H | Results disappear on any rerun after an analysis (for example after clicking Download) and are lost if the tab closes. Long runs cannot be resumed. | Keep results in `st.session_state`; process in chunks with partial downloads; cache fetched companies (`st.cache_data`, TTL 1 day). |
 | UX-2 | M | Long runs (100+ companies) take many minutes and can be throttled by Yahoo. | Fetch in parallel with limits, cache results, and show an estimated time. |
 | UX-3 | M | AI Judge only outputs "Yes" companies. The full judgement list (Yes / No / Grey with reasons) cannot be downloaded for review. | Add a judgement-results download. |
 | UX-4 | M | AI errors are hidden: segment failures are silent, and AI Judge batch errors appear only in Debug Mode. | Show a warning with the affected codes. |
@@ -432,15 +457,24 @@ Priority: **H** = affects correctness of the deliverable; **M** = affects usabil
 
 | ID | Pri | Issue | Target behaviour |
 |---|---|---|---|
-| SEC-1 | H | If `APP_PASSWORD` is missing, the app is fully open. | Fail closed: show an error and refuse access. |
 | SEC-2 | L | One shared password, with no attempt limit and no per-user accounts. | Consider Streamlit's built-in viewer authentication (Google login) for named users. |
 | OPS-1 | M | No automated tests and no CI checks on pull requests. | Add unit tests (code parsing, extract_data with fixtures) and a GitHub Actions test job. |
 | OPS-2 | M | The AI Judge "Save as Default" prompt is written to disk and lost on restart. | Store the default prompt in the repository (`prompts/it_judge_prompt.txt`) and edit it on GitHub, as with default lists. |
 | OPS-3 | L | `streamlit`, `pandas`, `openpyxl` and `google-genai` are unpinned, so upstream releases can break the app. | Pin tested versions. |
 | OPS-4 | L | The sector master workflow fails silently if Yahoo changes its screener; the safeguard keeps old data without alerting anyone. | Fail the workflow (red) when the safeguard triggers, so GitHub sends a notification. |
 
+### 14.5 Resolved
+
+| ID | Resolved in | Resolution |
+|---|---|---|
+| DATA-2 | 1.1 | "Market / Board" is column 4 of the Excel. |
+| DATA-5 | 1.1 | Missing items are blank; 0 only for reported zeros. |
+| UX-1 | 1.1 | Results persist in the session; fetched companies are cached for 24 h, so interrupted runs resume quickly. |
+| SEC-1 | 1.1 | The app fails closed when `APP_PASSWORD` is missing; the comparison is constant-time. |
+
 ## 15. Change history
 
 | Version | Date | Change |
 |---|---|---|
 | 1.0 | 2026-11-23 | First specification, written after the sector master rebuild (PR #1). |
+| 1.1 | 2026-11-23 | H-priority fixes (PR #3): Malaysian board, official classification support, blank for missing data, persistent results and caching, fail-closed login. |

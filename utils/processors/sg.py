@@ -3,7 +3,7 @@ from .base import BaseProcessor
 class SGProcessor(BaseProcessor):
     def __init__(self):
         # シンガポール設定 (通貨: SGD, サフィックス: .SI)
-        super().__init__(currency="SGD", suffix=".SI")
+        super().__init__(currency="SGD", suffix=".SI", country="SG")
 
     def process_dataframe(self, df):
         # 1. Baseの共通処理を行う (単位変換など)

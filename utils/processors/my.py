@@ -2,7 +2,7 @@ from .base import BaseProcessor
 
 class MYProcessor(BaseProcessor):
     def __init__(self):
-        super().__init__(currency="MYR", suffix=".KL")
+        super().__init__(currency="MYR", suffix=".KL", country="MY")
 
     def process_dataframe(self, df):
         df = super().process_dataframe(df)

@@ -11,11 +11,11 @@ def get_processor(country_code):
     elif country_code == "VN":
         return VNProcessor()
     elif country_code == "TH":
-        return BaseProcessor(currency="THB", suffix=".BK")
+        return BaseProcessor(currency="THB", suffix=".BK", country="TH")
     elif country_code == "ID":
-        return BaseProcessor(currency="IDR", suffix=".JK")
+        return BaseProcessor(currency="IDR", suffix=".JK", country="ID")
     elif country_code == "PH":
-        return BaseProcessor(currency="PHP", suffix=".PS")
+        return BaseProcessor(currency="PHP", suffix=".PS", country="PH")
     else:
         # デフォルトはBase (USD扱いなど)
         return BaseProcessor(currency="USD", suffix="")

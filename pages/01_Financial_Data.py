@@ -4,7 +4,7 @@ import os
 from utils.ui import render_country_selector
 from utils.processors import get_processor
 from utils.codes import parse_codes
-from utils.analysis import run_financial_analysis
+from utils.analysis import run_financial_analysis, show_result
 
 # --- 1. Page Config (必ず一番最初！) ---
 st.set_page_config(page_title="Version 1: Financial Data", layout="wide")
@@ -34,7 +34,7 @@ with st.sidebar:
         if default_codes:
             st.dataframe(
                 pd.DataFrame(default_codes, columns=["Stock Code"]),
-                use_container_width=True,
+                width="stretch",
                 hide_index=True,
                 height=200
             )
@@ -81,3 +81,6 @@ if st.button("Start Analysis 🚀"):
             st.error(f"❌ Error: {e}")
             if debug_mode:
                 st.exception(e)
+
+# 直近の結果を表示 (ダウンロード後も消えない)
+show_result("Version_1", country_code)

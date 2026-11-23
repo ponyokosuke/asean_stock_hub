@@ -1,11 +1,17 @@
-import streamlit as st
+import hmac
 import os
+
+import streamlit as st
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def check_password():
     """
     パスワード認証を行う関数。
     認証が済んでいなければ入力画面を表示し、処理を止める (Falseを返す)。
-    認証済み、またはパスワード未設定なら True を返す。
+    認証済みなら True を返す。
+    パスワード未設定の場合は誰も入れないようにする (fail closed)。
     """
     
     # 1. パスワードの取得 (st.secrets 優先、なければ os.environ)
@@ -18,9 +24,11 @@ def check_password():
     elif "APP_PASSWORD" in os.environ:
         correct_password = os.environ.get("APP_PASSWORD")
         
-    # パスワードが設定されていない場合は認証なしで通す
+    # パスワードが設定されていない場合はアクセスを拒否する
     if not correct_password:
-        return True
+        st.error("🔒 Access is disabled: APP_PASSWORD is not configured. "
+                 "Set it in Streamlit Cloud → App settings → Secrets (or in .env when running locally).")
+        return False
 
     # 2. セッションステートでログイン状態を管理
     if "password_correct" not in st.session_state:
@@ -34,7 +42,7 @@ def check_password():
     input_password = st.text_input("Password", type="password", key="auth_input")
     
     if st.button("Log in"):
-        if input_password == correct_password:
+        if hmac.compare_digest(input_password.encode(), str(correct_password).encode()):
             st.session_state["password_correct"] = True
             st.rerun() # 再読み込みしてメイン画面へ
         else:

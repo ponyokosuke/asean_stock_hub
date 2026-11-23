@@ -9,7 +9,7 @@ from datetime import datetime
 from utils.ui import render_country_selector
 from utils.processors import get_processor
 from utils.sector_master import load_master, SECTORS
-from utils.analysis import run_financial_analysis
+from utils.analysis import run_financial_analysis, show_result
 
 # --- 1. Page Config (必ず最初！) ---
 st.set_page_config(page_title="Version 3: AI Judge", layout="wide")
@@ -242,3 +242,6 @@ if st.button("Start AI Judgment & Analysis 🚀"):
         except Exception as e:
             st.error(f"❌ Error: {e}")
             if debug_mode: st.exception(e)
+
+# 直近の結果を表示 (ダウンロード後も消えない)
+show_result("Version_3_AI_Judge", country_code)
