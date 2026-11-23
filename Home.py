@@ -33,6 +33,8 @@ Please select a tool from the sidebar on the left.
     * IT Business Verification & Classification
 * **Compare Lists**
     * Compare Stock Lists (Diff Tool)
+* **Specification**
+    * System specification and known limitations
 
 ### Initial Setup
 Please select the **Target Country** from the "Settings" in the sidebar.
