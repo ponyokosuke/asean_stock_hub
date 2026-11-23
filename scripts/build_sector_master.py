@@ -101,6 +101,10 @@ def main():
     master = pd.concat(frames, ignore_index=True)
     # タイの NVDR (-R) / 外国人枠 (-F) は本体と重複するので除外
     master = master[~master["symbol"].str.contains(r"-[RF]\.BK$", regex=True)]
+    # ETF は企業ではないので除外 (MY は "xxxxEA.KL"、他は名称に "ETF" を含むもの)
+    is_etf = (master["symbol"].str.contains(r"^\d{4}EA\.KL$", regex=True)
+              | master["name"].str.contains(r"\bETF\b", case=False, regex=True))
+    master = master[~is_etf]
     master = master.sort_values(["country", "sector", "symbol"]).reset_index(drop=True)
 
     csv_text = master.to_csv(index=False)

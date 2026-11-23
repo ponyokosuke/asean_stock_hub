@@ -98,9 +98,9 @@ Out of scope:
 
 | Country | Code | Suffix | Currency label | Sector master | Default list |
 |---|---|---|---|---|---|
-| Singapore | SG | `.SI` | SGD | Yes (535) | Yes (70 codes, curated IT list) |
-| Malaysia | MY | `.KL` | MYR | Yes (1,087) | Yes (129 codes, Yahoo "Technology") |
-| Thailand | TH | `.BK` | THB | Yes (1,517) | No |
+| Singapore | SG | `.SI` | SGD | Yes (537) | Yes (70 codes, curated IT list) |
+| Malaysia | MY | `.KL` | MYR | Yes (1,077) | Yes (129 codes, Yahoo "Technology") |
+| Thailand | TH | `.BK` | THB | Yes (1,497) | No |
 | Indonesia | ID | `.JK` | IDR | Yes (838) | No |
 | Philippines | PH | `.PS` | PHP | **No** (not covered by the Yahoo screener) | No |
 | Vietnam | VN | `.VN` | VND | **No** (not covered by the Yahoo screener) | No |
@@ -115,6 +115,11 @@ Counts are as of 2026-11-23 and change with each master update.
 ### 5.2 Thailand
 
 - NVDR (`-R.BK`) and foreign-board (`-F.BK`) lines are excluded, because they duplicate the underlying company.
+
+### 5.2a All markets: ETFs
+
+- ETFs are excluded from the sector master in every country (owner decision, 2026-11-23).
+- A row counts as an ETF when its symbol matches `xxxxEA.KL` (Malaysia), or its name contains the word "ETF".
 
 ### 5.3 Malaysia — market boards (Main / ACE / LEAP)
 
@@ -136,9 +141,15 @@ Bursa Malaysia has three boards:
 | `03xxx` | LEAP | Certain |
 | `1xxx`–`9xxx` | Main | Certain (ACE codes always start with 0) |
 | `0xxx` | ACE (unverified) | Usually ACE. Companies that moved from ACE to Main keep their `0xxx` code. |
-| anything else (`…EA`, `…PA`, `…R1`, `…SS`) | Other | ETFs, preference shares, rights, stapled securities |
+| anything else (`…PA`, `…PC`, `…R1`, `…SS`) | Other | Preference shares, rights, stapled securities (ETFs are excluded from the master) |
 
-As of 2026-11-23 the Malaysian rows are: 704 Main, 360 ACE (unverified), 3 LEAP and 20 Other.
+As of 2026-11-23 the Malaysian rows are: 705 Main, 360 ACE (unverified), 3 LEAP and 9 Other.
+
+**LEAP coverage:**
+- Yahoo Finance covers very few LEAP Market companies. Most LEAP tickers, e.g. `03008.KL` and `03036.KL`, return "Quote not found".
+- Most LEAP companies therefore cannot appear in the master, and cannot be analysed in any version (issue COV-3).
+
+**Delisted companies** are dropped automatically: the Yahoo screener only returns listed securities.
 
 To make every board certain, list the `0xxx` companies that are on the Main Market in `data/official/MY.csv`. Take that list from a source you are licensed to use. Bursa Malaysia's website licenses its market data and blocks automated access, so it must not be scraped.
 
@@ -377,7 +388,7 @@ When the app loads the master, it adds `board`, `official_sector` and `official_
    - Pages are 1 s apart; failed pages retry up to 4 times with 5, 10, 20 and 40 s waits.
 2. Query the whole region again and add symbols that are not in any sector, as `Unknown`.
 3. **Safeguard:** if a country returns fewer than 50 % of its previous row count, keep the previous rows for that country.
-4. Remove Thai `-R.BK` and `-F.BK` lines.
+4. Remove Thai `-R.BK` and `-F.BK` lines, and ETFs (Section 5.2a).
 5. If the resulting CSV text is identical to the existing file, stop with "No changes".
 6. Otherwise write the CSV and the metadata.
 
@@ -428,7 +439,7 @@ Priority: **H** = affects correctness of the deliverable; **M** = affects usabil
 | ID | Pri | Issue | Target behaviour |
 |---|---|---|---|
 | DATA-1 | H | **Partly resolved in 1.1.** The board is shown and can be filtered, and all non-`0xxx` codes are certain. The 360 `0xxx` codes are shown as "ACE (unverified)" until `data/official/MY.csv` lists the ones on the Main Market. | Fill `data/official/MY.csv` from a licensed source, and review it quarterly. |
-| DATA-3 | L | The master contains ETFs, preference shares, rights and depositary receipts, alongside ordinary shares. | **All markets and instruments are kept** (owner decision, 2026-11-23). In Malaysia they appear under the board "Other". If needed, add an instrument-type label; do not exclude them. |
+| DATA-3 | L | **Partly resolved in 1.1:** ETFs are excluded. Preference shares, rights, stapled securities and depositary receipts remain, alongside ordinary shares. | Keep all markets (Main, ACE, LEAP) and these instruments (owner decision, 2026-11-23). In Malaysia they appear under the board "Other". If needed, add an instrument-type label. |
 | DATA-4 | H | **Partly resolved in 1.1.** The app supports official sectors: a classification switch in Sector Search, and the Excel columns 42–43. The data files are still empty. | Fill `official_sector` and `official_industry` in `data/official/{COUNTRY}.csv` from a licensed source (e.g. ShareInvestor). |
 | DATA-6 | M | FY comes from `lastFiscalYearEnd`, while figures come from the latest balance sheet or income statement column. The two can refer to different years. | Use the statement column date as FY. |
 | DATA-7 | M | The column "Debt/Equity(%)" actually holds total liabilities ÷ equity. | Rename it to "Liabilities/Equity (%)", or compute Total Debt ÷ Equity. |
@@ -442,6 +453,7 @@ Priority: **H** = affects correctness of the deliverable; **M** = affects usabil
 | ID | Pri | Issue | Target behaviour |
 |---|---|---|---|
 | COV-1 | M | No sector master for PH and VN (Yahoo screener does not cover them). Yahoo's VN data quality has not been checked. | Find an alternative list source, or document "upload only". |
+| COV-3 | M | Yahoo Finance does not cover most LEAP Market companies, e.g. `03008.KL` SL Innovation Capital and `03036.KL` Redplanet. | Add LEAP companies through `data/official/MY.csv` together with another data source for their financials, or document LEAP as out of scope. |
 | COV-2 | M | Default lists exist only for SG and MY. The MY list is a provisional Yahoo "Technology" list, not a curated IT list like SG's. | Replace it with the agreed curated MY list. |
 
 ### 14.3 Usability and reliability
@@ -483,4 +495,4 @@ Priority: **H** = affects correctness of the deliverable; **M** = affects usabil
 | Version | Date | Change |
 |---|---|---|
 | 1.0 | 2026-11-23 | First specification, written after the sector master rebuild (PR #1). |
-| 1.1 | 2026-11-23 | H-priority fixes (PR #3): Malaysian board, official classification support, blank for missing data, persistent results and caching. All Malaysian markets kept; login unchanged. |
+| 1.1 | 2026-11-23 | H-priority fixes (PR #3): Malaysian board, official classification support, blank for missing data, persistent results and caching. All Malaysian markets kept, ETFs excluded; login unchanged. |
