@@ -9,14 +9,20 @@ from google import genai
 from openpyxl import load_workbook
 from openpyxl.styles import PatternFill, Font, Alignment
 from dotenv import load_dotenv
+from utils.sector_master import classify
+
+# Excel の「公式分類」列に使う取引所名
+EXCHANGE_LABELS = {"SG": "SGX", "MY": "Bursa", "TH": "SET", "ID": "IDX", "PH": "PSE", "VN": "HOSE"}
 
 # クラス内でも確実に読み込む
 load_dotenv()
 
 class BaseProcessor:
-    def __init__(self, currency="USD", suffix=""):
+    def __init__(self, currency="USD", suffix="", country=""):
         self.currency = currency
         self.suffix = suffix
+        self.country = country
+        self.exchange_label = EXCHANGE_LABELS.get(country, "SGX")
         
         # APIキーの取得とクライアント初期化
         self.api_key = os.getenv("GEMINI_API_KEY")
@@ -123,37 +129,44 @@ class BaseProcessor:
         if bs is not None and not bs.empty: latest_date = bs.columns[0]
         elif inc is not None and not inc.empty: latest_date = inc.columns[0]
 
+        # 取得できない項目は None (Excel では空欄) にする。0 は「本当にゼロ」の場合だけ
         def get_fin_value(df, key):
             if df is not None and not df.empty and key in df.index and latest_date in df.columns:
-                return df.loc[key, latest_date]
-            return 0
+                val = df.loc[key, latest_date]
+                if not pd.isna(val):
+                    return float(val)
+            return None
+
+        def first_value(*vals):
+            return next((v for v in vals if v is not None), None)
 
         # 財務数値取得
         revenue = get_fin_value(inc, "Total Revenue")
-        pretax = get_fin_value(inc, "Pretax Income")
         ope_inc = get_fin_value(inc, "Operating Income")
-        profit = pretax if pretax != 0 else ope_inc
+        profit = first_value(get_fin_value(inc, "Pretax Income"), ope_inc)
         
-        net_owners = get_fin_value(inc, "Net Income")
-        if net_owners == 0: net_owners = get_fin_value(inc, "Net Income Common Stock")
-        
-        net_group = get_fin_value(inc, "Net Income Including Noncontrolling Interests")
-        if net_group == 0: net_group = get_fin_value(inc, "Net Income Continuous Operations")
+        net_owners = first_value(get_fin_value(inc, "Net Income"),
+                                 get_fin_value(inc, "Net Income Common Stock"))
+        net_group = first_value(get_fin_value(inc, "Net Income Including Noncontrolling Interests"),
+                                get_fin_value(inc, "Net Income Continuous Operations"),
+                                net_owners)
 
         minority = get_fin_value(bs, "Minority Interest")
-        if net_group == 0 and net_owners != 0: net_group = net_owners
-
         stock_eq = get_fin_value(bs, "Stockholders Equity")
         total_assets = get_fin_value(bs, "Total Assets")
         total_eq = get_fin_value(bs, "Total Equity Gross Minority Interest")
-        if total_eq == 0 and stock_eq != 0: total_eq = stock_eq + minority
+        if total_eq is None and stock_eq is not None:
+            total_eq = stock_eq + (minority or 0)
 
         loan = get_fin_value(bs, "Total Debt")
-        if loan == 0: loan = get_fin_value(bs, "Current Debt") + get_fin_value(bs, "Long Term Debt")
+        if loan is None:
+            cur_debt, lt_debt = get_fin_value(bs, "Current Debt"), get_fin_value(bs, "Long Term Debt")
+            if cur_debt is not None or lt_debt is not None:
+                loan = (cur_debt or 0) + (lt_debt or 0)
 
-        # 比率計算
-        de_ratio = (total_assets - total_eq) / total_eq if (total_eq and total_assets) else None
-        le_ratio = loan / total_eq if (total_eq and loan) else None
+        # 比率計算 (分母が無い・ゼロなら空欄)
+        de_ratio = (total_assets - total_eq) / total_eq if (total_eq and total_assets is not None) else None
+        le_ratio = loan / total_eq if (total_eq and loan is not None) else None
 
         # FY Date
         fy_date = None
@@ -177,14 +190,8 @@ class BaseProcessor:
         disp_cur = 'RMB (CNY)' if raw_cur == 'CNY' else raw_cur
         exchange_rate = self.get_exchange_rate(disp_cur)
 
-        # 市場判定
-        market = info.get('exchange', 'Unknown')
-        if str(code).endswith('.KL'):
-            clean = str(code).replace('.KL', '')
-            if len(clean) == 5 and clean.startswith('03'): market = "LEAP"
-            elif len(clean) == 4 and clean.startswith('0'): market = "ACE"
-            elif len(clean) == 4 and clean[0] in '123456789': market = "Main"
-            else: market = "Main/Other"
+        # 市場区分・公式分類 (data/official 優先、MY はコードから推定)
+        official = classify(self.country, str(code))
         
         # 株価 (前日終値優先)
         curr_price = info.get('previousClose') or info.get('regularMarketPrice')
@@ -223,7 +230,9 @@ class BaseProcessor:
             "Number of Employee Current": info.get('fullTimeEmployees'),
             "Category Classification/YahooFin": info.get('sector', "Not Available"),
             "Sector & Industry/YahooFin": info.get('industry', "Not Available"),
-            "Market": market
+            "Market / Board": official["board"],
+            f"Category Classification/{self.exchange_label}": official["official_sector"],
+            f"Sector & Industry/ {self.exchange_label}": official["official_industry"],
         }
 
     # --- 4. AI分析 (Batch Analyze 完全再現) ---
@@ -319,7 +328,7 @@ class BaseProcessor:
         empty_cols = [
             "Taka's comments", "Remarks", "Visited (V) / Meeting Proposal (MP)",
             "Access", "Last Communications", "Category Classification/\nShareInvestor", 
-            "Incorporated\n (IN / Year)", "Category Classification/SGX", "Sector & Industry/ SGX"
+            "Incorporated\n (IN / Year)"
         ]
         for col in empty_cols: df[col] = ""
         
@@ -342,7 +351,7 @@ class BaseProcessor:
 
         # ★最終的な列順序 (main.py と完全に同じ)
         target_order = [
-            "Ref", "Name of Company", "Code", "Listed 'o' / Non Listed \"x\"",
+            "Ref", "Name of Company", "Code", "Market / Board", "Listed 'o' / Non Listed \"x\"",
             "Taka's comments", "Remarks", "Visited (V) / Meeting Proposal (MP)",
             "Website", "Major Shareholders", "Currency", 
             final_rate_col, 
@@ -360,7 +369,7 @@ class BaseProcessor:
             "Access", "Last Communications", "Number of Employee Current",
             "Category Classification/YahooFin", "Sector & Industry/YahooFin", 
             "Category Classification/\nShareInvestor", "Incorporated\n (IN / Year)",
-            "Category Classification/SGX", "Sector & Industry/ SGX"
+            f"Category Classification/{self.exchange_label}", f"Sector & Industry/ {self.exchange_label}"
         ]
 
         # 存在しない列は空文字で埋める

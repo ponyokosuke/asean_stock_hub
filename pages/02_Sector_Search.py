@@ -3,7 +3,7 @@ from datetime import datetime
 from utils.ui import render_country_selector
 from utils.processors import get_processor
 from utils.sector_master import load_master, load_meta, SECTORS
-from utils.analysis import run_financial_analysis
+from utils.analysis import run_financial_analysis, show_result
 
 # --- 1. Page Config (必ず最初) ---
 st.set_page_config(page_title="Version 2: Sector Search", layout="wide")
@@ -43,22 +43,51 @@ if country_df.empty:
 
 st.caption(f"Sector master: {len(country_df)} listed companies in {country_code} · last updated {meta.get('updated_at', 'unknown')}")
 
+# ★ 分類の選択: 公式セクター (data/official) があればそちらも選べる
+has_official = (country_df["official_sector"] != "").any()
+sector_col = "sector"
+if has_official:
+    basis = st.radio("Sector classification", ["Yahoo Finance", "Official (exchange)"], horizontal=True)
+    if basis.startswith("Official"):
+        sector_col = "official_sector"
+else:
+    st.caption("Sectors follow Yahoo Finance's classification, which differs from the exchange's official sectors.")
+
 # ★ Multi-select Input for Sectors (件数つき)
-sector_counts = country_df["sector"].value_counts()
-sector_options = [s for s in SECTORS + ["Unknown"] if s in sector_counts]
+sector_counts = country_df[sector_col].replace("", "Unknown").value_counts()
+if sector_col == "sector":
+    sector_options = [s for s in SECTORS + ["Unknown"] if s in sector_counts]
+else:
+    sector_options = sorted(sector_counts.index)
 selected_sectors = st.multiselect(
     "Select Target Sectors",
     options=sector_options,
     format_func=lambda s: f"{s} ({sector_counts[s]})",
     placeholder="Choose sectors (e.g., Technology, Real Estate)"
 )
+
+# ★ 市場区分フィルタ (MY: Main / ACE / LEAP)
+selected_boards = []
+board_counts = country_df["board"].value_counts()
+if (country_df["board"] != "").any():
+    selected_boards = st.multiselect(
+        "Market / Board",
+        options=list(board_counts.index),
+        default=list(board_counts.index),
+        format_func=lambda b: f"{b} ({board_counts[b]})",
+        help="'ACE (unverified)': 0xxx codes are usually ACE Market, but companies that moved to the Main Market keep their code. "
+             "Add confirmed boards to data/official/{country}.csv to fix them.",
+    )
+
 keyword = st.text_input("Filter by company name (optional)", placeholder="e.g. Berhad, Tech")
 
 if not selected_sectors:
     st.info("Select at least one sector to see the companies.")
     st.stop()
 
-hits = country_df[country_df["sector"].isin(selected_sectors)]
+hits = country_df[country_df[sector_col].replace("", "Unknown").isin(selected_sectors)]
+if selected_boards:
+    hits = hits[hits["board"].isin(selected_boards)]
 if keyword:
     hits = hits[hits["name"].str.contains(keyword, case=False, regex=False)]
 
@@ -67,16 +96,20 @@ if hits.empty:
     st.stop()
 
 # --- 5. 銘柄一覧 (チェックで対象を選択) ---
-table = hits[["symbol", "name", "sector"]].rename(
-    columns={"symbol": "Code", "name": "Name of Company", "sector": "Sector"}
-)
+show_cols = {"symbol": "Code", "name": "Name of Company", "board": "Board", "sector": "Sector (Yahoo)",
+             "official_sector": "Sector (Official)"}
+if not (hits["board"] != "").any():
+    show_cols.pop("board")
+if not has_official:
+    show_cols.pop("official_sector")
+table = hits[list(show_cols)].rename(columns=show_cols)
 table.insert(0, "Select", True)
 edited = st.data_editor(
     table,
     hide_index=True,
-    use_container_width=True,
-    disabled=["Code", "Name of Company", "Sector"],
-    key=f"hits_{country_code}_{'|'.join(selected_sectors)}_{keyword}",
+    width="stretch",
+    disabled=list(show_cols.values()),
+    key=f"hits_{country_code}_{sector_col}_{'|'.join(selected_sectors)}_{'|'.join(selected_boards)}_{keyword}",
 )
 selected_codes = edited.loc[edited["Select"], "Code"].tolist()
 
@@ -103,3 +136,6 @@ if start:
         st.error(f"❌ Error: {e}")
         if debug_mode:
             st.exception(e)
+
+# 直近の結果を表示 (ダウンロード後も消えない)
+show_result("Version_2", country_code)

@@ -1240,6 +1240,7 @@ MY,7176.KL,TPC Plus Berhad,Consumer Defensive,KLS
 MY,7216.KL,Kawan Food Berhad,Consumer Defensive,KLS
 MY,7237.KL,Power Root Berhad,Consumer Defensive,KLS
 MY,7252.KL,Teo Seng Capital Berhad,Consumer Defensive,KLS
+MY,7439.KL,Teck Guan Perdana Berhad,Consumer Defensive,KLS
 MY,7501.KL,Harn Len Corporation Bhd,Consumer Defensive,KLS
 MY,8303.KL,Lotus KFM Berhad,Consumer Defensive,KLS
 MY,8478.KL,Hwa Tai Industries Berhad,Consumer Defensive,KLS
@@ -1897,17 +1898,6 @@ MY,9172.KL,Formosa Prosonic Industries Berhad,Technology,KLS
 MY,9334.KL,KESM Industries Berhad,Technology,KLS
 MY,9377.KL,FSBM Holdings Berhad,Technology,KLS
 MY,9393.KL,Industronics Berhad,Technology,KLS
-MY,0800EA.KL,ABF Malaysia Bond Index,Unknown,KLS
-MY,0820EA.KL,FTSE Bursa Malaysia KLCI ETF,Unknown,KLS
-MY,0821EA.KL,Eq8 Dow Jones Islamic Market Malaysia Titans 25 ETF,Unknown,KLS
-MY,0823EA.KL,Principal FTSE China 50 ETF,Unknown,KLS
-MY,0824EA.KL,Eq8 MSCI Malaysia Islamic Dividend ETF,Unknown,KLS
-MY,0825EA.KL,Eq8 MSCI SEA Islamic Dividend ETF,Unknown,KLS
-MY,0827EA.KL,Eq8 Dow Jones US Titans 50 ETF,Unknown,KLS
-MY,0828EA.KL,TradePlus Shariah Gold ETF,Unknown,KLS
-MY,0829EA.KL,TradePlus S&P New China Tracker ETF,Unknown,KLS
-MY,0838EA.KL,VP-DJ Shariah China A-Shares 100 ETF,Unknown,KLS
-MY,0839EA.KL,Eq8 FTSE Malaysia Enhanced Dividend Waqf ETF,Unknown,KLS
 MY,8877R1.KL,EKOVEST-R1,Unknown,KLS
 MY,0318.KL,Elridge Energy Holdings Berhad,Utilities,KLS
 MY,0369.KL,JS Solar Holding Berhad,Utilities,KLS
@@ -2262,6 +2252,7 @@ SG,NEX.SI,Reclaims Global Limited,Industrials,SES
 SG,NS8U.SI,Hutchison Port Holdings Trust,Industrials,SES
 SG,P7VU.SI,Hutchison Port Holdings Trust,Industrials,SES
 SG,P9D.SI,Civmec Limited,Industrials,SES
+SG,PA3.SI,TA Corporation Ltd,Industrials,SES
 SG,Q0X.SI,Ley Choon Group Holdings Limited,Industrials,SES
 SG,R14.SI,Eneco Energy Limited,Industrials,SES
 SG,RXS.SI,Pacific Radiance Ltd.,Industrials,SES
@@ -2393,6 +2384,7 @@ SG,AVP.SI,"AvePoint, Inc.",Technology,SES
 SG,AWX.SI,AEM Holdings Ltd.,Technology,SES
 SG,AWZ.SI,Multi-Chem Limited,Technology,SES
 SG,AYN.SI,Global Testing Corporation Limited,Technology,SES
+SG,AYV.SI,Acma Ltd.,Technology,SES
 SG,BBW.SI,Azeus Systems Holdings Ltd.,Technology,SES
 SG,BCY.SI,Powermatic Data Systems Limited,Technology,SES
 SG,BDA.SI,PNE Industries Ltd,Technology,SES
@@ -2890,9 +2882,7 @@ TH,UMS.BK,Unique Mining Services Public Company Limited,Energy,SET
 TH,AEONTS.BK,AEON Thana Sinsap (Thailand) Public Company Limited,Financial Services,SET
 TH,AF.BK,AIRA Factoring Public Company Limited,Financial Services,SET
 TH,AIINFRA24.BK,Mirae Asset Global Investments (HK) Ltd,Financial Services,SET
-TH,AIQ24.BK,Global X Japan Co. Ltd - Global X Artificial Intelligence and Technology ETF,Financial Services,SET
 TH,AMANAH.BK,Amanah Leasing Public Company Limited,Financial Services,SET
-TH,APDIV24.BK,Global X ETF Series II - Global X Asia Pacific High Dividend Yield ETF,Financial Services,SET
 TH,ASEMI23.BK,Mirae Asset Global Investments (HK) Ltd,Financial Services,SET
 TH,ASEMI24.BK,Mirae Asset Global Investments (HK) Ltd,Financial Services,SET
 TH,ASK.BK,Asia Sermkij Leasing Public Company Limited,Financial Services,SET
@@ -2913,18 +2903,15 @@ TH,CGH.BK,Country Group Holdings Public Company Limited,Financial Services,SET
 TH,CHARAN.BK,Charan Insurance Public Company Limited,Financial Services,SET
 TH,CHASE.BK,Chase Asia Public Company Limited,Financial Services,SET
 TH,CHAYO.BK,Chayo Group Public Company Limited,Financial Services,SET
-TH,CHNXT5023.BK,Invesco Great Wall Fund Management Co Ltd - Szse Chinext 50 Index ETF,Financial Services,SET
 TH,CNBIO24.BK,Mirae Asset Global Investments (HK) Ltd,Financial Services,SET
 TH,CNEV24.BK,Mirae Asset Global Investments (HK) Ltd,Financial Services,SET
 TH,CNSEMI24.BK,Mirae Asset Global Investments (HK) Ltd,Financial Services,SET
 TH,COPHK24.BK,Mirae Asset Global Investments (HK) Ltd,Financial Services,SET
 TH,CREDIT.BK,Thai Credit Bank Public Company Limited,Financial Services,SET
 TH,DBS19.BK,DBS Group Holdings Ltd,Financial Services,SET
-TH,E1VFVN3001.BK,DCVFMVN30 ETF,Financial Services,SET
 TH,EAST.BK,Eastern Commercial Leasing Public Company Limited,Financial Services,SET
 TH,FNS.BK,FNS Holdings Public Company Limited,Financial Services,SET
 TH,FSX.BK,Finansia X Public Company Limited,Financial Services,SET
-TH,FUEVFVND01.BK,VFMVN Diamond ETF,Financial Services,SET
 TH,GBX.BK,Globlex Holding Management Public Company Limited,Financial Services,SET
 TH,GCAP.BK,G Capital Public Company Limited,Financial Services,SET
 TH,GOLD19.BK,Yuanta Securities (Thailand) Company Limited,Financial Services,SET
@@ -2932,7 +2919,6 @@ TH,GOLDHK24.BK,Hang Seng Investment Management Ltd,Financial Services,SET
 TH,GSEMI24.BK,Global X Japan Co. Ltd.,Financial Services,SET
 TH,HENG.BK,Heng Leasing and Capital Public Company Limited,Financial Services,SET
 TH,HK01.BK,Tracker Fund Of Hong Kong,Financial Services,SET
-TH,HKCE01.BK,Hang Seng China Enterprises Index ETF,Financial Services,SET
 TH,HKDIV24.BK,Hang Seng Investment Management Ltd,Financial Services,SET
 TH,HSHD23.BK,Mirae Asset Global Investments (HK) Ltd,Financial Services,SET
 TH,ICBC19.BK,Industrial and Commercial Bank of China Limited,Financial Services,SET
@@ -2940,7 +2926,6 @@ TH,IFS.BK,IFS Capital (Thailand) Public Company Limited,Financial Services,SET
 TH,INDIA01.BK,China Asset Management (HK) Limited,Financial Services,SET
 TH,INDIAESG19.BK,BlackRock (Singapore) Ltd,Financial Services,SET
 TH,INSURE.BK,Indara Insurance Public Company Limited,Financial Services,SET
-TH,JAPAN10001.BK,Hang Seng Investment Management - Japan Topix 100 IDX ETF,Financial Services,SET
 TH,JMT.BK,JMT Network Services Public Company Limited,Financial Services,SET
 TH,JPANIME24.BK,Global X Japan Co. Ltd.,Financial Services,SET
 TH,JPMS24.BK,Global X Japan Co. Ltd.,Financial Services,SET
@@ -2964,7 +2949,6 @@ TH,MTC.BK,Muangthai Capital Public Company Limited,Financial Services,SET
 TH,MTI.BK,Muang Thai Insurance Public Company Limited,Financial Services,SET
 TH,NCAP.BK,Next Capital Public Company Limited,Financial Services,SET
 TH,NKI.BK,The Navakij Insurance Public Company Limited,Financial Services,SET
-TH,OIL24.BK,Global X ETF Series II - Global X S&P Crude Oil Futures Enhanced ER ETF,Financial Services,SET
 TH,PINGAN01.BK,"Ping An Insurance (Group) Company of China, Ltd.",Financial Services,SET
 TH,S11.BK,S 11 Group Public Company Limited,Financial Services,SET
 TH,SAK.BK,Saksiam Leasing Public Company Limited,Financial Services,SET
@@ -3000,10 +2984,8 @@ TH,TURBO.BK,Ngernturbo Public Company Limited,Financial Services,SET
 TH,TVH.BK,Thaivivat Holdings Public Company Limited,Financial Services,SET
 TH,UOB19.BK,United Overseas Bank Limited,Financial Services,SET
 TH,USTLTH24.BK,Global X Japan Co. Ltd.,Financial Services,SET
-TH,USTR24.BK,Global X Etf Series Global X Us Treasury 3-5 Year Etf,Financial Services,SET
 TH,V3011.BK,Kim Vietnam Fund Management JSC,Financial Services,SET
 TH,VCB11.BK,Joint Stock Commercial Bank for Foreign Trade of Vietnam,Financial Services,SET
-TH,VDIAMOND11.BK,Kim Growth Vn Diamond ETF,Financial Services,SET
 TH,XPG.BK,XSpring Capital Public Company Limited,Financial Services,SET
 TH,AHC.BK,Aikchol Hospital Public Company Limited,Healthcare,SET
 TH,BCH.BK,Bangkok Chain Hospital Public Company Limited,Healthcare,SET
@@ -3440,9 +3422,6 @@ TH,TPS.BK,The Practical Solution Public Company Limited,Technology,SET
 TH,VCOM.BK,Vintcom Technology Public Company Limited,Technology,SET
 TH,XIAOMI01.BK,Xiaomi Corporation,Technology,SET
 TH,XIAOMI80.BK,Xiaomi Corporation,Technology,SET
-TH,1I01BSET50.BK,BCAP SET50 Daily Inverse ETF (-1X),Unknown,SET
-TH,2I01BSET50.BK,BCAP SET50 Daily Inverse ETF (-2X),Unknown,SET
-TH,2X01BSET50.BK,BCAP SET50 Daily Leveraged ETF (2X),Unknown,SET
 TH,3BBIF.BK,3BB Internet Infrastructure Fund,Unknown,SET
 TH,AAOI03.BK,"Applied Optoelectronics, Inc.",Unknown,SET
 TH,AAOI23.BK,"Applied Optoelectronics, Inc.",Unknown,SET
@@ -3537,14 +3516,12 @@ TH,CIEN03.BK,Ciena Corporation,Unknown,SET
 TH,CLS03.BK,Celestica Inc.,Unknown,SET
 TH,CMBANK23.BK,"China Merchants Bank Co., Ltd.",Unknown,SET
 TH,CME03.BK,CME Group Inc.,Unknown,SET
-TH,CN01.BK,ChinaAMC ETF Series - ChinaAMC CSI 300 Index ETF,Unknown,SET
 TH,CN23.BK,CN23_DR CN#INVX,Unknown,SET
 TH,CNBIO80.BK,CNBIO80_DR CNBIO#KTB,Unknown,SET
 TH,CNLIFE11.BK,China Life Insurance Company Limited,Unknown,SET
 TH,CNROBOAI23.BK,CNROBOAI23_DR CNROBOAI#INVX,Unknown,SET
 TH,CNSEMI23.BK,CNSEMI23_DR CNSEMI#INVX,Unknown,SET
 TH,CNSTAR5023.BK,CNSTAR5023_DR CNSTAR50#INVX,Unknown,SET
-TH,CNTECH01.BK,ChinaAMC Global ETF Series - ChinaAMC Hang Seng Tech Index ETF,Unknown,SET
 TH,COHR23.BK,Coherent Corp.,Unknown,SET
 TH,COHR80.BK,Coherent Corp.,Unknown,SET
 TH,COIN01.BK,"Coinbase Global, Inc.",Unknown,SET
@@ -3742,7 +3719,6 @@ TH,NBIS03.BK,Nebius Group N.V.,Unknown,SET
 TH,NBIS23.BK,Nebius Group N.V.,Unknown,SET
 TH,NBIS80.BK,Nebius Group N.V.,Unknown,SET
 TH,NDAQ06.BK,"Nasdaq, Inc.",Unknown,SET
-TH,NDX01.BK,ChinaAMC NASDAQ 100 ETF,Unknown,SET
 TH,NEE80.BK,"NextEra Energy, Inc.",Unknown,SET
 TH,NEM06.BK,Newmont Corporation,Unknown,SET
 TH,NEM23.BK,Newmont Corporation,Unknown,SET
@@ -3779,7 +3755,6 @@ TH,OUST03.BK,"Ouster, Inc.",Unknown,SET
 TH,OXY03.BK,Occidental Petroleum Corporation,Unknown,SET
 TH,PANW19.BK,"Palo Alto Networks, Inc.",Unknown,SET
 TH,PANW80.BK,"Palo Alto Networks, Inc.",Unknown,SET
-TH,PAVE80.BK,Global X Funds - Global X U.S. Infrastructure Development ETF,Unknown,SET
 TH,PFIZER19.BK,Pfizer Inc.,Unknown,SET
 TH,PINGAN11.BK,"Ping An Insurance (Group) Company of China, Ltd.",Unknown,SET
 TH,PINGAN80.BK,"Ping An Insurance (Group) Company of China, Ltd.",Unknown,SET
@@ -3856,7 +3831,6 @@ TH,SPHLTH80.BK,SPHLTH80_DR SPHLTH#KTB,Unknown,SET
 TH,SPOT06.BK,Spotify Technology S.A.,Unknown,SET
 TH,SPTECH80.BK,SPTECH80_DR SPTECH#KTB,Unknown,SET
 TH,SSPF.BK,Sala @ Sathorn Property Fund,Unknown,SET
-TH,STAR5001.BK,Premia China STAR50 ETF,Unknown,SET
 TH,STEG19.BK,Singapore Technologies Engineering Ltd,Unknown,SET
 TH,STM03.BK,STMicroelectronics N.V.,Unknown,SET
 TH,SUNGROW80.BK,"Sungrow Power Supply Co., Ltd.",Unknown,SET
@@ -3915,14 +3889,12 @@ TH,VICR80.BK,Vicor Corporation,Unknown,SET
 TH,VISA06.BK,Visa Inc.,Unknown,SET
 TH,VISA80.BK,Visa Inc.,Unknown,SET
 TH,VISHAY03.BK,"Vishay Intertechnology, Inc.",Unknown,SET
-TH,VNFIN24.BK,SSIAM Vnfin Lead ETF,Unknown,SET
 TH,VRT01.BK,Vertiv Holdings Co,Unknown,SET
 TH,VRT03.BK,Vertiv Holdings Co,Unknown,SET
 TH,VRT23.BK,Vertiv Holdings Co,Unknown,SET
 TH,VRT80.BK,Vertiv Holdings Co,Unknown,SET
 TH,VRTX80.BK,Vertex Pharmaceuticals Incorporated,Unknown,SET
 TH,VST03.BK,Vistra Corp.,Unknown,SET
-TH,VT03.BK,Vanguard International Equity Index Funds - Vanguard Total World Stock ETF,Unknown,SET
 TH,WDC03.BK,Western Digital Corporation,Unknown,SET
 TH,WMT06.BK,Walmart Inc.,Unknown,SET
 TH,WMT80.BK,Walmart Inc.,Unknown,SET

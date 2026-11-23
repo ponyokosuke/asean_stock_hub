@@ -2,7 +2,7 @@ from .base import BaseProcessor
 
 class VNProcessor(BaseProcessor):
     def __init__(self):
-        super().__init__(currency="VND", suffix=".VN")
+        super().__init__(currency="VND", suffix=".VN", country="VN")
 
     def process_dataframe(self, df):
         # 親の処理を呼ぶ前に、独自に計算しても良いが、一旦親を呼ぶ
