@@ -118,7 +118,7 @@ In the left sidebar, under **Target Country**, click the country, e.g. **Malaysi
 
 **B. Use the default list**
 
-- Tick **"Use default list for MY (141 codes)"**. The number of codes is shown on the box.
+- Tick **"Use default list for MY (107 codes)"**. The number of codes is shown on the box.
 - To see which companies are in it, open **📋 Default List** in the left sidebar.
 - If a country has no default list, the box says **"Not registered ⚠️"** and can't be ticked.
 - To change a default list permanently, ask Kosuke. Changes made inside the app are not saved.
@@ -127,7 +127,7 @@ If you both upload a file **and** tick the default list, the **uploaded file is 
 
 ### Step 3 — Start
 
-Click **Start Analysis 🚀**. A progress bar shows "Fetching Financial Data (5/141): 0097.KL…".
+Click **Start Analysis 🚀**. A progress bar shows "Fetching Financial Data (5/107): 0097.KL…".
 
 > ⏱ **How long does it take?** About **3–6 seconds per company**, plus a short AI step at the end. 10 companies take about 1 minute; 130 companies take about 10–15 minutes.
 >
@@ -183,6 +183,8 @@ The sectors are **Yahoo Finance's 11 sectors**:
 
 They are **not the same as Bursa Malaysia's or SGX's official sectors**. For example, an IT services company may appear under "Industrials". "Unknown" means Yahoo has not assigned a sector.
 
+**Malaysia — Bursa's official sectors:** above the sector box you can choose **"Official (exchange)"** instead of "Yahoo Finance". The list then uses Bursa Malaysia's own sectors (e.g. Technology, Industrial Products & Services). So far only the 141 companies checked against Bursa have an official sector; all others appear as **"Not checked"**.
+
 > 💡 Looking for **IT companies**? Technology is the main one, but also check **Communication Services**. To be thorough, use **AI Judge** (Section 6).
 
 ### Step 3 — Market / Board (Malaysia only)
@@ -192,7 +194,8 @@ Malaysia has three markets. All of them are selected at the start.
 | Board shown | Meaning |
 |---|---|
 | **Main** | Main Market: established, larger companies |
-| **ACE (unverified)** | Usually ACE Market (growth companies). "Unverified" because a few companies that moved from ACE to Main keep their old code, so the tool can't be 100% sure. |
+| **ACE** | ACE Market (growth companies), confirmed against Bursa. |
+| **ACE (unverified)** | Probably ACE Market, but not yet confirmed. Companies that moved from ACE to Main keep their old `0xxx` code, so the tool can't be sure from the code alone. |
 | **LEAP** | LEAP Market (for sophisticated investors). Most LEAP companies are included; a few have no Yahoo data and are missing. |
 | **Other** | Preference shares, rights and similar instruments (not ordinary shares) |
 
@@ -298,7 +301,7 @@ The Excel has one row per company. The first row (yellow) is the header.
 |---|---|
 | Ref | Row number |
 | Name of Company / Code | Company name and stock code |
-| **Market / Board** | Malaysia: Main / ACE (unverified) / LEAP / Other. Blank for other countries. |
+| **Market / Board** | Malaysia: Main / ACE / ACE (unverified) / LEAP / Other. Blank for other countries. |
 | Website, Address, Contact No. | From the company profile on Yahoo Finance |
 | Major Shareholders | Ownership information from Yahoo. Often percentages (insiders / institutions) rather than named shareholders. |
 | Currency | The currency of the company's financial statements |

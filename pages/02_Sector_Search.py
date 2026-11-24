@@ -46,15 +46,20 @@ st.caption(f"Sector master: {len(country_df)} listed companies in {country_code}
 # ★ 分類の選択: 公式セクター (data/official) があればそちらも選べる
 has_official = (country_df["official_sector"] != "").any()
 sector_col = "sector"
+blank_label = "Unknown"
 if has_official:
     basis = st.radio("Sector classification", ["Yahoo Finance", "Official (exchange)"], horizontal=True)
     if basis.startswith("Official"):
         sector_col = "official_sector"
+        # 公式セクターは確認済みの会社にしか無い
+        blank_label = "Not checked"
+        n_checked = (country_df["official_sector"] != "").sum()
+        st.caption(f"Official sectors are available for {n_checked} checked companies; the rest are shown as \"Not checked\".")
 else:
     st.caption("Sectors follow Yahoo Finance's classification, which differs from the exchange's official sectors.")
 
 # ★ Multi-select Input for Sectors (件数つき)
-sector_counts = country_df[sector_col].replace("", "Unknown").value_counts()
+sector_counts = country_df[sector_col].replace("", blank_label).value_counts()
 if sector_col == "sector":
     sector_options = [s for s in SECTORS + ["Unknown"] if s in sector_counts]
 else:
@@ -85,7 +90,7 @@ if not selected_sectors:
     st.info("Select at least one sector to see the companies.")
     st.stop()
 
-hits = country_df[country_df[sector_col].replace("", "Unknown").isin(selected_sectors)]
+hits = country_df[country_df[sector_col].replace("", blank_label).isin(selected_sectors)]
 if selected_boards:
     hits = hits[hits["board"].isin(selected_boards)]
 if keyword:
