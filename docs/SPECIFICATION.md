@@ -2,7 +2,7 @@
 
 | Item | Value |
 |---|---|
-| Document version | 1.2 |
+| Document version | 1.3 |
 | Date | 2026-11-23 |
 | Applies to | `main` branch of `ponyokosuke/asean_stock_hub` (after PR #3) |
 | Live app | https://aseanstockapp-analysis.streamlit.app/ |
@@ -100,7 +100,7 @@ Out of scope:
 | Country | Code | Suffix | Currency label | Sector master | Default list |
 |---|---|---|---|---|---|
 | Singapore | SG | `.SI` | SGD | Yes (537) | Yes (70 codes, curated IT list) |
-| Malaysia | MY | `.KL` | MYR | Yes (1,116) | Yes (141 codes, Yahoo "Technology") |
+| Malaysia | MY | `.KL` | MYR | Yes (about 1,120) | Yes (107 codes, checked against Bursa) |
 | Thailand | TH | `.BK` | THB | Yes (1,497) | No |
 | Indonesia | ID | `.JK` | IDR | Yes (838) | No |
 | Philippines | PH | `.PS` | PHP | **No** (not covered by the Yahoo screener) | No |
@@ -144,7 +144,9 @@ Bursa Malaysia has three boards:
 | `0xxx` | ACE (unverified) | Usually ACE. Companies that moved from ACE to Main keep their `0xxx` code. |
 | anything else (`…PA`, `…PC`, `…R1`, `…SS`) | Other | Preference shares, rights, stapled securities (ETFs are excluded from the master) |
 
-As of 2026-11-23 the Malaysian rows are: 705 Main, 360 ACE (unverified), 42 LEAP and 9 Other.
+As of 2026-11-25 the Malaysian rows are: 736 Main, 58 ACE, 274 ACE (unverified), 42 LEAP and 9 Other.
+
+`data/official/MY.csv` holds the market and Bursa sector of the 141 companies checked by Elaine against Bursa Malaysia on 2026-11-24, so their boards are certain. Of the 87 `0xxx` companies checked, 29 were on the Main Market.
 
 **LEAP coverage:**
 - The Yahoo screener returns only a few LEAP Market companies, but Yahoo has quotes and financials for most of them when asked by code.
@@ -219,7 +221,7 @@ The latest result stays on the page (Section 8.1). Default lists cannot be edite
 1. Loads the sector master for the selected country.
    - If the country has no rows (PH, VN), shows a message pointing to Version 1 and stops.
 2. Shows the number of companies and the date the master was last updated.
-3. **Sector classification:** when the country has official sectors in `data/official/`, a choice between "Yahoo Finance" and "Official (exchange)". Otherwise a note explains that sectors follow Yahoo Finance.
+3. **Sector classification:** when the country has official sectors in `data/official/`, a choice between "Yahoo Finance" and "Official (exchange)". In Official mode, companies without an official sector are grouped as "Not checked", and a caption shows how many are checked. Otherwise a note explains that sectors follow Yahoo Finance.
 4. **Select Target Sectors:** multi-select of sectors for the chosen classification, each showing its company count.
    - Yahoo: the 11 sectors plus "Unknown".
    - Official: the values found in the file.
@@ -443,7 +445,7 @@ Priority: **H** = affects correctness of the deliverable; **M** = affects usabil
 
 | ID | Pri | Issue | Target behaviour |
 |---|---|---|---|
-| DATA-1 | H | **Partly resolved in 1.1.** The board is shown and can be filtered, and all non-`0xxx` codes are certain. The 360 `0xxx` codes are shown as "ACE (unverified)" until `data/official/MY.csv` lists the ones on the Main Market. | Fill `data/official/MY.csv` from a licensed source, and review it quarterly. |
+| DATA-1 | M | **Mostly resolved in 1.3.** All non-`0xxx` codes are certain, and the 141 checked companies (the default MY list before 1.3) are certain from `data/official/MY.csv`. The other 274 `0xxx` codes remain "ACE (unverified)". | Fill `data/official/MY.csv` from a licensed source, and review it quarterly. |
 | DATA-3 | L | **Partly resolved in 1.1:** ETFs are excluded. Preference shares, rights, stapled securities and depositary receipts remain, alongside ordinary shares. | Keep all markets (Main, ACE, LEAP) and these instruments (owner decision, 2026-11-23). In Malaysia they appear under the board "Other". If needed, add an instrument-type label. |
 | DATA-4 | H | **Partly resolved in 1.1.** The app supports official sectors: a classification switch in Sector Search, and the Excel columns 42–43. The data files are still empty. | Fill `official_sector` and `official_industry` in `data/official/{COUNTRY}.csv` from a licensed source (e.g. ShareInvestor). |
 | DATA-6 | M | FY comes from `lastFiscalYearEnd`, while figures come from the latest balance sheet or income statement column. The two can refer to different years. | Use the statement column date as FY. |
@@ -459,7 +461,7 @@ Priority: **H** = affects correctness of the deliverable; **M** = affects usabil
 |---|---|---|---|
 | COV-1 | M | No sector master for PH and VN (Yahoo screener does not cover them). Yahoo's VN data quality has not been checked. | Find an alternative list source, or document "upload only". |
 | COV-3 | L | **Mostly resolved in 1.2:** the build probes LEAP codes directly, adding 39 LEAP companies the screener missed (42 in total). A few LEAP tickers have no Yahoo data at all, e.g. `03008.KL` SL Innovation Capital and `03036.KL` Redplanet. | Check the LEAP list against Bursa quarterly. Companies without Yahoo data need another source for their financials. |
-| COV-2 | M | Default lists exist only for SG and MY. The MY list is a provisional Yahoo "Technology" list, not a curated IT list like SG's. | Replace it with the agreed curated MY list. |
+| COV-2 | L | Default lists exist only for SG and MY. **MY curated in 1.3:** the 141 Yahoo "Technology" companies were checked against Bursa, and 34 whose Bursa sector is not technology-related were removed (107 left). Companies Bursa classes as Technology but Yahoo does not are not in the list. | Add such companies when found, e.g. Total Dynamic (03058). |
 
 ### 14.3 Usability and reliability
 
@@ -502,3 +504,4 @@ Priority: **H** = affects correctness of the deliverable; **M** = affects usabil
 | 1.0 | 2026-11-23 | First specification, written after the sector master rebuild (PR #1). |
 | 1.1 | 2026-11-23 | H-priority fixes (PR #3): Malaysian board, official classification support, blank for missing data, persistent results and caching. All Malaysian markets kept, ETFs excluded; login unchanged. |
 | 1.2 | 2026-11-23 | LEAP coverage: the build probes `03001`–`03199` directly (42 LEAP companies instead of 3). Default MY list rebuilt (141 codes). |
+| 1.3 | 2026-11-25 | Bursa check of the MY list by Elaine: markets and Bursa sectors of 141 companies in `data/official/MY.csv` (29 moved from ACE to Main); 34 removed from the default MY list (107 left). Sector Search shows unchecked companies as "Not checked" in Official mode. |

@@ -6,7 +6,7 @@ These files hold each exchange's official classification, which Yahoo Finance do
 - `official_sector`: the exchange's sector
 - `official_industry`: the exchange's industry or sub-sector
 
-They are maintained by hand. Update them from a source you are licensed to use (for example the exchange's published listing, or your ShareInvestor subscription). Do not scrape exchange websites; Bursa Malaysia and SGX license their market data.
+They are maintained by hand. `MY.csv` currently holds the 141 companies of the original MY default list, checked against Bursa Malaysia on 2026-11-24. Update them from a source you are licensed to use (for example the exchange's published listing, or your ShareInvestor subscription). Do not scrape exchange websites; Bursa Malaysia and SGX license their market data.
 
 ## Format
 
