@@ -1074,6 +1074,7 @@ MY,5657.KL,Parkson Holdings Berhad,Consumer Cyclical,KLS
 MY,5738.KL,Country Heights Holdings Berhad,Consumer Cyclical,KLS
 MY,5983.KL,MBM Resources Berhad,Consumer Cyclical,KLS
 MY,6068.KL,PCCS Group Berhad,Consumer Cyclical,KLS
+MY,6297.KL,Box-Pak (Malaysia) Bhd.,Consumer Cyclical,KLS
 MY,6351.KL,Amway (Malaysia) Holdings Berhad,Consumer Cyclical,KLS
 MY,6599.KL,Aeon Co. (M) Bhd.,Consumer Cyclical,KLS
 MY,6939.KL,Fiamma Holdings Berhad,Consumer Cyclical,KLS
@@ -1301,7 +1302,6 @@ MY,7293.KL,Yinson Holdings Berhad,Energy,KLS
 MY,0053.KL,OSK Ventures International Berhad,Financial Services,KLS
 MY,0058.KL,JcbNext Berhad,Financial Services,KLS
 MY,0150.KL,Fintec Global Berhad,Financial Services,KLS
-MY,0150PA.KL,Fintec Global Berhad,Financial Services,KLS
 MY,0242.KL,Pappajack Berhad,Financial Services,KLS
 MY,0285.KL,Mercury Securities Group Berhad,Financial Services,KLS
 MY,0286.KL,Evergreen Max Cash Capital Berhad,Financial Services,KLS
@@ -1322,7 +1322,7 @@ MY,1818.KL,Bursa Malaysia Berhad,Financial Services,KLS
 MY,2488.KL,Alliance Bank Malaysia Berhad,Financial Services,KLS
 MY,3379.KL,Insas Berhad,Financial Services,KLS
 MY,5088.KL,Apex Equity Holdings Berhad,Financial Services,KLS
-MY,5108.KL,icapital.biz Berhad Unit,Financial Services,KLS
+MY,5108.KL,iCapital.biz Berhad,Financial Services,KLS
 MY,5139.KL,AEON Credit Service (M) Berhad,Financial Services,KLS
 MY,5185.KL,AFFIN Bank Berhad,Financial Services,KLS
 MY,5228.KL,ELK-Desa Resources Berhad,Financial Services,KLS
@@ -1796,6 +1796,7 @@ MY,8745.KL,S & F Capital Berhad,Real Estate,KLS
 MY,8893.KL,M K Land Holdings Berhad,Real Estate,KLS
 MY,8923.KL,Jiankun International Berhad,Real Estate,KLS
 MY,9539.KL,Multi-Usage Holdings Berhad,Real Estate,KLS
+MY,9687.KL,Ideal Capital Berhad,Real Estate,KLS
 MY,9814.KL,Bertam Alliance Berhad,Real Estate,KLS
 MY,9962.KL,Gromutual Berhad,Real Estate,KLS
 MY,0006.KL,Pineapple Resources Berhad,Technology,KLS
@@ -1898,6 +1899,7 @@ MY,0466.KL,SRKK AI Berhad,Technology,KLS
 MY,0477.KL,EcoSys (Malaysia) Berhad,Technology,KLS
 MY,0479.KL,RedPlanet Berhad,Technology,KLS
 MY,0482.KL,MyDCD Berhad,Technology,KLS
+MY,0483.KL,,Technology,KLS
 MY,3247.KL,GUH Holdings Berhad,Technology,KLS
 MY,3514.KL,Marco Holdings Berhad,Technology,KLS
 MY,3867.KL,Malaysian Pacific Industries Berhad,Technology,KLS
@@ -1941,7 +1943,7 @@ MY,9377.KL,FSBM Holdings Berhad,Technology,KLS
 MY,9393.KL,Industronics Berhad,Technology,KLS
 MY,03009.KL,Seers Bhd,Unknown,KLS
 MY,03058.KL,Total Dynamic Holdings Berhad,Unknown,KLS
-MY,0483.KL,,Unknown,KLS
+MY,5359.KL,,Unknown,KLS
 MY,8877R1.KL,EKOVEST-R1,Unknown,KLS
 MY,0318.KL,Elridge Energy Holdings Berhad,Utilities,KLS
 MY,0369.KL,JS Solar Holding Berhad,Utilities,KLS
@@ -1967,6 +1969,7 @@ SG,5TP.SI,CNMC Goldmine Holdings Limited,Basic Materials,SES
 SG,5WV.SI,AsiaPhos Limited,Basic Materials,SES
 SG,A55.SI,Asia Enterprises Holding Limited,Basic Materials,SES
 SG,A7RU.SI,Keppel Infrastructure Trust,Basic Materials,SES
+SG,AWG.SI,Ascent Bridge Limited,Basic Materials,SES
 SG,BEC.SI,BRC Asia Limited,Basic Materials,SES
 SG,BEI.SI,LHT Holdings Limited,Basic Materials,SES
 SG,BTG.SI,HG Metal Manufacturing Limited,Basic Materials,SES
@@ -1986,8 +1989,8 @@ SG,S20.SI,The Straits Trading Company Limited,Basic Materials,SES
 SG,S44.SI,EnGro Corporation Limited,Basic Materials,SES
 SG,TSCD.SI,The Siam Cement Public Company Limited,Basic Materials,SES
 SG,Y8E.SI,Samurai 2K Aerosol Limited,Basic Materials,SES
-SG,ZBA.SI,Infinity Development Holdings Company Limited,Basic Materials,SES
 SG,1D1.SI,UnUsUaL Limited,Communication Services,SES
+SG,1F0.SI,shopper360 Limited,Communication Services,SES
 SG,9VW.SI,Polaris E&M Limited,Communication Services,SES
 SG,BAI.SI,Digilife Technologies Limited,Communication Services,SES
 SG,CC3.SI,StarHub Ltd,Communication Services,SES
@@ -2011,7 +2014,6 @@ SG,42L.SI,Taka Jewellery Holdings Limited,Consumer Cyclical,SES
 SG,42R.SI,Jumbo Group Limited,Consumer Cyclical,SES
 SG,43A.SI,Octopus (APAC) Holdings Limited,Consumer Cyclical,SES
 SG,504.SI,HS Optimus Holdings Limited,Consumer Cyclical,SES
-SG,51O.SI,MSM International Limited,Consumer Cyclical,SES
 SG,533.SI,ABR Holdings Limited,Consumer Cyclical,SES
 SG,543.SI,Noel Gifts International Ltd,Consumer Cyclical,SES
 SG,596.SI,Pavillon Holdings Ltd.,Consumer Cyclical,SES
@@ -2040,7 +2042,6 @@ SG,B58.SI,Banyan Tree Holdings Limited,Consumer Cyclical,SES
 SG,BCZ.SI,Travelite Holdings Ltd.,Consumer Cyclical,SES
 SG,BHU.SI,SUTL Enterprise Limited,Consumer Cyclical,SES
 SG,BJZ.SI,Koda Ltd,Consumer Cyclical,SES
-SG,BKW.SI,Datapulse Technology Limited,Consumer Cyclical,SES
 SG,BPF.SI,YHI International Limited,Consumer Cyclical,SES
 SG,C04.SI,Casa Holdings Limited,Consumer Cyclical,SES
 SG,C41.SI,Cortina Holdings Limited,Consumer Cyclical,SES
@@ -2087,7 +2088,6 @@ SG,5JS.SI,Indofood Agri Resources Ltd.,Consumer Defensive,SES
 SG,AAJ.SI,Sunmoon Food Company Limited,Consumer Defensive,SES
 SG,BEW.SI,JB Foods Limited,Consumer Defensive,SES
 SG,BHD.SI,China Mining International Limited,Consumer Defensive,SES
-SG,BKV.SI,China Shenshan Orchard Holdings Co. Ltd.,Consumer Defensive,SES
 SG,BQD.SI,Envictus International Holdings Limited,Consumer Defensive,SES
 SG,CNE.SI,MindChamps PreSchool Limited,Consumer Defensive,SES
 SG,D01.SI,DFI Retail Group Holdings Limited,Consumer Defensive,SES
@@ -2118,6 +2118,7 @@ SG,Y03.SI,Yeo Hiap Seng Limited,Consumer Defensive,SES
 SG,Y92.SI,Thai Beverage Public Company Limited,Consumer Defensive,SES
 SG,585.SI,Asian Micro Holdings Limited,Energy,SES
 SG,594.SI,Happiness World Holdings Limited,Energy,SES
+SG,5AU.SI,AP Oil International Limited,Energy,SES
 SG,5E2.SI,Seatrium Limited,Energy,SES
 SG,5G2.SI,Kim Heng Limited,Energy,SES
 SG,5NF.SI,Mencast Holdings Ltd.,Energy,SES
@@ -2126,7 +2127,6 @@ SG,5WH.SI,Rex International Holding Limited,Energy,SES
 SG,BDU.SI,Federal International (2000) Ltd,Energy,SES
 SG,BEZ.SI,Beng Kuang Marine Limited,Energy,SES
 SG,BLZ.SI,Advanced Holdings Ltd.,Energy,SES
-SG,BTP.SI,Baker Technology Limited,Energy,SES
 SG,C13.SI,CH Offshore Ltd.,Energy,SES
 SG,C9Q.SI,Sinostar PEC Holdings Limited,Energy,SES
 SG,DU4.SI,Mermaid Maritime Public Company Limited,Energy,SES
@@ -2158,13 +2158,13 @@ SG,S23.SI,Singapura Finance Ltd,Financial Services,SES
 SG,S35.SI,Sing Investments & Finance Limited,Financial Services,SES
 SG,S41.SI,Hong Leong Finance Limited,Financial Services,SES
 SG,S68.SI,Singapore Exchange Limited,Financial Services,SES
+SG,T55.SI,TIH Limited,Financial Services,SES
 SG,TCU.SI,Credit Bureau Asia Limited,Financial Services,SES
 SG,TKKD.SI,Kasikornbank Public Company Limited,Financial Services,SES
 SG,U10.SI,UOB-Kay Hian Holdings Limited,Financial Services,SES
 SG,U11.SI,United Overseas Bank Limited,Financial Services,SES
 SG,U13.SI,United Overseas Insurance Limited,Financial Services,SES
 SG,YF8.SI,Yangzijiang Financial Holding Ltd.,Financial Services,SES
-SG,1B1.SI,HC Surgical Specialists Limited,Healthcare,SES
 SG,1D4.SI,Aoxin Q & M Dental Group Limited,Healthcare,SES
 SG,1H3.SI,Clearbridge Health Limited,Healthcare,SES
 SG,1J5.SI,Hyphens Pharma International Limited,Healthcare,SES
@@ -2228,10 +2228,10 @@ SG,5LY.SI,Marco Polo Marine Ltd.,Industrials,SES
 SG,5MZ.SI,Kingsmen Creatives Ltd.,Industrials,SES
 SG,5NV.SI,Chasen Holdings Limited,Industrials,SES
 SG,5OC.SI,Koyo International Limited,Industrials,SES
+SG,5PO.SI,Hiap Tong Corporation Ltd.,Industrials,SES
 SG,5TJ.SI,Far East Group Limited,Industrials,SES
 SG,5TT.SI,Keong Hong Holdings Limited,Industrials,SES
 SG,5UL.SI,Atlantic Navigation Holdings (Singapore) Limited,Industrials,SES
-SG,5VP.SI,GDS Global Limited,Industrials,SES
 SG,5VS.SI,Hafary Holdings Limited,Industrials,SES
 SG,5WF.SI,ISOTeam Ltd.,Industrials,SES
 SG,9DC.SI,Deluge Corporation Limited,Industrials,SES
@@ -2239,7 +2239,6 @@ SG,9PQ.SI,XMH Hldgs,Industrials,SES
 SG,A04.SI,ASL Marine Holdings Ltd.,Industrials,SES
 SG,A33.SI,Southern Archipelago Ltd.,Industrials,SES
 SG,ALK.SI,All-Link Air & Sea Limited,Industrials,SES
-SG,AWC.SI,Brook Crompton Holdings Ltd.,Industrials,SES
 SG,B49.SI,World Precision Machinery Limited,Industrials,SES
 SG,BBP.SI,Hor Kew Corporation Limited,Industrials,SES
 SG,BCV.SI,Qian Hu Corporation Limited,Industrials,SES
@@ -2261,6 +2260,7 @@ SG,C52.SI,ComfortDelGro Corporation Limited,Industrials,SES
 SG,C6L.SI,Singapore Airlines Limited,Industrials,SES
 SG,CHJ.SI,Uni-Asia Group Limited,Industrials,SES
 SG,CHZ.SI,HRnetGroup Limited,Industrials,SES
+SG,CIN.SI,Courage Investment Group Limited,Industrials,SES
 SG,D8DU.SI,First Ship Lease Trust,Industrials,SES
 SG,E3B.SI,Wee Hur Holdings Ltd.,Industrials,SES
 SG,EGX.SI,EGP Energy Corporation Limited,Industrials,SES
@@ -2326,6 +2326,7 @@ SG,ZKX.SI,Ever Glory United Holdings Limited,Industrials,SES
 SG,ZQM.SI,Soilbuild Construction Group Ltd.,Industrials,SES
 SG,1D5.SI,Capital World Limited,Real Estate,SES
 SG,1F3.SI,Aspen (Group) Holdings Limited,Real Estate,SES
+SG,1U8.SI,Rich Capital Holdings Limited,Real Estate,SES
 SG,40V.SI,Alset International Limited,Real Estate,SES
 SG,41O.SI,LHN Limited,Real Estate,SES
 SG,581.SI,Sunrise Shares Holdings Ltd.,Real Estate,SES
@@ -2487,7 +2488,6 @@ SG,5CR.SI,Asiatic Group (Holdings) Limited,Utilities,SES
 SG,5GD.SI,Sunpower Group Ltd.,Utilities,SES
 SG,5IG.SI,Gallant Venture Ltd.,Utilities,SES
 SG,AJ2.SI,Ouhua Energy Holdings Limited,Utilities,SES
-SG,BEH.SI,China International Holdings Limited,Utilities,SES
 SG,BHK.SI,SIIC Environment Holdings Ltd.,Utilities,SES
 SG,BWM.SI,Zheneng Jinjiang Environment Holding Company Limited,Utilities,SES
 SG,I11.SI,Renaissance United Limited,Utilities,SES
@@ -2745,6 +2745,7 @@ TH,S.BK,Singha Estate Public Company Limited,Consumer Cyclical,SET
 TH,SABINA.BK,Sabina Public Company Limited,Consumer Cyclical,SET
 TH,SANKO.BK,Sanko Diecasting (Thailand) Public Company Limited,Consumer Cyclical,SET
 TH,SAT.BK,Somboon Advance Technology Public Company Limited,Consumer Cyclical,SET
+TH,SAWANG.BK,Sawang Export Public Company Limited,Consumer Cyclical,SET
 TH,SBUX80.BK,Starbucks Corporation,Consumer Cyclical,SET
 TH,SCGP.BK,SCG Packaging Public Company Limited,Consumer Cyclical,SET
 TH,SCL.BK,S.C.L Motor Part Public Company Limited,Consumer Cyclical,SET
@@ -2775,7 +2776,6 @@ TH,TPBI.BK,TPBI Public Company Limited,Consumer Cyclical,SET
 TH,TPCS.BK,TPCS Public Company Limited,Consumer Cyclical,SET
 TH,TPLAS.BK,Thai Plastic Industrial (1994) Public Company Limited,Consumer Cyclical,SET
 TH,TPP.BK,Thai Packaging & Printing Public Company Limited,Consumer Cyclical,SET
-TH,TR.BK,Thai Rayon Public Company Limited,Consumer Cyclical,SET
 TH,TRU.BK,Thai Rung Union Car Public Company Limited,Consumer Cyclical,SET
 TH,TRV.BK,T.R.V. Rubber Products Public Company Limited,Consumer Cyclical,SET
 TH,TSC.BK,Thai Steel Cable Public Company Limited,Consumer Cyclical,SET
@@ -3018,7 +3018,7 @@ TH,THANI.BK,Ratchthani Leasing Public Company Limited,Financial Services,SET
 TH,THRE.BK,Thai Reinsurance Public Company Limited,Financial Services,SET
 TH,THREL.BK,Thaire Life Assurance Public Company Limited,Financial Services,SET
 TH,TIDLOR.BK,Tidlor Holdings Public Company Limited,Financial Services,SET
-TH,TIF1.BK,Thai Industrial Fund 1 Ord,Financial Services,SET
+TH,TIF1.BK,Thai Industrial Fund 1,Financial Services,SET
 TH,TIPH.BK,Dhipaya Group Holdings Public Company Limited,Financial Services,SET
 TH,TISCO.BK,TISCO Financial Group Public Company Limited,Financial Services,SET
 TH,TK.BK,Thitikorn Public Company Limited,Financial Services,SET
@@ -3318,18 +3318,18 @@ TH,KUN.BK,Villa Kunalai Public Company Limited,Real Estate,SET
 TH,KWC.BK,Krungdhep Sophon Public Company Limited,Real Estate,SET
 TH,LALIN.BK,Lalin Property Public Company Limited,Real Estate,SET
 TH,LH.BK,Land and Houses Public Company Limited,Real Estate,SET
-TH,LHHOTEL.BK,LH Hotel Leasehold Real Estate Inv Trust,Real Estate,SET
+TH,LHHOTEL.BK,LH Hotel Leasehold Real Estate Investment Trust,Real Estate,SET
 TH,LHRREIT.BK,Land And Houses Residential Freehold And Leasehold Real Estate Investment Trust,Real Estate,SET
 TH,LHSC.BK,LH Shopping Centers Leasehold Real Estate Investment Trust,Real Estate,SET
 TH,LPN.BK,L.P.N. Development Public Company Limited,Real Estate,SET
 TH,MDX.BK,MDX Public Company Limited,Real Estate,SET
 TH,MII.BK,MFC Industrial Investment Property and Leasehold Fund,Real Estate,SET
-TH,MIPF.BK,Millionaire Property Fund Ord,Real Estate,SET
+TH,MIPF.BK,Millionaire Property Fund,Real Estate,SET
 TH,MJD.BK,Major Development Public Company Limited,Real Estate,SET
 TH,MJLF.BK,Major Cineplex Lifestyle Leasehold Property Fund.,Real Estate,SET
 TH,MK.BK,M.K. Real Estate Development Public Company Limited,Real Estate,SET
 TH,MMM.BK,MFC Short Maturity Management,Real Estate,SET
-TH,MNIT.BK,MFC-Nichada Thani Prop Fun Ord,Real Estate,SET
+TH,MNIT.BK,MFC-Nichada Thani Property Fund 2,Real Estate,SET
 TH,NCH.BK,N.C. Housing Public Company Limited,Real Estate,SET
 TH,NOBLE.BK,Noble Development Public Company Limited,Real Estate,SET
 TH,NVD.BK,Nirvana Development Public Company Limited,Real Estate,SET
@@ -3347,8 +3347,8 @@ TH,PROUD.BK,Proud Real Estate Public Company Limited,Real Estate,SET
 TH,PSH.BK,Pruksa Holding Public Company Limited,Real Estate,SET
 TH,QH.BK,Quality Houses Public Company Limited,Real Estate,SET
 TH,QHBREIT.BK,Quality Houses Business Complex Leasehold Real Estate Investment Trust,Real Estate,SET
-TH,QHHRREIT.BK,Quality Houses Hotel and Resid REIT Ord,Real Estate,SET
-TH,QHOP.BK,Quality Hospitality Leasehold Ord,Real Estate,SET
+TH,QHHRREIT.BK,Quality Houses Hotel And Residence Freehold And Leasehold Reit,Real Estate,SET
+TH,QHOP.BK,Quality Hospitality Leasehold Property Fund,Real Estate,SET
 TH,RICHY.BK,Richy Place 2002 Public Company Limited,Real Estate,SET
 TH,RML.BK,Raimon Land Public Company Limited,Real Estate,SET
 TH,SA.BK,Siamese Asset Public Company Limited,Real Estate,SET
@@ -3471,7 +3471,7 @@ TH,TPS.BK,The Practical Solution Public Company Limited,Technology,SET
 TH,VCOM.BK,Vintcom Technology Public Company Limited,Technology,SET
 TH,XIAOMI01.BK,Xiaomi Corporation,Technology,SET
 TH,XIAOMI80.BK,Xiaomi Corporation,Technology,SET
-TH,3BBIF.BK,3BB INTERNET INFRASTRUCTURE FUND ORD,Unknown,SET
+TH,3BBIF.BK,3BB Internet Infrastructure Fund,Unknown,SET
 TH,AAOI03.BK,"Applied Optoelectronics, Inc.",Unknown,SET
 TH,AAOI23.BK,"Applied Optoelectronics, Inc.",Unknown,SET
 TH,AAPL03.BK,Apple Inc.,Unknown,SET
@@ -3525,7 +3525,7 @@ TH,AVGO23.BK,Broadcom Inc.,Unknown,SET
 TH,AVGO80.BK,Broadcom Inc.,Unknown,SET
 TH,AXP06.BK,American Express Company,Unknown,SET
 TH,BABA06.BK,Alibaba Group Holding Limited,Unknown,SET
-TH,BABA11.BK,BABA11_DR BABA#KS,Unknown,SET
+TH,BABA11.BK,Alibaba Group Holding Limited,Unknown,SET
 TH,BABA13.BK,Alibaba Group Holding Limited,Unknown,SET
 TH,BAC03.BK,Bank of America Corporation,Unknown,SET
 TH,BDX06.BK,"Becton, Dickinson and Company",Unknown,SET
@@ -3541,8 +3541,8 @@ TH,BONDAS19.BK,BONDAS19_DR BONDAS#YUANTA,Unknown,SET
 TH,BONDUS01.BK,BONDUS01_DR BONDUS#BLS,Unknown,SET
 TH,BOTZ80.BK,BOTZ80_DR BOTZ#KTB,Unknown,SET
 TH,BRKB23.BK,Berkshire Hathaway Inc.,Unknown,SET
-TH,BRRGIF.BK,BURIRAM SUGAR GROUP POWER PLANT INFR FD,Unknown,SET
-TH,BTSGIF.BK,BTS Rail Mass Transit Growth Infra,Unknown,SET
+TH,BRRGIF.BK,Buriram Sugar Group Power Plant Infrastructure Fund,Unknown,SET
+TH,BTSGIF.BK,BTS Rail Mass Transit Growth Infrastructure Fund,Unknown,SET
 TH,BYDCOM80.BK,BYD Company Limited,Unknown,SET
 TH,CAMBRI80.BK,Cambricon Technologies Corporation Limited,Unknown,SET
 TH,CAT19.BK,Caterpillar Inc.,Unknown,SET
@@ -3580,7 +3580,7 @@ TH,COPX03.BK,COPX03_DR COPX#PI,Unknown,SET
 TH,COPX80.BK,COPX80_DR COPX#KTB,Unknown,SET
 TH,COSTCO19.BK,Costco Wholesale Corporation,Unknown,SET
 TH,COSTCO80.BK,Costco Wholesale Corporation,Unknown,SET
-TH,CPNCG.BK,CPN Commercial Growth Leasehol Ord,Unknown,SET
+TH,CPNCG.BK,CPN Commercial Growth Leasehold Property Fund,Unknown,SET
 TH,CRDO23.BK,Credo Technology Group Holding Ltd,Unknown,SET
 TH,CRDO80.BK,Credo Technology Group Holding Ltd,Unknown,SET
 TH,CRM06.BK,"Salesforce, Inc.",Unknown,SET
@@ -3599,12 +3599,12 @@ TH,DELL19.BK,Dell Technologies Inc.,Unknown,SET
 TH,DELL23.BK,Dell Technologies Inc.,Unknown,SET
 TH,DELL80.BK,Dell Technologies Inc.,Unknown,SET
 TH,DEYE80.BK,"Ningbo Deye Technology Group Co., Ltd.",Unknown,SET
-TH,DIF.BK,Digital Telecommunications Infrastructur,Unknown,SET
+TH,DIF.BK,Digital Telecommunications Infrastructure Fund,Unknown,SET
 TH,DISNEY19.BK,The Walt Disney Company,Unknown,SET
 TH,DOLLARG80.BK,Dollar General Corporation,Unknown,SET
 TH,DUOL06.BK,"Duolingo, Inc.",Unknown,SET
 TH,ECHO03.BK,EchoStar Corporation,Unknown,SET
-TH,EGATIF.BK,"NBPP BLOCK 1 INF FD, ELECT GEN AU OF THA",Unknown,SET
+TH,EGATIF.BK,Electricity Generating Authority Of Thailand- North Bangkok Power Plant Block 1 Infrastructure Fund,Unknown,SET
 TH,ELMT03.BK,The Elmet Group Co.,Unknown,SET
 TH,EOSE03.BK,"Eos Energy Enterprises, Inc.",Unknown,SET
 TH,EOSE23.BK,"Eos Energy Enterprises, Inc.",Unknown,SET
@@ -3657,7 +3657,7 @@ TH,HOOD80.BK,"Robinhood Markets, Inc.",Unknown,SET
 TH,HORIZON23.BK,Horizon Robotics,Unknown,SET
 TH,HPE03.BK,Hewlett Packard Enterprise Company,Unknown,SET
 TH,HPE80.BK,Hewlett Packard Enterprise Company,Unknown,SET
-TH,HPF.BK,HEMARAJ INDUSTRIAL PRP & LEASEHOLD FUND,Unknown,SET
+TH,HPF.BK,Hemaraj Industrial Property and Leasehold Fund,Unknown,SET
 TH,HPG19.BK,Hoa Phat Group Joint Stock Company,Unknown,SET
 TH,HSBC11.BK,HSBC Holdings plc,Unknown,SET
 TH,HUAHONG80.BK,Hua Hong Grace Semiconductor Limited,Unknown,SET
@@ -3693,7 +3693,7 @@ TH,JOBY03.BK,"Joby Aviation, Inc.",Unknown,SET
 TH,JPMUS06.BK,JPMorgan Chase & Co.,Unknown,SET
 TH,JPMUS19.BK,JPMorgan Chase & Co.,Unknown,SET
 TH,JTEK19.BK,JTEK19_DR JTEK#YUANTA,Unknown,SET
-TH,KBSPIF.BK,Khonburi Sugar Power Plant Infra,Unknown,SET
+TH,KBSPIF.BK,Khonburi Sugar Power Plant Infrastructure Fund,Unknown,SET
 TH,KEYENCE23.BK,Keyence Corporation,Unknown,SET
 TH,KINGSOFT23.BK,Kingsoft Corporation Limited,Unknown,SET
 TH,KIOXIA23.BK,Kioxia Holdings Corporation,Unknown,SET
@@ -3704,7 +3704,7 @@ TH,KLAC19.BK,KLA Corporation,Unknown,SET
 TH,KLAC23.BK,KLA Corporation,Unknown,SET
 TH,KOREA01.BK,KOREA01_DR KOREA#BLS,Unknown,SET
 TH,KUAISH06.BK,Kuaishou Technology,Unknown,SET
-TH,KUAISH11.BK,KUAISH11_DR KUAISH#KS,Unknown,SET
+TH,KUAISH11.BK,Kuaishou Technology,Unknown,SET
 TH,KUAISH23.BK,Kuaishou Technology,Unknown,SET
 TH,KUAISH80.BK,Kuaishou Technology,Unknown,SET
 TH,LEU03.BK,Centrus Energy Corp.,Unknown,SET
@@ -3721,9 +3721,9 @@ TH,LRCX19.BK,Lam Research Corporation,Unknown,SET
 TH,LRCX23.BK,Lam Research Corporation,Unknown,SET
 TH,LRCX80.BK,Lam Research Corporation,Unknown,SET
 TH,LULU06.BK,lululemon athletica inc.,Unknown,SET
-TH,LUXF.BK,Luxury Real Estate Investment Ord,Unknown,SET
+TH,LUXF.BK,Luxury Real Estate Investment Fund,Unknown,SET
 TH,LUXSHARE80.BK,"Luxshare Precision Industry Co., Ltd.",Unknown,SET
-TH,M-STOR.BK,MFC-Strategic Storage Fund Ord,Unknown,SET
+TH,M-STOR.BK,MFC-Strategic Storage Fund,Unknown,SET
 TH,MA80.BK,Mastercard Incorporated,Unknown,SET
 TH,MEITUAN19.BK,Meituan,Unknown,SET
 TH,MEITUAN23.BK,Meituan,Unknown,SET
@@ -3737,8 +3737,8 @@ TH,MICRON23.BK,"Micron Technology, Inc.",Unknown,SET
 TH,MICRON80.BK,"Micron Technology, Inc.",Unknown,SET
 TH,MITSU19.BK,"Mitsubishi Heavy Industries, Ltd.",Unknown,SET
 TH,MKSI03.BK,MKS Inc.,Unknown,SET
-TH,MNIT2.BK,MFC-Nichada Thani Prop Fund 2 Ord,Unknown,SET
-TH,MNRF.BK,Multi-National Residence Fund Ord,Unknown,SET
+TH,MNIT2.BK,MFC-Nichada Thani Property Fund 2,Unknown,SET
+TH,MNRF.BK,MFC Multi-National Residence Fund,Unknown,SET
 TH,MNSO80.BK,MINISO Group Holding Limited,Unknown,SET
 TH,MNST06.BK,Monster Beverage Corporation,Unknown,SET
 TH,MP23.BK,MP Materials Corp.,Unknown,SET
@@ -3772,7 +3772,7 @@ TH,NEE80.BK,"NextEra Energy, Inc.",Unknown,SET
 TH,NEM06.BK,Newmont Corporation,Unknown,SET
 TH,NEM23.BK,Newmont Corporation,Unknown,SET
 TH,NET03.BK,"Cloudflare, Inc.",Unknown,SET
-TH,NETEASE11.BK,NETEASE11_DR NETEASE#KS,Unknown,SET
+TH,NETEASE11.BK,"NetEase, Inc.",Unknown,SET
 TH,NETEASE80.BK,"NetEase, Inc.",Unknown,SET
 TH,NFLX06.BK,"Netflix, Inc.",Unknown,SET
 TH,NIKE80.BK,"NIKE, Inc.",Unknown,SET
@@ -3805,7 +3805,7 @@ TH,OXY03.BK,Occidental Petroleum Corporation,Unknown,SET
 TH,PANW19.BK,"Palo Alto Networks, Inc.",Unknown,SET
 TH,PANW80.BK,"Palo Alto Networks, Inc.",Unknown,SET
 TH,PFIZER19.BK,Pfizer Inc.,Unknown,SET
-TH,PINGAN11.BK,PINGAN11_DR PINGAN#KS,Unknown,SET
+TH,PINGAN11.BK,"Ping An Insurance (Group) Company of China, Ltd.",Unknown,SET
 TH,PINGAN80.BK,"Ping An Insurance (Group) Company of China, Ltd.",Unknown,SET
 TH,PLAB03.BK,Planet Labs PBC,Unknown,SET
 TH,PLTR03.BK,Palantir Technologies Inc.,Unknown,SET
@@ -3813,8 +3813,8 @@ TH,PLTR06.BK,Palantir Technologies Inc.,Unknown,SET
 TH,PLTR23.BK,Palantir Technologies Inc.,Unknown,SET
 TH,PLTR80.BK,Palantir Technologies Inc.,Unknown,SET
 TH,PNG80.BK,The Procter & Gamble Company,Unknown,SET
-TH,POPF.BK,Prime Office Leasehold Prpty C Share,Unknown,SET
-TH,POPMART11.BK,POPMART11_DR POPMART#KS,Unknown,SET
+TH,POPF.BK,Prime Office Leasehold Property Fund,Unknown,SET
+TH,POPMART11.BK,Pop Mart International Group Limited,Unknown,SET
 TH,POPMART23.BK,Pop Mart International Group Limited,Unknown,SET
 TH,POPMART80.BK,Pop Mart International Group Limited,Unknown,SET
 TH,PWR03.BK,"Quanta Services, Inc.",Unknown,SET
@@ -3879,12 +3879,12 @@ TH,SPFIN80.BK,SPFIN80_DR SPFIN#KTB,Unknown,SET
 TH,SPHLTH80.BK,SPHLTH80_DR SPHLTH#KTB,Unknown,SET
 TH,SPOT06.BK,Spotify Technology S.A.,Unknown,SET
 TH,SPTECH80.BK,SPTECH80_DR SPTECH#KTB,Unknown,SET
-TH,SSPF.BK,Sala @ Sathorn Property Fund Ord,Unknown,SET
+TH,SSPF.BK,Sala @ Sathorn Property Fund,Unknown,SET
 TH,STEG19.BK,Singapore Technologies Engineering Ltd,Unknown,SET
 TH,STM03.BK,STMicroelectronics N.V.,Unknown,SET
 TH,SUNGROW80.BK,"Sungrow Power Supply Co., Ltd.",Unknown,SET
 TH,SUNNY80.BK,Sunny Optical Technology (Group) Company Limited,Unknown,SET
-TH,SUPEREIF.BK,SUPER ENERGY POWER PLANT INFRASTRUCTURE,Unknown,SET
+TH,SUPEREIF.BK,Super Energy Power Plant Infrastructure Fund,Unknown,SET
 TH,SUSHI23.BK,Food & Life Companies Ltd.,Unknown,SET
 TH,SYM03.BK,Symbotic Inc.,Unknown,SET
 TH,SYM23.BK,Symbotic Inc.,Unknown,SET
@@ -3902,9 +3902,9 @@ TH,TENCENT80.BK,Tencent Holdings Limited,Unknown,SET
 TH,TER01.BK,"Teradyne, Inc.",Unknown,SET
 TH,TER23.BK,"Teradyne, Inc.",Unknown,SET
 TH,TER80.BK,"Teradyne, Inc.",Unknown,SET
-TH,TFFIF.BK,THAILAND FUTURE,Unknown,SET
+TH,TFFIF.BK,Thailand Future Fund,Unknown,SET
 TH,TME23.BK,Tencent Music Entertainment Group,Unknown,SET
-TH,TNPF.BK,Trinity Freehold & Leasehold PRP Fund,Unknown,SET
+TH,TNPF.BK,Trinity Freehold and Leasehold Property Fund,Unknown,SET
 TH,TONGFU23.BK,"Tongfu Microelectronics Co.,Ltd",Unknown,SET
 TH,TOTO80.BK,TOTO LTD.,Unknown,SET
 TH,TOYOTA80.BK,Toyota Motor Corporation,Unknown,SET
@@ -3917,7 +3917,7 @@ TH,TSEMI80.BK,Tower Semiconductor Ltd.,Unknown,SET
 TH,TSLA03.BK,"Tesla, Inc.",Unknown,SET
 TH,TSLA23.BK,"Tesla, Inc.",Unknown,SET
 TH,TSLA80.BK,"Tesla, Inc.",Unknown,SET
-TH,TTLPF.BK,Talaad Thai Leasehold Property Ord,Unknown,SET
+TH,TTLPF.BK,Talaad Thai Leasehold Property Fund,Unknown,SET
 TH,TTMI80.BK,"TTM Technologies, Inc.",Unknown,SET
 TH,TXN03.BK,Texas Instruments Incorporated,Unknown,SET
 TH,UBER06.BK,"Uber Technologies, Inc.",Unknown,SET
@@ -3951,7 +3951,7 @@ TH,WORLD03.BK,WORLD03_DR WORLD#PI,Unknown,SET
 TH,WORLDA01.BK,WORLDA01_DR WORLDA#BLS,Unknown,SET
 TH,WUXI06.BK,WuXi Biologics (Cayman) Inc.,Unknown,SET
 TH,WUXI11.BK,WuXi Biologics (Cayman) Inc.,Unknown,SET
-TH,XIAOMI11.BK,XIAOMI11_DR XIAOMI#KS,Unknown,SET
+TH,XIAOMI11.BK,Xiaomi Corporation,Unknown,SET
 TH,XIAOMI13.BK,Xiaomi Corporation,Unknown,SET
 TH,XIAOMI19.BK,Xiaomi Corporation,Unknown,SET
 TH,XIAOMI23.BK,Xiaomi Corporation,Unknown,SET
