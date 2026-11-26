@@ -52,8 +52,12 @@ def run_financial_analysis(codes, processor, country_code, file_prefix, extra_fi
         try:
             data = dict(fetch_company(country_code, code))
         except FetchError:
+            # データが無くてもリストから消えないよう、社名・市場区分だけの行を残す
             failed.append(code)
+            all_results.append(processor.no_data_row(code))
             continue
+        # 市場区分・公式分類はキャッシュせず、最新の data/official から付け直す
+        data.update(processor.classification_fields(code))
         if extra_fields and code in extra_fields:
             data.update(extra_fields[code])
         all_results.append(data)
@@ -67,7 +71,7 @@ def run_financial_analysis(codes, processor, country_code, file_prefix, extra_fi
     progress_bar.empty()
     status_text.empty()
 
-    if not all_results:
+    if len(failed) == total:
         st.session_state[key] = {"failed": failed, "total": total, "excel": None}
         return
 
@@ -96,7 +100,8 @@ def show_result(file_prefix, country_code):
 
     st.divider()
     if result["failed"]:
-        st.warning(f"⚠️ Could not retrieve data for {len(result['failed'])} code(s): {', '.join(result['failed'])}")
+        st.warning(f"⚠️ No Yahoo Finance data for {len(result['failed'])} code(s): {', '.join(result['failed'])}. "
+                   "They are kept in the Excel with the remark \"No data on Yahoo Finance\" and blank figures.")
 
     if result["excel"] is None:
         st.error("No data retrieved. Yahoo Finance may be limiting requests — please wait a few minutes and try again. "

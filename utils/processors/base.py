@@ -9,7 +9,7 @@ from google import genai
 from openpyxl import load_workbook
 from openpyxl.styles import PatternFill, Font, Alignment
 from dotenv import load_dotenv
-from utils.sector_master import classify
+from utils.sector_master import classify, load_official
 
 # Excel の「公式分類」列に使う取引所名
 EXCHANGE_LABELS = {"SG": "SGX", "MY": "Bursa", "TH": "SET", "ID": "IDX", "PH": "PSE", "VN": "HOSE"}
@@ -49,7 +49,8 @@ class BaseProcessor:
                         return None
                     time.sleep(2 * (2 ** attempt))
 
-            if not info: return None
+            # 存在しないコードでも Yahoo はほぼ空の info を返すので、社名が無ければデータ無しとする
+            if not info or not (info.get('longName') or info.get('shortName')): return None
 
             return {
                 "info": info,
@@ -190,9 +191,6 @@ class BaseProcessor:
         disp_cur = 'RMB (CNY)' if raw_cur == 'CNY' else raw_cur
         exchange_rate = self.get_exchange_rate(disp_cur)
 
-        # 市場区分・公式分類 (data/official 優先、MY はコードから推定)
-        official = classify(self.country, str(code))
-        
         # 株価 (前日終値優先)
         curr_price = info.get('previousClose') or info.get('regularMarketPrice')
         shares = info.get('sharesOutstanding')
@@ -230,12 +228,32 @@ class BaseProcessor:
             "Number of Employee Current": info.get('fullTimeEmployees'),
             "Category Classification/YahooFin": info.get('sector', "Not Available"),
             "Sector & Industry/YahooFin": info.get('industry', "Not Available"),
+            **self.classification_fields(code),
+        }
+
+    # --- 4. AI分析 (Batch Analyze 完全再現) ---
+    def classification_fields(self, code):
+        """市場区分・公式分類の列 (data/official 優先、MY はコードから推定)。
+
+        取得データのキャッシュとは別に毎回計算するので、公式ファイルの修正がすぐ反映される。
+        """
+        official = classify(self.country, str(code))
+        return {
             "Market / Board": official["board"],
             f"Category Classification/{self.exchange_label}": official["official_sector"],
             f"Sector & Industry/ {self.exchange_label}": official["official_industry"],
         }
 
-    # --- 4. AI分析 (Batch Analyze 完全再現) ---
+    def no_data_row(self, code):
+        """Yahoo にデータが無い銘柄の行。社名・市場区分だけ入れて、財務の列は空欄にする"""
+        name = load_official(self.country).get(str(code).upper(), {}).get("name", "")
+        return {
+            "Name of Company": name,
+            "Code": code,
+            "Remarks": "No data on Yahoo Finance",
+            **self.classification_fields(code),
+        }
+
     def run_ai_analysis(self, all_results):
         if not self.client:
             print("⚠️ API Key not found. Skipping AI analysis.")
@@ -330,7 +348,8 @@ class BaseProcessor:
             "Access", "Last Communications", "Category Classification/\nShareInvestor", 
             "Incorporated\n (IN / Year)"
         ]
-        for col in empty_cols: df[col] = ""
+        for col in empty_cols:
+            df[col] = df[col].fillna("") if col in df.columns else ""
         
         df["Listed 'o' / Non Listed \"x\""] = "o"
 
