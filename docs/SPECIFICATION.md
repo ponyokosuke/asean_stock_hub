@@ -2,7 +2,7 @@
 
 | Item | Value |
 |---|---|
-| Document version | 1.3 |
+| Document version | 1.4 |
 | Date | 2026-11-23 |
 | Applies to | `main` branch of `ponyokosuke/asean_stock_hub` (after PR #3) |
 | Live app | https://aseanstockapp-analysis.streamlit.app/ |
@@ -100,7 +100,7 @@ Out of scope:
 | Country | Code | Suffix | Currency label | Sector master | Default list |
 |---|---|---|---|---|---|
 | Singapore | SG | `.SI` | SGD | Yes (537) | Yes (70 codes, curated IT list) |
-| Malaysia | MY | `.KL` | MYR | Yes (about 1,120) | Yes (107 codes, checked against Bursa) |
+| Malaysia | MY | `.KL` | MYR | Yes (about 1,120) | Yes (140 codes, checked against Bursa) |
 | Thailand | TH | `.BK` | THB | Yes (1,497) | No |
 | Indonesia | ID | `.JK` | IDR | Yes (838) | No |
 | Philippines | PH | `.PS` | PHP | **No** (not covered by the Yahoo screener) | No |
@@ -284,7 +284,8 @@ For each code, in order:
 1. **Fetch and extract:** `fetch_company(country, code)` calls `processor.get_stock_data` and then `processor.extract_data`, which builds one row (Section 9).
    - `.info` is retried up to 3 times, waiting 2, 4 and 8 seconds.
    - Successful rows are **cached for 24 hours** (`st.cache_data`, shared by all users). Failures are not cached.
-   - If all attempts fail, the code is recorded as failed.
+   - The Market / Board and official sector columns are **not** taken from the cache: they are recomputed from `data/official/` on every run (`processor.classification_fields`), so a corrected file takes effect at once. `load_official` re-reads the file when its modification time changes.
+   - If all attempts fail, the code is recorded as failed, and a row with only Name (from `data/official/`), Code, Market / Board, official sector and the remark "No data on Yahoo Finance" is kept (`processor.no_data_row`). Its figures are blank.
 2. Pause 0.3 s between companies. There is no pause when the row came from the cache.
 
 After the loop:
@@ -411,7 +412,7 @@ When the app loads the master, it adds `board`, `official_sector` and `official_
 | `APP_PASSWORD` | Streamlit Secrets or environment variable | Strongly recommended | Login password. If unset, there is no login. |
 | `GEMINI_API_KEY` | Streamlit Secrets or environment variable | For AI features | Segments (all versions) and AI Judge (V3). |
 | `templates/{COUNTRY}.csv` | Repository | Optional | Default list for V1. |
-| `data/official/{COUNTRY}.csv` | Repository | Optional | Official board and sector (`symbol,board,official_sector,official_industry`). |
+| `data/official/{COUNTRY}.csv` | Repository | Optional | Official name, board and sector (`symbol,name,board,official_sector,official_industry`). |
 
 Secrets must never be committed. `.streamlit/secrets.toml` in the repository is empty and must stay empty.
 
@@ -461,7 +462,7 @@ Priority: **H** = affects correctness of the deliverable; **M** = affects usabil
 |---|---|---|---|
 | COV-1 | M | No sector master for PH and VN (Yahoo screener does not cover them). Yahoo's VN data quality has not been checked. | Find an alternative list source, or document "upload only". |
 | COV-3 | L | **Mostly resolved in 1.2:** the build probes LEAP codes directly, adding 39 LEAP companies the screener missed (42 in total). A few LEAP tickers have no Yahoo data at all, e.g. `03008.KL` SL Innovation Capital and `03036.KL` Redplanet. | Check the LEAP list against Bursa quarterly. Companies without Yahoo data need another source for their financials. |
-| COV-2 | L | Default lists exist only for SG and MY. **MY curated in 1.3:** the 141 Yahoo "Technology" companies were checked against Bursa, and 34 whose Bursa sector is not technology-related were removed (107 left). Companies Bursa classes as Technology but Yahoo does not are not in the list. | Add such companies when found, e.g. Total Dynamic (03058). |
+| COV-2 | L | Default lists exist only for SG and MY. **MY curated in 1.3–1.4:** the 141 Yahoo "Technology" companies were checked against Bursa and 34 removed (1.3); 33 companies from the team's earlier MY list were added (1.4), giving 140. | Keep the list in step with the team's checks. |
 
 ### 14.3 Usability and reliability
 
@@ -505,3 +506,4 @@ Priority: **H** = affects correctness of the deliverable; **M** = affects usabil
 | 1.1 | 2026-11-23 | H-priority fixes (PR #3): Malaysian board, official classification support, blank for missing data, persistent results and caching. All Malaysian markets kept, ETFs excluded; login unchanged. |
 | 1.2 | 2026-11-23 | LEAP coverage: the build probes `03001`–`03199` directly (42 LEAP companies instead of 3). Default MY list rebuilt (141 codes). |
 | 1.3 | 2026-11-25 | Bursa check of the MY list by Elaine: markets and Bursa sectors of 141 companies in `data/official/MY.csv` (29 moved from ACE to Main); 34 removed from the default MY list (107 left). Sector Search shows unchecked companies as "Not checked" in Official mode. |
+| 1.4 | 2026-11-26 | Fix: Market / Board and Bursa sector were taken from the 24-hour data cache, so the 1.3 corrections did not show; they are now recomputed on every run. 33 companies added to the MY list (140), names added to `data/official/MY.csv` (174 rows), and companies without Yahoo data are kept as rows with blank figures. |

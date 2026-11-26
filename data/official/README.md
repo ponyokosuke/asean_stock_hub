@@ -6,19 +6,20 @@ These files hold each exchange's official classification, which Yahoo Finance do
 - `official_sector`: the exchange's sector
 - `official_industry`: the exchange's industry or sub-sector
 
-They are maintained by hand. `MY.csv` currently holds the 141 companies of the original MY default list, checked against Bursa Malaysia on 2026-11-24. Update them from a source you are licensed to use (for example the exchange's published listing, or your ShareInvestor subscription). Do not scrape exchange websites; Bursa Malaysia and SGX license their market data.
+They are maintained by hand. `MY.csv` currently holds 174 companies checked against Bursa Malaysia by Elaine (2026-11-24 and 2026-11-25). Update them from a source you are licensed to use (for example the exchange's published listing, or your ShareInvestor subscription). Do not scrape exchange websites; Bursa Malaysia and SGX license their market data.
 
 ## Format
 
 One file per country: `MY.csv`, `SG.csv`, …
 
 ```csv
-symbol,board,official_sector,official_industry
-0097.KL,Main,Technology,Semiconductors
-0249.KL,ACE,Technology,Digital Services
+symbol,name,board,official_sector,official_industry
+0097.KL,ViTrox Corporation Berhad,Main,Technology,Semiconductors
+0249.KL,LGMS Berhad,Main,Technology,Digital Services
 ```
 
 - `symbol` must be the Yahoo ticker, including its suffix (`.KL`, `.SI`, …).
+- `name` is used for companies Yahoo has no data for, so they still appear in the Excel.
 - Any column may be left blank. Rows only need to cover the companies you want to correct.
 
 ## How the app uses them

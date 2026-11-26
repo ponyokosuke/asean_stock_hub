@@ -118,7 +118,7 @@ In the left sidebar, under **Target Country**, click the country, e.g. **Malaysi
 
 **B. Use the default list**
 
-- Tick **"Use default list for MY (107 codes)"**. The number of codes is shown on the box.
+- Tick **"Use default list for MY (140 codes)"**. The number of codes is shown on the box.
 - To see which companies are in it, open **📋 Default List** in the left sidebar.
 - If a country has no default list, the box says **"Not registered ⚠️"** and can't be ticked.
 - To change a default list permanently, ask Kosuke. Changes made inside the app are not saved.
@@ -127,7 +127,7 @@ If you both upload a file **and** tick the default list, the **uploaded file is 
 
 ### Step 3 — Start
 
-Click **Start Analysis 🚀**. A progress bar shows "Fetching Financial Data (5/107): 0097.KL…".
+Click **Start Analysis 🚀**. A progress bar shows "Fetching Financial Data (5/140): 0097.KL…".
 
 > ⏱ **How long does it take?** About **3–6 seconds per company**, plus a short AI step at the end. 10 companies take about 1 minute; 130 companies take about 10–15 minutes.
 >
@@ -354,7 +354,7 @@ These columns are empty on purpose, for your team's notes:
 | The default-list box says "Not registered ⚠️" | There is no default list for this country | Upload your own CSV, or ask Kosuke to add a default list. |
 | "No company list is available for PH" (or VN) | Yahoo Finance doesn't provide a company list for this market | Use **Financial Data** with your own CSV. |
 | "No companies found matching the specified sectors." | The filters exclude everything | Remove the name filter, add sectors, or re-select all boards. |
-| ⚠️ "Could not retrieve data for N code(s): …" | Those companies are delisted, the code is wrong, Yahoo has no data (this happens for a few LEAP companies), or Yahoo was busy | Check the codes. If it looks like a temporary problem, click Start again a few minutes later. |
+| ⚠️ "No Yahoo Finance data for N code(s): …" | Those companies are delisted, the code is wrong, Yahoo has no data (this happens for a few LEAP companies), or Yahoo was busy. They still appear in the Excel with the remark "No data on Yahoo Finance" and blank figures. | Check the codes. If it looks like a temporary problem, click Start again a few minutes later. |
 | "No data retrieved. Yahoo Finance may be limiting requests…" | Yahoo is temporarily refusing requests | Wait 5–10 minutes and click Start again. Companies already retrieved are remembered for 24 hours, so the retry is quicker. |
 | The page went blank or reset in the middle of a run | You clicked something during the run, or the tab or computer went to sleep | Click Start again. Companies already retrieved come back almost instantly ("N from cache"). |
 | A Malaysian company is missing from Sector Search | It may be delisted, an ETF (ETFs are excluded), or one of the few LEAP companies Yahoo has no data for | Check the code on Bursa Malaysia's website. If it is listed, add it through **Financial Data** with your own CSV. |

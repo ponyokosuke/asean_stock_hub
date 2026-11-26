@@ -1,7 +1,6 @@
 import json
 import os
 import re
-from functools import lru_cache
 
 import pandas as pd
 
@@ -10,7 +9,7 @@ MASTER_PATH = os.path.join(BASE_DIR, "data", "sector_master.csv")
 META_PATH = os.path.join(BASE_DIR, "data", "sector_master_meta.json")
 # 取引所の公式分類 (市場区分・公式セクター)。保守担当が利用許諾のある情報源から手動で更新する
 OFFICIAL_DIR = os.path.join(BASE_DIR, "data", "official")
-OFFICIAL_COLUMNS = ["symbol", "board", "official_sector", "official_industry"]
+OFFICIAL_COLUMNS = ["symbol", "name", "board", "official_sector", "official_industry"]
 
 COLUMNS = ["country", "symbol", "name", "sector", "exchange"]
 
@@ -54,16 +53,25 @@ def my_board_from_code(symbol):
     return "Other"
 
 
-@lru_cache(maxsize=None)
+# {country: (ファイル更新時刻, データ)}。ファイルが更新されたら読み直す
+_official_cache = {}
+
+
 def load_official(country):
     """data/official/{country}.csv を {symbol: {board, official_sector, official_industry}} で返す"""
     path = os.path.join(OFFICIAL_DIR, f"{country}.csv")
     if not os.path.exists(path):
         return {}
+    mtime = os.path.getmtime(path)
+    cached = _official_cache.get(country)
+    if cached and cached[0] == mtime:
+        return cached[1]
     df = pd.read_csv(path, dtype=str).fillna("")
     df = df.reindex(columns=OFFICIAL_COLUMNS, fill_value="")
     df["symbol"] = df["symbol"].str.strip().str.upper()
-    return df.set_index("symbol").to_dict("index")
+    data = df.set_index("symbol").to_dict("index")
+    _official_cache[country] = (mtime, data)
+    return data
 
 
 def classify(country, symbol):
