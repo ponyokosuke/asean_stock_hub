@@ -941,6 +941,7 @@ MY,7803.KL,Hextar Healthcare Berhad,Basic Materials,KLS
 MY,7854.KL,Timberwell Berhad,Basic Materials,KLS
 MY,8052.KL,Central Global Berhad,Basic Materials,KLS
 MY,8117.KL,PGF Capital Berhad,Basic Materials,KLS
+MY,8117PA.KL,PGF Capital Berhad,Basic Materials,KLS
 MY,8435.KL,Concrete Engineering Products Berhad,Basic Materials,KLS
 MY,8486.KL,Lion Posim Berhad,Basic Materials,KLS
 MY,8869.KL,Press Metal Aluminium Holdings Berhad,Basic Materials,KLS
@@ -961,7 +962,6 @@ MY,0092.KL,mTouche Technology Berhad,Communication Services,KLS
 MY,0103.KL,M N C Wireless Berhad,Communication Services,KLS
 MY,0147.KL,Innity Corporation Berhad,Communication Services,KLS
 MY,0165.KL,XOX Berhad,Communication Services,KLS
-MY,0165PA.KL,XOX Berhad,Communication Services,KLS
 MY,0172.KL,OCK Group Berhad,Communication Services,KLS
 MY,0173.KL,Catcha Digital Berhad,Communication Services,KLS
 MY,0195.KL,Binasat Communications Berhad,Communication Services,KLS
@@ -1244,7 +1244,6 @@ MY,6633.KL,Leong Hup International Berhad,Consumer Defensive,KLS
 MY,7035.KL,CCK Consolidated Holdings Berhad,Consumer Defensive,KLS
 MY,7054.KL,Astral Asia Berhad,Consumer Defensive,KLS
 MY,7084.KL,QL Resources Berhad,Consumer Defensive,KLS
-MY,7085.KL,LTKM Berhad,Consumer Defensive,KLS
 MY,7103.KL,Spritzer Bhd,Consumer Defensive,KLS
 MY,7107.KL,Oriental Food Industries Holdings Berhad,Consumer Defensive,KLS
 MY,7121.KL,XL Holdings Berhad,Consumer Defensive,KLS
@@ -1760,6 +1759,7 @@ MY,5310.KL,Kumpulan Kitacon Berhad,Real Estate,KLS
 MY,5313.KL,Radium Development Berhad,Real Estate,KLS
 MY,5315.KL,SkyWorld Development Berhad,Real Estate,KLS
 MY,5338.KL,Paradigm Real Estate Investment Trust,Real Estate,KLS
+MY,5359.KL,IOIPG Malaysia Real Estate Investment Trust,Real Estate,KLS
 MY,5401.KL,Tropicana Corporation Berhad,Real Estate,KLS
 MY,5606.KL,IGB Berhad,Real Estate,KLS
 MY,5789.KL,LBS Bina Group Berhad,Real Estate,KLS
@@ -1943,7 +1943,8 @@ MY,9377.KL,FSBM Holdings Berhad,Technology,KLS
 MY,9393.KL,Industronics Berhad,Technology,KLS
 MY,03009.KL,Seers Bhd,Unknown,KLS
 MY,03058.KL,Total Dynamic Holdings Berhad,Unknown,KLS
-MY,5359.KL,,Unknown,KLS
+MY,0485.KL,,Unknown,KLS
+MY,7108PA.KL,PERDANA-PA,Unknown,KLS
 MY,8877R1.KL,EKOVEST-R1,Unknown,KLS
 MY,0318.KL,Elridge Energy Holdings Berhad,Utilities,KLS
 MY,0369.KL,JS Solar Holding Berhad,Utilities,KLS
@@ -1964,7 +1965,6 @@ SG,41T.SI,GCCP Resources Limited,Basic Materials,SES
 SG,541.SI,Abundance International Limited,Basic Materials,SES
 SG,5F7.SI,Wilton Resources Corporation Limited,Basic Materials,SES
 SG,5FX.SI,New Wave Holdings Ltd.,Basic Materials,SES
-SG,5MD.SI,Soon Lian Holdings Limited,Basic Materials,SES
 SG,5TP.SI,CNMC Goldmine Holdings Limited,Basic Materials,SES
 SG,5WV.SI,AsiaPhos Limited,Basic Materials,SES
 SG,A55.SI,Asia Enterprises Holding Limited,Basic Materials,SES
@@ -2018,7 +2018,6 @@ SG,533.SI,ABR Holdings Limited,Consumer Cyclical,SES
 SG,543.SI,Noel Gifts International Ltd,Consumer Cyclical,SES
 SG,596.SI,Pavillon Holdings Ltd.,Consumer Cyclical,SES
 SG,5AI.SI,H2G Green Limited,Consumer Cyclical,SES
-SG,5DO.SI,Sakae Holdings Ltd.,Consumer Cyclical,SES
 SG,5EF.SI,Adventus Holdings Limited,Consumer Cyclical,SES
 SG,5G1.SI,EuroSports Global Limited,Consumer Cyclical,SES
 SG,5HH.SI,Prospera Global Limited,Consumer Cyclical,SES
@@ -2058,10 +2057,8 @@ SG,HBBD.SI,Alibaba Group Holding Limited,Consumer Cyclical,SES
 SG,HJDD.SI,"JD.com, Inc.",Consumer Cyclical,SES
 SG,HLPD.SI,"Laopu Gold Co., Ltd.",Consumer Cyclical,SES
 SG,HYDD.SI,BYD Company Limited,Consumer Cyclical,SES
-SG,KUH.SI,TSH Corporation Limited,Consumer Cyclical,SES
 SG,M01.SI,Metro Holdings Limited,Consumer Cyclical,SES
 SG,N08.SI,New Toyo International Holdings Ltd,Consumer Cyclical,SES
-SG,N0Z.SI,Combine Will International Holdings Limited,Consumer Cyclical,SES
 SG,NIO.SI,NIO Inc.,Consumer Cyclical,SES
 SG,O08.SI,Ossia International Limited,Consumer Cyclical,SES
 SG,O9E.SI,Parkson Retail Asia Limited,Consumer Cyclical,SES
@@ -2165,6 +2162,7 @@ SG,U10.SI,UOB-Kay Hian Holdings Limited,Financial Services,SES
 SG,U11.SI,United Overseas Bank Limited,Financial Services,SES
 SG,U13.SI,United Overseas Insurance Limited,Financial Services,SES
 SG,YF8.SI,Yangzijiang Financial Holding Ltd.,Financial Services,SES
+SG,1B1.SI,HC Surgical Specialists Limited,Healthcare,SES
 SG,1D4.SI,Aoxin Q & M Dental Group Limited,Healthcare,SES
 SG,1H3.SI,Clearbridge Health Limited,Healthcare,SES
 SG,1J5.SI,Hyphens Pharma International Limited,Healthcare,SES
@@ -2232,12 +2230,12 @@ SG,5PO.SI,Hiap Tong Corporation Ltd.,Industrials,SES
 SG,5TJ.SI,Far East Group Limited,Industrials,SES
 SG,5TT.SI,Keong Hong Holdings Limited,Industrials,SES
 SG,5UL.SI,Atlantic Navigation Holdings (Singapore) Limited,Industrials,SES
+SG,5VP.SI,GDS Global Limited,Industrials,SES
 SG,5VS.SI,Hafary Holdings Limited,Industrials,SES
 SG,5WF.SI,ISOTeam Ltd.,Industrials,SES
 SG,9DC.SI,Deluge Corporation Limited,Industrials,SES
 SG,9PQ.SI,XMH Hldgs,Industrials,SES
 SG,A04.SI,ASL Marine Holdings Ltd.,Industrials,SES
-SG,A33.SI,Southern Archipelago Ltd.,Industrials,SES
 SG,ALK.SI,All-Link Air & Sea Limited,Industrials,SES
 SG,B49.SI,World Precision Machinery Limited,Industrials,SES
 SG,BBP.SI,Hor Kew Corporation Limited,Industrials,SES
@@ -2292,7 +2290,6 @@ SG,LS9.SI,Leader Environmental Technologies Limited,Industrials,SES
 SG,M03.SI,Miyoshi Limited,Industrials,SES
 SG,M14.SI,InnoTek Limited,Industrials,SES
 SG,MET.SI,Metasurface Technologies Holdings Limited,Industrials,SES
-SG,MF6.SI,Mun Siong Engineering Limited,Industrials,SES
 SG,MR7.SI,Nordic Group Limited,Industrials,SES
 SG,NEX.SI,Reclaims Global Limited,Industrials,SES
 SG,NS8U.SI,Hutchison Port Holdings Trust,Industrials,SES
@@ -2350,6 +2347,7 @@ SG,AW9U.SI,First Real Estate Investment Trust,Real Estate,SES
 SG,AZA.SI,IPC Corporation Ltd,Real Estate,SES
 SG,B61.SI,Bukit Sembawang Estates Limited,Real Estate,SES
 SG,BJV.SI,Yamada Green Resources Limited,Real Estate,SES
+SG,BMGU.SI,BHG Retail REIT,Real Estate,SES
 SG,BTE.SI,Bund Center Investment Ltd,Real Estate,SES
 SG,BTOU.SI,Manulife US Real Estate Investment Trust,Real Estate,SES
 SG,BUOU.SI,Frasers Logistics & Commercial Trust,Real Estate,SES
@@ -3315,7 +3313,6 @@ TH,KC.BK,K.C. Property Public Company Limited,Real Estate,SET
 TH,KPNREIT.BK,KPN Freehold and Leasehold Real Estate Investment Trust,Real Estate,SET
 TH,KTBSTMR.BK,KTBST Mixed Freehold and Leasehold Real Estate Investment Trust,Real Estate,SET
 TH,KUN.BK,Villa Kunalai Public Company Limited,Real Estate,SET
-TH,KWC.BK,Krungdhep Sophon Public Company Limited,Real Estate,SET
 TH,LALIN.BK,Lalin Property Public Company Limited,Real Estate,SET
 TH,LH.BK,Land and Houses Public Company Limited,Real Estate,SET
 TH,LHHOTEL.BK,LH Hotel Leasehold Real Estate Investment Trust,Real Estate,SET
@@ -3324,7 +3321,6 @@ TH,LHSC.BK,LH Shopping Centers Leasehold Real Estate Investment Trust,Real Estat
 TH,LPN.BK,L.P.N. Development Public Company Limited,Real Estate,SET
 TH,MDX.BK,MDX Public Company Limited,Real Estate,SET
 TH,MII.BK,MFC Industrial Investment Property and Leasehold Fund,Real Estate,SET
-TH,MIPF.BK,Millionaire Property Fund,Real Estate,SET
 TH,MJD.BK,Major Development Public Company Limited,Real Estate,SET
 TH,MJLF.BK,Major Cineplex Lifestyle Leasehold Property Fund.,Real Estate,SET
 TH,MK.BK,M.K. Real Estate Development Public Company Limited,Real Estate,SET
