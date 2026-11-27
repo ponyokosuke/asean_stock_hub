@@ -933,6 +933,7 @@ MY,7180.KL,Sern Kou Resources Berhad,Basic Materials,KLS
 MY,7188.KL,BTM Resources Berhad,Basic Materials,KLS
 MY,7192.KL,GIIB Holdings Berhad,Basic Materials,KLS
 MY,7202.KL,Hextar Retail Berhad,Basic Materials,KLS
+MY,7203.KL,Wang-Zheng Berhad,Basic Materials,KLS
 MY,7214.KL,A-Rank Berhad,Basic Materials,KLS
 MY,7219.KL,AIZO Group Berhad,Basic Materials,KLS
 MY,7222.KL,Imaspro Corporation Berhad,Basic Materials,KLS
@@ -1018,6 +1019,7 @@ MY,0398.KL,Golden Destinations Group Berhad,Consumer Cyclical,KLS
 MY,0455.KL,Bus Cap Berhad,Consumer Cyclical,KLS
 MY,0465.KL,RNG Tech Berhad,Consumer Cyclical,KLS
 MY,0476.KL,SLGC Berhad,Consumer Cyclical,KLS
+MY,0485.KL,,Consumer Cyclical,KLS
 MY,1481.KL,Advance Synergy Berhad,Consumer Cyclical,KLS
 MY,1619.KL,DRB-HICOM Berhad,Consumer Cyclical,KLS
 MY,1643.KL,Landmarks Berhad,Consumer Cyclical,KLS
@@ -1244,6 +1246,7 @@ MY,6633.KL,Leong Hup International Berhad,Consumer Defensive,KLS
 MY,7035.KL,CCK Consolidated Holdings Berhad,Consumer Defensive,KLS
 MY,7054.KL,Astral Asia Berhad,Consumer Defensive,KLS
 MY,7084.KL,QL Resources Berhad,Consumer Defensive,KLS
+MY,7085.KL,LTKM Berhad,Consumer Defensive,KLS
 MY,7103.KL,Spritzer Bhd,Consumer Defensive,KLS
 MY,7107.KL,Oriental Food Industries Holdings Berhad,Consumer Defensive,KLS
 MY,7121.KL,XL Holdings Berhad,Consumer Defensive,KLS
@@ -1943,7 +1946,6 @@ MY,9377.KL,FSBM Holdings Berhad,Technology,KLS
 MY,9393.KL,Industronics Berhad,Technology,KLS
 MY,03009.KL,Seers Bhd,Unknown,KLS
 MY,03058.KL,Total Dynamic Holdings Berhad,Unknown,KLS
-MY,0485.KL,,Unknown,KLS
 MY,7108PA.KL,PERDANA-PA,Unknown,KLS
 MY,8877R1.KL,EKOVEST-R1,Unknown,KLS
 MY,0318.KL,Elridge Energy Holdings Berhad,Utilities,KLS
@@ -1961,6 +1963,7 @@ MY,5614.KL,Nuenergy Holdings Berhad,Utilities,KLS
 MY,6742.KL,YTL Power International Berhad,Utilities,KLS
 MY,6874.KL,JAG Capital Berhad,Utilities,KLS
 MY,7676.KL,G Capital Berhad,Utilities,KLS
+SG,1J7.SI,Jawala Inc.,Basic Materials,SES
 SG,41T.SI,GCCP Resources Limited,Basic Materials,SES
 SG,541.SI,Abundance International Limited,Basic Materials,SES
 SG,5F7.SI,Wilton Resources Corporation Limited,Basic Materials,SES
@@ -1970,6 +1973,7 @@ SG,5WV.SI,AsiaPhos Limited,Basic Materials,SES
 SG,A55.SI,Asia Enterprises Holding Limited,Basic Materials,SES
 SG,A7RU.SI,Keppel Infrastructure Trust,Basic Materials,SES
 SG,AWG.SI,Ascent Bridge Limited,Basic Materials,SES
+SG,BAZ.SI,Lion Asiapac Limited,Basic Materials,SES
 SG,BEC.SI,BRC Asia Limited,Basic Materials,SES
 SG,BEI.SI,LHT Holdings Limited,Basic Materials,SES
 SG,BTG.SI,HG Metal Manufacturing Limited,Basic Materials,SES
@@ -1991,7 +1995,6 @@ SG,TSCD.SI,The Siam Cement Public Company Limited,Basic Materials,SES
 SG,Y8E.SI,Samurai 2K Aerosol Limited,Basic Materials,SES
 SG,1D1.SI,UnUsUaL Limited,Communication Services,SES
 SG,1F0.SI,shopper360 Limited,Communication Services,SES
-SG,9VW.SI,Polaris E&M Limited,Communication Services,SES
 SG,BAI.SI,Digilife Technologies Limited,Communication Services,SES
 SG,CC3.SI,StarHub Ltd,Communication Services,SES
 SG,CJLU.SI,NetLink NBN Trust,Communication Services,SES
@@ -2047,7 +2050,6 @@ SG,C41.SI,Cortina Holdings Limited,Consumer Cyclical,SES
 SG,DM0.SI,PSC Corporation Ltd.,Consumer Cyclical,SES
 SG,F10.SI,F J Benjamin Holdings Ltd,Consumer Cyclical,SES
 SG,G13.SI,Genting Singapore Limited,Consumer Cyclical,SES
-SG,G50.SI,Grand Banks Yachts Limited,Consumer Cyclical,SES
 SG,H07.SI,Stamford Land Corporation Ltd,Consumer Cyclical,SES
 SG,H12.SI,Hotel Royal Limited,Consumer Cyclical,SES
 SG,H15.SI,Hotel Properties Limited,Consumer Cyclical,SES
@@ -2085,19 +2087,18 @@ SG,5JS.SI,Indofood Agri Resources Ltd.,Consumer Defensive,SES
 SG,AAJ.SI,Sunmoon Food Company Limited,Consumer Defensive,SES
 SG,BEW.SI,JB Foods Limited,Consumer Defensive,SES
 SG,BHD.SI,China Mining International Limited,Consumer Defensive,SES
+SG,BNE.SI,Kencana Agri Limited,Consumer Defensive,SES
 SG,BQD.SI,Envictus International Holdings Limited,Consumer Defensive,SES
 SG,CNE.SI,MindChamps PreSchool Limited,Consumer Defensive,SES
 SG,D01.SI,DFI Retail Group Holdings Limited,Consumer Defensive,SES
 SG,D03.SI,Del Monte Pacific Limited,Consumer Defensive,SES
 SG,E5H.SI,Golden Agri-Resources Ltd,Consumer Defensive,SES
 SG,EB5.SI,First Resources Limited,Consumer Defensive,SES
-SG,EMI.SI,Emperador Inc.,Consumer Defensive,SES
 SG,F03.SI,Food Empire Holdings Limited,Consumer Defensive,SES
 SG,F34.SI,Wilmar International Limited,Consumer Defensive,SES
 SG,F99.SI,"Fraser and Neave, Limited",Consumer Defensive,SES
 SG,IICD.SI,PT Indofood CBP Sukses Makmur Tbk,Consumer Defensive,SES
 SG,K03.SI,Khong Guan Limited,Consumer Defensive,SES
-SG,LGH.SI,Leong Guan Holdings Limited,Consumer Defensive,SES
 SG,MV4.SI,Mewah International Inc.,Consumer Defensive,SES
 SG,NR7.SI,Raffles Education Limited,Consumer Defensive,SES
 SG,OTS.SI,OTS Holdings Limited,Consumer Defensive,SES
@@ -2142,7 +2143,6 @@ SG,8YZ.SI,Yangzijiang Maritime Development Ltd.,Financial Services,SES
 SG,B73.SI,Global Investments Limited,Financial Services,SES
 SG,BLS.SI,Hotung Investment Holdings Limited,Financial Services,SES
 SG,D05.SI,DBS Group Holdings Ltd,Financial Services,SES
-SG,E9L.SI,Joyas International Holdings Limited,Financial Services,SES
 SG,G07.SI,Great Eastern Holdings Limited,Financial Services,SES
 SG,HBND.SI,Bank of China Limited,Financial Services,SES
 SG,HPAD.SI,"Ping An Insurance (Group) Company of China, Ltd.",Financial Services,SES
@@ -2197,10 +2197,12 @@ SG,ULG.SI,UltraGreen.ai Limited,Healthcare,SES
 SG,Z4D.SI,Medi Lifestyle Limited,Healthcare,SES
 SG,1A1.SI,Wong Fong Industries Limited,Industrials,SES
 SG,1AZ.SI,Audience Analytics Limited,Industrials,SES
+SG,1B6.SI,Ocean Sky International Limited,Industrials,SES
 SG,1E3.SI,Sanli Environmental Limited,Industrials,SES
 SG,1J4.SI,JEP Holdings Ltd.,Industrials,SES
 SG,1L2.SI,Hiap Seng Industries Limited,Industrials,SES
 SG,1MZ.SI,Nam Cheong Limited,Industrials,SES
+SG,1V3.SI,Mooreast Holdings Ltd.,Industrials,SES
 SG,41B.SI,Huationg Global Limited,Industrials,SES
 SG,42N.SI,IPS Securex Holdings Limited,Industrials,SES
 SG,42Z.SI,Eindec Corporation Limited,Industrials,SES
@@ -2208,6 +2210,7 @@ SG,43B.SI,Secura Group Limited,Industrials,SES
 SG,43E.SI,VCPlus Limited,Industrials,SES
 SG,43F.SI,AcroMeta Group Limited,Industrials,SES
 SG,500.SI,Tai Sin Electric Limited,Industrials,SES
+SG,508.SI,Fuji Offset Plates Manufacturing Ltd,Industrials,SES
 SG,554.SI,King Wan Corporation Limited,Industrials,SES
 SG,566.SI,SHS Holdings Ltd.,Industrials,SES
 SG,570.SI,Abundante Limited,Industrials,SES
@@ -2308,7 +2311,6 @@ SG,S61.SI,SBS Transit Ltd,Industrials,SES
 SG,S63.SI,Singapore Technologies Engineering Ltd,Industrials,SES
 SG,SES.SI,Shanaya Limited,Industrials,SES
 SG,SGR.SI,Sheffield Green Ltd.,Industrials,SES
-SG,TATD.SI,Airports of Thailand Public Company Limited,Industrials,SES
 SG,TDED.SI,Delta Electronics (Thailand) Public Company Limited,Industrials,SES
 SG,UXSD.SI,Space Exploration Technologies Corp.,Industrials,SES
 SG,V7R.SI,Resources Global Development Limited,Industrials,SES
@@ -2477,6 +2479,7 @@ SG,HZGD.SI,Zijin Gold International Company Limited,Unknown,SES
 SG,HZJD.SI,"Zhongji Innolight Co., Ltd.",Unknown,SES
 SG,ITKD.SI,Perusahaan Perseroan (Persero) PT Telekomunikasi Indonesia Tbk,Unknown,SES
 SG,MENU.SI,Elite UK REIT,Unknown,SES
+SG,S45U.SI,Singapore Index Fund,Unknown,SES
 SG,TBDD.SI,Bangkok Dusit Medical Services Public Company Limited,Unknown,SES
 SG,UGGD.SI,Sea Limited,Unknown,SES
 SG,UGS.SI,UltraGreen.ai Limited,Unknown,SES
@@ -2489,7 +2492,6 @@ SG,AJ2.SI,Ouhua Energy Holdings Limited,Utilities,SES
 SG,BHK.SI,SIIC Environment Holdings Ltd.,Utilities,SES
 SG,BWM.SI,Zheneng Jinjiang Environment Holding Company Limited,Utilities,SES
 SG,I11.SI,Renaissance United Limited,Utilities,SES
-SG,L02.SI,Metis Energy Limited,Utilities,SES
 SG,SEG.SI,Concord New Energy Group Limited,Utilities,SES
 SG,TWL.SI,Memiontec Holdings Ltd.,Utilities,SES
 SG,U96.SI,Sembcorp Industries Ltd,Utilities,SES
@@ -2697,7 +2699,6 @@ TH,ITTHI.BK,Itthirit Nice Corporation Public Company Limited,Consumer Cyclical,S
 TH,JMART.BK,Jaymart Group Holdings Public Company Limited,Consumer Cyclical,SET
 TH,JUBILE.BK,Jubilee Enterprise Public Company Limited,Consumer Cyclical,SET
 TH,KLINIQ.BK,The Klinique Medical Clinic Public Company Limited,Consumer Cyclical,SET
-TH,KOOL.BK,CL Venture Public Company Limited,Consumer Cyclical,SET
 TH,KYE.BK,Kang Yong Electric Public Company Limited,Consumer Cyclical,SET
 TH,LPGOLD13.BK,"Laopu Gold Co., Ltd.",Consumer Cyclical,SET
 TH,LTS.BK,Light Up Total Solution Public Company Limited,Consumer Cyclical,SET
@@ -3310,7 +3311,6 @@ TH,J.BK,JAS Asset Public Company Limited,Real Estate,SET
 TH,JAK.BK,Jakpaisan Estate Public Company Limited,Real Estate,SET
 TH,JCK.BK,JCK International Public Company Limited,Real Estate,SET
 TH,KC.BK,K.C. Property Public Company Limited,Real Estate,SET
-TH,KPNREIT.BK,KPN Freehold and Leasehold Real Estate Investment Trust,Real Estate,SET
 TH,KTBSTMR.BK,KTBST Mixed Freehold and Leasehold Real Estate Investment Trust,Real Estate,SET
 TH,KUN.BK,Villa Kunalai Public Company Limited,Real Estate,SET
 TH,LALIN.BK,Lalin Property Public Company Limited,Real Estate,SET
@@ -3608,7 +3608,6 @@ TH,ESTEE80.BK,The Estée Lauder Companies Inc.,Unknown,SET
 TH,ETN03.BK,Eaton Corporation plc,Unknown,SET
 TH,ETN23.BK,Eaton Corporation plc,Unknown,SET
 TH,EXPE06.BK,"Expedia Group, Inc.",Unknown,SET
-TH,F&D.BK,Food and Drinks Public Company Limited,Unknown,SET
 TH,FABRINET03.BK,Fabrinet,Unknown,SET
 TH,FABRINET23.BK,Fabrinet,Unknown,SET
 TH,FABRINET80.BK,Fabrinet,Unknown,SET
@@ -3641,6 +3640,7 @@ TH,GOOGL19.BK,Alphabet Inc.,Unknown,SET
 TH,GRAB80.BK,Grab Holdings Limited,Unknown,SET
 TH,GSUS06.BK,"The Goldman Sachs Group, Inc.",Unknown,SET
 TH,HAIERS19.BK,"Haier Smart Home Co., Ltd.",Unknown,SET
+TH,HAPPY26.BK,HAPPY26_MESUK SOLUTIONS,Unknown,SET
 TH,HERMES80.BK,Hermès International Société en commandite par actions,Unknown,SET
 TH,HIMS03.BK,"Hims & Hers Health, Inc.",Unknown,SET
 TH,HK13.BK,HK13_DR TRAHK#KGI,Unknown,SET
