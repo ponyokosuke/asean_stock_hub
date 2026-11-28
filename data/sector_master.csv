@@ -1571,7 +1571,6 @@ MY,5246.KL,Westports Holdings Berhad,Industrials,KLS
 MY,5253.KL,Econpile Holdings Berhad,Industrials,KLS
 MY,5259.KL,Avangaad Berhad,Industrials,KLS
 MY,5263.KL,Sunway Construction Group Berhad,Industrials,KLS
-MY,5267.KL,Xin Hwa Holdings Berhad,Industrials,KLS
 MY,5276.KL,Dancomech Holdings Berhad,Industrials,KLS
 MY,5281.KL,Advancecon Holdings Berhad,Industrials,KLS
 MY,5291.KL,HPMT Holdings Berhad,Industrials,KLS
@@ -1654,7 +1653,6 @@ MY,7241.KL,Nextgreen Global Berhad,Industrials,KLS
 MY,7245.KL,Citaglobal Berhad,Industrials,KLS
 MY,7315.KL,AHB Holdings Berhad,Industrials,KLS
 MY,7323.KL,Ken Holdings Berhad,Industrials,KLS
-MY,7374.KL,Tien Wah Press Holdings Berhad,Industrials,KLS
 MY,7471.KL,Eden Inc. Berhad,Industrials,KLS
 MY,7544.KL,Quality Concrete Holdings Berhad,Industrials,KLS
 MY,7579.KL,AWC Berhad,Industrials,KLS
@@ -1965,7 +1963,6 @@ MY,6874.KL,JAG Capital Berhad,Utilities,KLS
 MY,7676.KL,G Capital Berhad,Utilities,KLS
 SG,1J7.SI,Jawala Inc.,Basic Materials,SES
 SG,41T.SI,GCCP Resources Limited,Basic Materials,SES
-SG,541.SI,Abundance International Limited,Basic Materials,SES
 SG,5F7.SI,Wilton Resources Corporation Limited,Basic Materials,SES
 SG,5FX.SI,New Wave Holdings Ltd.,Basic Materials,SES
 SG,5TP.SI,CNMC Goldmine Holdings Limited,Basic Materials,SES
@@ -1995,13 +1992,12 @@ SG,TSCD.SI,The Siam Cement Public Company Limited,Basic Materials,SES
 SG,Y8E.SI,Samurai 2K Aerosol Limited,Basic Materials,SES
 SG,1D1.SI,UnUsUaL Limited,Communication Services,SES
 SG,1F0.SI,shopper360 Limited,Communication Services,SES
-SG,BAI.SI,Digilife Technologies Limited,Communication Services,SES
+SG,AWV.SI,Captii Limited,Communication Services,SES
 SG,CC3.SI,StarHub Ltd,Communication Services,SES
 SG,CJLU.SI,NetLink NBN Trust,Communication Services,SES
 SG,E27.SI,The Place Holdings Limited,Communication Services,SES
 SG,GEH.SI,Goodwill Entertainment Holding Limited,Communication Services,SES
 SG,HTCD.SI,Tencent Holdings Limited,Communication Services,SES
-SG,OMK.SI,Vividthree Holdings Ltd.,Communication Services,SES
 SG,S7OU.SI,Asian Pay Television Trust,Communication Services,SES
 SG,T41.SI,TeleChoice International Limited,Communication Services,SES
 SG,TADD.SI,Advanced Info Service Public Company Limited,Communication Services,SES
@@ -2019,9 +2015,8 @@ SG,43A.SI,Octopus (APAC) Holdings Limited,Consumer Cyclical,SES
 SG,504.SI,HS Optimus Holdings Limited,Consumer Cyclical,SES
 SG,533.SI,ABR Holdings Limited,Consumer Cyclical,SES
 SG,543.SI,Noel Gifts International Ltd,Consumer Cyclical,SES
-SG,596.SI,Pavillon Holdings Ltd.,Consumer Cyclical,SES
 SG,5AI.SI,H2G Green Limited,Consumer Cyclical,SES
-SG,5EF.SI,Adventus Holdings Limited,Consumer Cyclical,SES
+SG,5DO.SI,Sakae Holdings Ltd.,Consumer Cyclical,SES
 SG,5G1.SI,EuroSports Global Limited,Consumer Cyclical,SES
 SG,5HH.SI,Prospera Global Limited,Consumer Cyclical,SES
 SG,5JK.SI,Hiap Hoe Limited,Consumer Cyclical,SES
@@ -2074,7 +2069,6 @@ SG,T12.SI,Tat Seng Packaging Group Ltd,Consumer Cyclical,SES
 SG,T15.SI,Tan Chong International Limited,Consumer Cyclical,SES
 SG,T6I.SI,ValueMax Group Limited,Consumer Cyclical,SES
 SG,URR.SI,Sim Leisure Group Ltd.,Consumer Cyclical,SES
-SG,VI2.SI,Trans-China Automotive Holdings Limited,Consumer Cyclical,SES
 SG,VIN.SI,Vin's Holdings Ltd,Consumer Cyclical,SES
 SG,WJP.SI,VICOM Ltd,Consumer Cyclical,SES
 SG,WNH.SI,Autagco Ltd.,Consumer Cyclical,SES
@@ -2087,6 +2081,7 @@ SG,5JS.SI,Indofood Agri Resources Ltd.,Consumer Defensive,SES
 SG,AAJ.SI,Sunmoon Food Company Limited,Consumer Defensive,SES
 SG,BEW.SI,JB Foods Limited,Consumer Defensive,SES
 SG,BHD.SI,China Mining International Limited,Consumer Defensive,SES
+SG,BKV.SI,China Shenshan Orchard Holdings Co. Ltd.,Consumer Defensive,SES
 SG,BNE.SI,Kencana Agri Limited,Consumer Defensive,SES
 SG,BQD.SI,Envictus International Holdings Limited,Consumer Defensive,SES
 SG,CNE.SI,MindChamps PreSchool Limited,Consumer Defensive,SES
@@ -2196,13 +2191,13 @@ SG,T14.SI,Tianjin Pharmaceutical Da Ren Tang Group Corporation Limited,Healthcar
 SG,ULG.SI,UltraGreen.ai Limited,Healthcare,SES
 SG,Z4D.SI,Medi Lifestyle Limited,Healthcare,SES
 SG,1A1.SI,Wong Fong Industries Limited,Industrials,SES
-SG,1AZ.SI,Audience Analytics Limited,Industrials,SES
 SG,1B6.SI,Ocean Sky International Limited,Industrials,SES
 SG,1E3.SI,Sanli Environmental Limited,Industrials,SES
 SG,1J4.SI,JEP Holdings Ltd.,Industrials,SES
 SG,1L2.SI,Hiap Seng Industries Limited,Industrials,SES
 SG,1MZ.SI,Nam Cheong Limited,Industrials,SES
 SG,1V3.SI,Mooreast Holdings Ltd.,Industrials,SES
+SG,40W.SI,ZICO Holdings Inc.,Industrials,SES
 SG,41B.SI,Huationg Global Limited,Industrials,SES
 SG,42N.SI,IPS Securex Holdings Limited,Industrials,SES
 SG,42Z.SI,Eindec Corporation Limited,Industrials,SES
@@ -2321,6 +2316,7 @@ SG,XZB.SI,Skylink Holdings Limited,Industrials,SES
 SG,Y06.SI,Green Build Technology Limited,Industrials,SES
 SG,YYB.SI,Bacui Technologies International Ltd.,Industrials,SES
 SG,Z59.SI,Yoma Strategic Holdings Ltd.,Industrials,SES
+SG,ZB9.SI,Union Steel Holdings Limited,Industrials,SES
 SG,ZKX.SI,Ever Glory United Holdings Limited,Industrials,SES
 SG,ZQM.SI,Soilbuild Construction Group Ltd.,Industrials,SES
 SG,1D5.SI,Capital World Limited,Real Estate,SES
@@ -2422,7 +2418,6 @@ SG,575.SI,ASTI Holdings Limited,Technology,SES
 SG,580.SI,Santak Holdings Limited,Technology,SES
 SG,5AB.SI,Trek 2000 International Ltd,Technology,SES
 SG,5DD.SI,Micro-Mechanics (Holdings) Ltd.,Technology,SES
-SG,5PF.SI,Jason Marine Group Limited,Technology,SES
 SG,8AZ.SI,Aztech Global Ltd.,Technology,SES
 SG,9MT.SI,MetaOptics Ltd,Technology,SES
 SG,A31.SI,Addvalue Technologies Ltd,Technology,SES
@@ -2445,7 +2440,6 @@ SG,CYW.SI,TrickleStar Limited,Technology,SES
 SG,E28.SI,Frencken Group Limited,Technology,SES
 SG,HHZD.SI,Horizon Robotics,Technology,SES
 SG,ITS.SI,Info-Tech Systems Ltd.,Technology,SES
-SG,K29.SI,Karin Technology Holdings Limited,Technology,SES
 SG,LVR.SI,17LIVE Group Limited,Technology,SES
 SG,M11.SI,Manufacturing Integration Technology Ltd,Technology,SES
 SG,MIM.SI,Mi Material Holding Limited,Technology,SES
@@ -3265,6 +3259,7 @@ TH,WASH.BK,Laundry You Public Company Limited,Industrials,SET
 TH,WGE.BK,Well Graded Engineering Public Company Limited,Industrials,SET
 TH,WICE.BK,Wice Logistics Public Company Limited,Industrials,SET
 TH,WIIK.BK,WIIK Public Company Limited,Industrials,SET
+TH,A.BK,Areeya Property Public Company Limited,Real Estate,SET
 TH,A5.BK,Asset Five Group Public Company Limited,Real Estate,SET
 TH,AIMCG.BK,AIM Commercial Growth Freehold And Leasehold Real Estate Investment Trust,Real Estate,SET
 TH,AIMIRT.BK,AIM Industrial Growth Freehold and Leasehold Real Estate Investment Trust,Real Estate,SET
@@ -3311,6 +3306,7 @@ TH,J.BK,JAS Asset Public Company Limited,Real Estate,SET
 TH,JAK.BK,Jakpaisan Estate Public Company Limited,Real Estate,SET
 TH,JCK.BK,JCK International Public Company Limited,Real Estate,SET
 TH,KC.BK,K.C. Property Public Company Limited,Real Estate,SET
+TH,KPNREIT.BK,KPN Freehold and Leasehold Real Estate Investment Trust,Real Estate,SET
 TH,KTBSTMR.BK,KTBST Mixed Freehold and Leasehold Real Estate Investment Trust,Real Estate,SET
 TH,KUN.BK,Villa Kunalai Public Company Limited,Real Estate,SET
 TH,LALIN.BK,Lalin Property Public Company Limited,Real Estate,SET
